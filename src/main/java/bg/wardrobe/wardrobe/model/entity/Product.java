@@ -2,6 +2,7 @@ package bg.wardrobe.wardrobe.model.entity;
 
 import bg.wardrobe.wardrobe.model.enums.CategoryEnum;
 import bg.wardrobe.wardrobe.model.enums.SizeEnum;
+import bg.wardrobe.wardrobe.model.enums.StyleEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,10 +10,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "products")
 public class Product extends BaseEntity {
@@ -45,5 +50,15 @@ public class Product extends BaseEntity {
 
     @Column(nullable = false)
     private BigDecimal price;
+
+    @Column(nullable = false)
+    private String material;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private StyleEnum Style;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
 }
