@@ -1,12 +1,8 @@
 package bg.conquerors.wardrobe.model.enums;
 
 public enum OrderStatusEnum {
-    //приет
-    SUBMIT,
-    //В процес
-    SENT,
-    //отказан
-    CANCELLED,
-    //доставен
-    SHIPPED
+    ORDERED,
+    SHIPPED,
+    DELIVERED,
+    NONE
 }

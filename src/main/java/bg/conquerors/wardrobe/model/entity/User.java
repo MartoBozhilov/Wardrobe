@@ -49,6 +49,10 @@ public class User extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @NotNull
+    @Column
+    private Integer points;
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

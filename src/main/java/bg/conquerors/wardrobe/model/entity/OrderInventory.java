@@ -8,29 +8,26 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "order_details")
-public class OrderDetail extends BaseEntity {
+@Table(name = "order_inventory")
+public class OrderInventory extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotEmpty
+    @Column
+    private Integer quantity;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
-
-    @Column(nullable = false)
-    private Integer quantity;
-
-    @Column(name = "mid_price", precision = 19, scale = 2)
-    private BigDecimal mid_price;
 
 }

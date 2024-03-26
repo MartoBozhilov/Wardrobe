@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,9 +25,6 @@ public class Order extends BaseEntity {
     @Column(nullable = false, name = "total_price")
     private BigDecimal totalPrice;
 
-    @Column(nullable = false, name = "phone_number")
-    private String phoneNumber;
-
     @Column(name = "address", nullable = false)
     private String address;
 
@@ -36,7 +32,7 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private List<OrderDetail> orderDetailList = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private Set<OrderInventory> orderInventories;
 
 }
