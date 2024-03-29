@@ -26,7 +26,7 @@ public class Order extends BaseEntity {
     private BigDecimal totalPrice;
 
     @Column(name = "address", nullable = false)
-    private String address;
+    private String address; // Todo Add to user ?
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

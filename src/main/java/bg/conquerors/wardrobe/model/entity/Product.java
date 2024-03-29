@@ -55,4 +55,8 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "discount_id", referencedColumnName = "id")
     private Discount discount;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tag_id", referencedColumnName = "id")
+    private Tag tag;
+
 }
