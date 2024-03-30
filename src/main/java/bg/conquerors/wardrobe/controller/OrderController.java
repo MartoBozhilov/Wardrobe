@@ -17,7 +17,7 @@ public class OrderController {
             ids.add(String.valueOf(i));
         }
 
-        model.addAttribute("test,", ids);
+        model.addAttribute("test", ids);
         return "orders";
     }
 }

@@ -15,8 +15,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "order_inventory")
-public class OrderInventory extends BaseEntity {
+@Table(name = "order_details")
+public class OrderDetail extends BaseEntity {
 
     @NotEmpty
     @Column

@@ -33,6 +33,6 @@ public class Order extends BaseEntity {
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Set<OrderInventory> orderInventories;
+    private Set<OrderDetail> orderInventories;
 
 }
