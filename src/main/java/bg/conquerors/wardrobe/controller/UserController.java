@@ -3,6 +3,7 @@ package bg.conquerors.wardrobe.controller;
 import bg.conquerors.wardrobe.model.dto.UserRegistrationDTO;
 import bg.conquerors.wardrobe.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -15,17 +16,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/users/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String register() {
+    @GetMapping("/users/register")
+    public String register(Model model) {
+        model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
         return "register";
     }
 
-   @PostMapping("/register")
+   @PostMapping("/users/register")
     public String register(UserRegistrationDTO userRegistrationDTO) {
 
         userService.registerAndLogin(userRegistrationDTO);
