@@ -35,4 +35,9 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderInventories;
 
+
+    public Order(long id){
+        super();
+        this.setId(id);
+    }
 }

@@ -2,23 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Orders</title>
 </head>
 <body>
 <a href="/home">Home</a>
+<a href="/orders">Order</a>
+<a href="/orders/test">Test</a>
 <table>
     <thead>
-    <tr>
+    <tr >
         <th scope="col">Id</th>
-       <!-- <th scope="col">order Date</th>
+        <th scope="col">order Date</th>
         <th scope="col">Status</th>
         <th scope="col">Total Price</th>
-        <th scope="col">User Id</th>-->
+        <th scope="col">User Id</th>
     </tr>
     </thead>
     <tbody>
-        <tr th:each="test : ${ids}"><!--th:each="order : ${orders}"-->
-            <td th:text="${ids}"/>
+        <tr th:each="order : ${orders}"><!--th:each="order : ${orders}"-->
+            <td th:text="${order.id}"/>
         </tr>
     </tbody>
 </table>

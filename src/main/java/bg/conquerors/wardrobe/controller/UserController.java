@@ -25,7 +25,7 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping("/register")
+   @PostMapping("/register")
     public String register(UserRegistrationDTO userRegistrationDTO) {
 
         userService.registerAndLogin(userRegistrationDTO);
