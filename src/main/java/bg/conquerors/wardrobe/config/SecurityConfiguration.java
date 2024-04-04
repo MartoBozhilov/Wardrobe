@@ -56,9 +56,9 @@ public class SecurityConfiguration {
         return new WardrobeUserDetailsService(userRepository);
     }
 
-    @Bean
+    /*@Bean
     public PasswordEncoder passwordEncoder() {
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
-    }
+    }*/
 
 }
