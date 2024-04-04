@@ -9,13 +9,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "order_details")
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderDetail extends BaseEntity {
 
     @NotEmpty

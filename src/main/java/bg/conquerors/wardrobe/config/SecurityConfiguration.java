@@ -23,21 +23,21 @@ public class SecurityConfiguration {
                         authorizeRequests -> authorizeRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 .requestMatchers("/").permitAll()
-                                .requestMatchers("/users/login").permitAll()
-                                .requestMatchers("/users/register").permitAll()
+                                .requestMatchers("/user/login").permitAll()
+                                .requestMatchers("/user/register").permitAll()
                                 .anyRequest().authenticated()
 
                 ).formLogin(
                         formLogin -> formLogin
-                                .loginPage("/users/login")
+                                .loginPage("/user/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/")
-                                .failureForwardUrl("/users/register")
+                                .failureForwardUrl("/user/register")
 
                 ).logout(
                         logout -> logout
-                                .logoutUrl("/users/logout")
+                                .logoutUrl("/user/logout")
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true)
                 ).rememberMe(
