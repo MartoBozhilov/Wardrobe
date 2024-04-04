@@ -30,9 +30,9 @@ public class UserController {
    @PostMapping("/users/register")
     public String register(UserRegistrationDTO userRegistrationDTO) {
 
-        userService.registerAndLogin(userRegistrationDTO);
+        userService.register(userRegistrationDTO);
 
-        return "redirect:/login";
+        return "redirect:/users/login";
     }
 
 }

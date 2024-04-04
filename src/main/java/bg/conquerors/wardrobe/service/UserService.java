@@ -4,6 +4,6 @@ import bg.conquerors.wardrobe.model.dto.UserRegistrationDTO;
 
 public interface UserService {
 
-    void registerAndLogin(UserRegistrationDTO userRegistrationDTO);
+    void register(UserRegistrationDTO userRegistrationDTO);
 
 }

@@ -30,7 +30,7 @@ public class SecurityConfiguration {
                 ).formLogin(
                         formLogin -> formLogin
                                 .loginPage("/users/login")
-                                .usernameParameter("email")
+                                .usernameParameter("username")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/")
                                 .failureForwardUrl("/users/register")
