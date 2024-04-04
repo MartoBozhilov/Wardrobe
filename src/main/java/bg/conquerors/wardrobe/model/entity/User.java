@@ -67,4 +67,8 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Order> orders;
 
+    @NotNull
+    @Column
+    private boolean isEnabled;
+
 }

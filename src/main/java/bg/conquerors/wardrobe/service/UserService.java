@@ -14,7 +14,7 @@ public interface UserService {
     User registerUser(RegistrationRequest request);
 
     Optional<User> findByUsername(String username);
-    void registerAndLogin(UserRegistrationDTO userRegistrationDTO);
+   // void registerAndLogin(UserRegistrationDTO userRegistrationDTO);
 
     void saveUserVerificationToken(User user, String verificationToken);
 }

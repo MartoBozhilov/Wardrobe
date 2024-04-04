@@ -4,6 +4,7 @@ import bg.conquerors.wardrobe.model.dto.UserRegistrationDTO;
 import bg.conquerors.wardrobe.model.entity.User;
 import bg.conquerors.wardrobe.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     private final UserService userService;
 
@@ -23,22 +25,23 @@ public class UserController {
     public List<User> getUsers(){
         return userService.getUsers();
     }
-    @GetMapping("/user/login")
+   /* @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping("/user/register")
+    @GetMapping("register")
     public String register(Model model) {
-        model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
+        log.info("Hello register");
+
+        //model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
         return "register";
     }
-
-   @PostMapping("/user/register")
+   @PostMapping("/register")
     public String register(UserRegistrationDTO userRegistrationDTO) {
 
         userService.registerAndLogin(userRegistrationDTO);
         return "redirect:/login";
-    }
+    }*/
 
 }

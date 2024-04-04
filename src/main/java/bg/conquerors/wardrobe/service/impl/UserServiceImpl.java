@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         newUser.setUsername(request.username());
         newUser.setPhoneNumber(request.phoneNumber());
         newUser.setPassword(passwordEncoder.encode(request.password()));
+        newUser.setPoints(request.points());
         //newUser.setRoles();
         return userRepository.save(newUser);
     }
@@ -52,11 +53,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
-    @Override
+  /*  @Override
     public void registerAndLogin(UserRegistrationDTO userRegistrationDTO) {
 
     }
-
+*/
     @Override
     public void saveUserVerificationToken(User user, String verificationToken) {
         var vt = new VerificationToken(user,verificationToken);
