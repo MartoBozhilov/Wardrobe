@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                                 .loginPage("/users/login")
                                 .usernameParameter("username")
                                 .passwordParameter("password")
-                                .defaultSuccessUrl("/")
+                                .defaultSuccessUrl("/home")
                                 .failureForwardUrl("/users/register")
 
                 ).logout(

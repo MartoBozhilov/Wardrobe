@@ -12,10 +12,10 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/")
-    public String Redirect(){
-        return "redirect:/home";
-    }
+//    @GetMapping("/")
+//    public String Redirect(){
+//        return "redirect:/home";
+//    }
 
     @GetMapping("/error")
     public String error() {

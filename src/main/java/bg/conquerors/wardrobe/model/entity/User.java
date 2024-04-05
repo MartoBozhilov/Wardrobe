@@ -62,4 +62,8 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders;
 
+    public void addRole(UserRole role) {
+        this.roles.add(role);
+    }
+
 }
