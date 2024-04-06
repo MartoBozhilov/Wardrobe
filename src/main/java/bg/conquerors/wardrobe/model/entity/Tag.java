@@ -4,13 +4,17 @@ import bg.conquerors.wardrobe.model.enums.CategoryEnum;
 import bg.conquerors.wardrobe.model.enums.GenderEnum;
 import bg.conquerors.wardrobe.model.enums.StyleEnum;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "tags")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tag extends BaseEntity {
 
     @Column(name = "gender", nullable = false)

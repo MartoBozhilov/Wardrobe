@@ -22,10 +22,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authorizeRequests -> authorizeRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                .requestMatchers("/").permitAll()
-                                .requestMatchers("/users/login").permitAll()
-                                .requestMatchers("/users/register").permitAll()
-                                .anyRequest().authenticated()
+//                                .requestMatchers("/").permitAll()
+//                                .requestMatchers("/users/login").permitAll()
+//                                .requestMatchers("/users/register").permitAll()
+//                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
 
                 ).formLogin(
                         formLogin -> formLogin

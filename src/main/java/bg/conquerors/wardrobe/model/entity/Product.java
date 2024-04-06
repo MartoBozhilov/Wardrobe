@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,9 +39,20 @@ public class Product extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @NotEmpty
     @NotNull
-    @OneToMany(mappedBy = "product")
-    private List<ImgUrl> imageUrlList;
+    @Column(name = "first_img_url")
+    private String firstImgUrl;
+
+    @NotEmpty
+    @NotNull
+    @Column(name = "second_img_url")
+    private String secondImgUrl;
+
+    @NotEmpty
+    @NotNull
+    @Column(name = "third_img_url")
+    private String thirdImgUrl;
 
     @Column(nullable = false)
     private Integer quantity;
