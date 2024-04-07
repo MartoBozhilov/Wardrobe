@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="mb-4">All Products</h1>
+  <div class="row">
+    <form
+            th:action="@{/shop}"
+            th:method="get">
+      <!-- Loop through products -->
+      <div class="col-md-4 mb-4" th:each="product : ${products}">
+        <div class="card">
+          <img th:src="@{${product.getImgUrl()}}" class="card-img-top" alt="Product Image">
+          <div class="card-body">
+            <h5 class="card-title" th:text="${product.name}"></h5>
+            <p class="card-text">Price: $<span th:text="${product.price}"></span></p>
+            <a th:href="@{'/product/' + ${product.id}}" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+      <!-- End loop -->
+    </form>
+  </div>
+</div>
+</body>
+</html>
