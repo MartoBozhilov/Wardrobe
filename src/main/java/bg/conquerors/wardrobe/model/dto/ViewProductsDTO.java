@@ -15,6 +15,8 @@ public class ViewProductsDTO {
 
     private Long id;
 
+    private String productNumber;
+
     private String name;
 
     private String imgUrl;
