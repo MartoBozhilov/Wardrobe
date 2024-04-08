@@ -102,24 +102,36 @@
                         </div>
                         <div class="form-group">
                             <label for="gender">Gender</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="gender"
-                                   name="gender">
+                            <select class="form-control"
+                                    id="gender"
+                                    name="gender"
+                                    th:field="*{addProductDTO.gender}">
+                                <option th:each="option : ${genderOptions}"
+                                        th:value="${option}"
+                                        th:text="${option}"></option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="category"
-                                   name="category">
+                            <select class="form-control"
+                                    id="category"
+                                    name="category"
+                                    th:field="*{addProductDTO.category}">
+                                <option th:each="option : ${categoryOptions}"
+                                        th:value="${option}"
+                                        th:text="${option}"></option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="style">Style</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="style"
-                                   name="style">
+                            <select class="form-control"
+                                    id="style"
+                                    name="style"
+                                    th:field="*{addProductDTO.style}">
+                                <option th:each="option : ${styleOptions}"
+                                        th:value="${option}"
+                                        th:text="${option}"></option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Add Product</button>
                     </form>
