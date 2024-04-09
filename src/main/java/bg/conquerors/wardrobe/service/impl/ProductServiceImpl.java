@@ -4,6 +4,8 @@ import bg.conquerors.wardrobe.model.dto.ViewProductsDTO;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.repository.ProductRepository;
 import bg.conquerors.wardrobe.service.ProductService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +22,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ViewProductsDTO> getViewOfProducts() {
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String UserName = authentication.getName();
+
+
 
         return mapProductView(productRepository.findAll());
     }

@@ -3,6 +3,7 @@ package bg.conquerors.wardrobe.model.entity;
 import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "orders")
+@NoArgsConstructor
 public class Order extends BaseEntity {
 
     @Column(name = "order_date")
