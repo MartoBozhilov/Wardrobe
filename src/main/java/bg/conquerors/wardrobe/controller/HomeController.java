@@ -6,19 +6,53 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("/")
+    public String Test10() {
+
+        return "about";
+    }
+
+    @GetMapping("/about")
     public String Test() {
+
+        return "about";
+    }
+    @GetMapping("/blog")
+    public String Test1() {
+
+        return "blog";
+    }
+    @GetMapping("/blog-detail")
+    public String Test2() {
 
         return "index";
     }
 
-//    @GetMapping("/")
-//    public String Redirect(){
-//        return "redirect:/home";
-//    }
+    @GetMapping("/contact")
+    public String Test4() {
 
-    @GetMapping("/error")
-    public String error() {
-        return "error";
+        return "contact";
     }
+    @GetMapping("/index")
+    public String Test5() {
+
+        return "index";
+    }
+
+    @GetMapping("/product")
+    public String Test6() {
+
+        return "product";
+    }
+    @GetMapping("/product-detail")
+    public String Test7() {
+
+        return "product-detail";
+    }
+    @GetMapping("/shoping-cart")
+    public String Test8() {
+
+        return "shoping-cart";
+    }
+
 }

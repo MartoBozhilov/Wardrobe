@@ -4,5 +4,5 @@ public enum OrderStatusEnum {
     ORDERED,
     SHIPPED,
     DELIVERED,
-    NONE
+    CART
 }
