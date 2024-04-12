@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                                 .loginPage("/users/login")
                                 .usernameParameter("username")
                                 .passwordParameter("password")
-                                .defaultSuccessUrl("/home")
+                                .defaultSuccessUrl("/index")
                                 .failureForwardUrl("/users/register")
 
                 ).logout(
@@ -41,12 +41,12 @@ public class SecurityConfiguration {
                                 .logoutUrl("/users/logout")
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true)
-                ).rememberMe(
-                        rememberMe ->
-                                rememberMe
-                                        .key("topSecret")
-                                        .rememberMeParameter("rememberme")
-                                        .rememberMeCookieName("rememberme")
+//                ).rememberMe(
+//                        rememberMe ->
+//                                rememberMe
+//                                        .key("topSecret")
+//                                        .rememberMeParameter("rememberme")
+//                                        .rememberMeCookieName("rememberme")
                 );
 
         return httpSecurity.build();
