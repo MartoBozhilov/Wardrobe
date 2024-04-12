@@ -5,6 +5,7 @@ import bg.conquerors.wardrobe.model.entity.User;
 import bg.conquerors.wardrobe.model.enums.UserRoleEnum;
 import bg.conquerors.wardrobe.repository.RoleRepository;
 import bg.conquerors.wardrobe.repository.UserRepository;
+import bg.conquerors.wardrobe.service.OrderService;
 import bg.conquerors.wardrobe.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,17 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    private final OrderService orderService;
+
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder,
+            OrderService orderService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
     @Override
@@ -38,6 +43,11 @@ public class UserServiceImpl implements UserService {
         }
 
         userRepository.save(map(userRegistrationDTO));
+        orderService.createNewOrder(
+                userRepository.findByUsername(
+                                userRegistrationDTO
+                                        .getUsername())
+                        .orElse(null));
     }
 
     private User map(UserRegistrationDTO userRegistrationDTO) {

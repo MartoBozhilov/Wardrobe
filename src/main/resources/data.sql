@@ -16,3 +16,8 @@ VALUES
     (1, 1),
     (1, 2),
     (2, 2);
+
+INSERT INTO `wardrobe_shop_database`.`products` (`id`, `description`, `first_img_url`, `min_price`, `name`, `price`, `product_number`, `quantity`, `second_img_url`, `size`, `third_img_url`, `tag_id`)
+VALUES ('1', 'grdedge', '/images/products/jeans/Colin\'s_grey_1.png', '14.99', 'T-shirt', '19.99', '12345', '23', '/images/products/jeans/Colin\'s_grey_1.png', 'S', '/images/products/jeans/Colin\'s_grey_1.png', '1');
+
+

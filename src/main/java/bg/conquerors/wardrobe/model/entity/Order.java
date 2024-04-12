@@ -24,11 +24,11 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status;
 
-    @Column(nullable = false, name = "total_price")
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @Column(name = "address", nullable = false)
-    private String address; // Todo Add to user ?
+    @Column(name = "address")
+    private String address;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
