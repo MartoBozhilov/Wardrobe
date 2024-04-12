@@ -27,6 +27,12 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    @GetMapping("")
+    public String admin() {
+
+        return "admin/admin";
+    }
+
     @GetMapping("/add-product")
     public String addProduct(Model model) {
 
@@ -43,7 +49,7 @@ public class AdminController {
     public String addProduct(AddProductDTO addProductDTO) {
 
         adminService.addProduct(addProductDTO);
-        return "index";
+        return "admin/admin";
     }
 
     private  Long itemId = -1l;
@@ -73,7 +79,26 @@ public class AdminController {
 
         adminService.editProduct(itemId,addProductDTO);
         itemId = -1l;
-        return "index";
+        return "admin/admin";
+    }
+
+    @GetMapping("/delete-product/{id}")
+    public String deleteProduct(@PathVariable("id") Long id) {
+
+        adminService.deleteProduct(id);
+
+        return "admin/admin";
+    }
+
+    @PostMapping("/delete-product")
+    public String deleteProduct() {
+
+        if (itemId == -1l)
+            return "error";
+
+        adminService.deleteProduct(itemId);
+        itemId = -1l;
+        return "admin/admin";
     }
 
 }
