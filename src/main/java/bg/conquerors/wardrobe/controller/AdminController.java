@@ -7,6 +7,7 @@ import bg.conquerors.wardrobe.model.enums.GenderEnum;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.model.enums.StyleEnum;
 import bg.conquerors.wardrobe.service.AdminService;
+import bg.conquerors.wardrobe.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,11 @@ public class AdminController {
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
     private final AdminService adminService;
 
-    public AdminController(AdminService adminService) {
+    private final ProductService productService;
+
+    public AdminController(AdminService adminService, ProductService productService) {
         this.adminService = adminService;
+        this.productService = productService;
     }
 
     @GetMapping("")
@@ -71,6 +75,8 @@ public class AdminController {
         return "admin/product/edit-product";
     }
 
+
+
     @PostMapping("/edit-product")
     public String editProduct( AddProductDTO addProductDTO) {
 
@@ -100,5 +106,14 @@ public class AdminController {
         itemId = -1l;
         return "admin/admin";
     }
+
+    @GetMapping("/product-grid")
+    public String productGrid(Model model) {
+        model.addAttribute("products", productService.getViewOfProducts());
+
+        return "admin/product-grid";
+    }
+
+
 
 }

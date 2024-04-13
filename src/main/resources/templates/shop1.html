@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Admin Dashboard - Product Grid</title>
+  <style>
+    .sidebar {
+        height: 100vh;
+        border-right: 1px solid #ddd;
+    }
+
+    .product-box {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        height: 100%;
+    }
+
+    .product-image {
+        width: 100%; /* Ensures the image takes up the entire width of its container */
+        height: 600px; /* Caps the image height */
+        object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+    }
+
+    .product-image-placeholder {
+        width: 100%;
+        height: 200px; /* Adjust as needed */
+        background-color: #f7f7f7;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ccc;
+        font-size: 1rem;
+    }
+
+    .product-info {
+        margin-bottom: 1rem;
+    }
+
+    .product-name {
+        font-weight: bold;
+    }
+
+    .product-price {
+        font-size: 1.25rem;
+        color: #333;
+    }
+
+    .edit-delete-buttons {
+        font-size: 0.875rem;
+    }
+
+    .add-product-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+    }
+
+    .add-product-btn:hover {
+        background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              Orders
+            </a>
+          </li>
+          <!-- More items -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Products Grid</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+<!--          <button class="btn btn-sm add-product-btn">Add New Product</button>-->
+          <a class="btn btn-sm add-product-btn" href="/admin/add-product">
+            Add new product
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Dynamic Products Start -->
+        <div th:each="product : ${products}" class="col-md-4 col-sm-6 mb-4">
+          <div class="product-box h-100">
+            <div class="product-image-placeholder" th:if="${product.imgUrl == null}">No Image Available</div>
+            <img th:if="${product.imgUrl != null}" th:src="@{${product.imgUrl}}" class="product-image" alt="Product Image">
+            <div class="product-info text-center">
+              <div class="product-name" th:text="${product.name}">Product Name</div>
+              <div class="product-price" th:text="'$' + ${product.price}">$0.00</div>
+              <button class="btn btn-primary edit-delete-buttons">Edit</button>
+              <button class="btn btn-danger edit-delete-buttons">Delete</button>
+            </div>
+          </div>
+        </div>
+        <!-- Dynamic Products End -->
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

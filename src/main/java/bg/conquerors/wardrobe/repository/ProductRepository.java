@@ -10,8 +10,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findAll();
-
-    List<Product> findAllByProductNumber(String ProductNumber);
-
     Product findAllById(Long id);
 }

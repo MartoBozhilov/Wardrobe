@@ -41,6 +41,12 @@ public class SecurityConfiguration {
                                 .logoutUrl("/users/logout")
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true)
+//                ).rememberMe(
+//                        rememberMe ->
+//                                rememberMe
+//                                        .key("topSecret")
+//                                        .rememberMeParameter("rememberme")
+//                                        .rememberMeCookieName("rememberme")
                 );
 
         return httpSecurity.build();
