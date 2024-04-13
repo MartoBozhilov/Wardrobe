@@ -1,70 +1,67 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/head}">
 </head>
-
 <body>
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Registration Wardrobe</div>
-                <div class="card-body">
-                    <form
-                            th:action="@{/users/register}"
-                            th:method="post">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="firstName">First Name</label>
-                                <input type="text" class="form-control"
-                                       id="firstName"
-                                       name="firstName">
+<nav th:replace="~{fragments/navbar}"></nav>
+<div class="item-slick1" style="background-image: url(/images/slide-03.jpg);">
+    <div class="container h-full">
+        <div class="flex-col-l-m h-full p-b-14 p-b-30 respon5">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-3 text-center">
+                        <form th:method="post"
+                              th:action="@{/users/register}"
+                              >
+                        <div class="mb-md-3 mt-md-4 pb-5">
+                            <h2 class="fw-bold mb-2 text-uppercase">Регистрация</h2>
+                            <p class="text-white-50 mb-2">Моля, въведете вашите данни за създаване на акаунт!</p>
+                            <div class="row">
+                                <div class="col-6 form-outline form-white mb-4">
+                                    <input type="text" id="firstName"
+                                           class="form-control form-control-lg center-placeholder"
+                                           placeholder="First Name"/>
+                                </div>
+                                <div class="col-6 form-outline form-white mb-4">
+                                    <input type="text" id="lastName"
+                                           class="form-control form-control-lg center-placeholder"
+                                           placeholder="Last Name" />
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" class="form-control"
-                                       id="lastName"
-                                       name="lastName">
+                            <div class="row">
+                                <div class="col-6 form-outline form-white mb-4">
+                                    <input type="text" id="username"
+                                           class="form-control form-control-lg center-placeholder"
+                                           placeholder="Username" />
+                                </div>
+                                <div class="col-6 form-outline form-white mb-4">
+                                    <input type="password" id="password"
+                                           class="form-control form-control-lg center-placeholder"
+                                           placeholder="Password" />
+                                </div>
                             </div>
+                            <div class="form-outline form-white mb-4">
+                                <input type="tel" id="phoneNumber"
+                                       class="form-control form-control-lg center-placeholder"
+                                       placeholder="Phone Number" />
+                            </div>
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="email"
+                                       class="form-control form-control-lg center-placeholder" placeholder="Email" />
+                            </div>
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
+                            <p class="mb-0 mt-1">Already have an account? <a href="login.html"
+                                                                             class="text-white-50 fw-bold">Login</a></p>
                         </div>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="username"
-                                   name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password"
-                                   class="form-control"
-                                   id="password"
-                                   name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email"
-                                   class="form-control"
-                                   id="email"
-                                   name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phoneNumber">Phone Number</label>
-                            <input type="tel"
-                                   class="form-control"
-                                   id="phoneNumber"
-                                   name="phoneNumber" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
