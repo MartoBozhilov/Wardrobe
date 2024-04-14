@@ -8,6 +8,8 @@ import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.service.AdminService;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.TemporalAdjuster;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -32,10 +34,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void editProduct(Long id,AddProductDTO addProductDTO) {
-        Tag tag = getTag(addProductDTO);
-
         Product product = setProduct(productRepository.findAllById(id),addProductDTO);
-        product.setTag(tag);
 
         productRepository.save(product);
     }
@@ -54,8 +53,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteProduct(Long id) {
-        productRepository.delete(
-                productRepository.getReferenceById(id));
+        var product = productRepository.getReferenceById(id);
+        Tag tag = product.getTag();
+        System.out.println(tag.getId());
+      /*  productRepository.delete(product);
+        tagRepository.delete(tag);*/
     }
 
     private Product getNewProduct(AddProductDTO addProductDTO) {
@@ -92,6 +94,10 @@ public class AdminServiceImpl implements AdminService {
         addProductDTO.setImageUrl2(product.getSecondImgUrl());
         addProductDTO.setImageUrl3(product.getThirdImgUrl());
 
+        addProductDTO.setCategory(product.getTag().getCategory());
+        addProductDTO.setGender(product.getTag().getGender());
+        addProductDTO.setStyle(product.getTag().getStyle());
+
         return addProductDTO;
     }
 
@@ -109,12 +115,14 @@ public class AdminServiceImpl implements AdminService {
         product.setSecondImgUrl(addProductDTO.getImageUrl2());
         product.setThirdImgUrl(addProductDTO.getImageUrl3());
 
+        updateTag(addProductDTO,product.getTag());
+
         return product;
     }
 
     private Tag getTag(AddProductDTO addProductDTO) {
 
-        Tag searchedTag = tagRepository
+        /*Tag searchedTag = tagRepository
                 .findByGenderAndCategoryAndStyle(
                         addProductDTO.getGender(),
                         addProductDTO.getCategory(),
@@ -123,7 +131,7 @@ public class AdminServiceImpl implements AdminService {
 
         if (searchedTag != null) {
             return searchedTag;
-        }
+        }*/
 
         Tag newTag = new Tag(
                 addProductDTO.getGender(),
@@ -134,6 +142,28 @@ public class AdminServiceImpl implements AdminService {
         tagRepository.save(newTag);
 
         return newTag;
+    }
+
+    private void updateTag(AddProductDTO addProductDTO, Tag tag){
+
+
+        boolean isChange = false;
+
+        if (!tag.getCategory().equals(addProductDTO.getCategory())) {
+            tag.setCategory(addProductDTO.getCategory());
+            isChange = true;
+        }
+
+        if (!tag.getGender().equals(addProductDTO.getGender())) {
+            tag.setGender(addProductDTO.getGender());
+            isChange = true;
+        }
+
+        if (!tag.getStyle().equals(addProductDTO.getStyle())) {
+            tag.setStyle(addProductDTO.getStyle());
+            isChange = true;
+        }
+           if(isChange) tagRepository.save(tag);
     }
 
 }

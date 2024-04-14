@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface TagRepository extends JpaRepository<Tag, Long> {
 
     Tag findByGenderAndCategoryAndStyle(GenderEnum gender, CategoryEnum category, StyleEnum style);
-
+    Optional<Tag> findById(Long id);
 }

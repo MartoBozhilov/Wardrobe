@@ -113,8 +113,13 @@
                         <div class="product-info text-center">
                             <div class="product-name" th:text="${product.name}">Product Name</div>
                             <div class="product-price" th:text="'$' + ${product.price}">$0.00</div>
-                            <button class="btn btn-primary edit-delete-buttons">Edit</button>
-                            <button class="btn btn-danger edit-delete-buttons">Delete</button>
+                            <form th:action="@{'/admin/edit-product/' + ${product.id}}">
+                                <button class="btn btn-primary edit-delete-buttons" type="submit">Edit</button>
+                            </form>
+                            <form th:action="@{'/admin/delete-product/' + ${product.id}}"
+                                  th:method="post">
+                                <button class="btn btn-danger edit-delete-buttons" type="submit">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>

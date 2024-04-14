@@ -32,7 +32,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ViewProductsDTO> getViewOfProducts() {
 
-
         return mapProductView(productRepository.findAll());
     }
 

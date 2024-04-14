@@ -62,17 +62,17 @@ public class AdminController {
         return "admin/admin";
     }
 
-    private  Long itemId = -1l;
     @GetMapping("/edit-product/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
 
-        itemId = id;
         AddProductDTO addProductDTO = adminService.getProductById(id);
 
 
         if (addProductDTO == null)
             return "error";
+
         model.addAttribute("addProductDTO", addProductDTO);
+        model.addAttribute("productId",id);
         model.addAttribute("categoryOptions", CategoryEnum.values());
         model.addAttribute("genderOptions", GenderEnum.values());
         model.addAttribute("sizeOptions", SizeEnum.values());
@@ -81,16 +81,10 @@ public class AdminController {
         return "admin/product/edit-product";
     }
 
+    @PostMapping("/edit-product/{id}")
+    public String editProduct(@PathVariable("id") Long id, AddProductDTO addProductDTO) {
 
-
-    @PostMapping("/edit-product")
-    public String editProduct( AddProductDTO addProductDTO) {
-
-        if (itemId == -1l)
-            return "error";
-
-        adminService.editProduct(itemId,addProductDTO);
-        itemId = -1l;
+        adminService.editProduct(id,addProductDTO);
         return "admin/admin";
     }
 
@@ -102,20 +96,21 @@ public class AdminController {
         return "admin/admin";
     }
 
-    @PostMapping("/delete-product")
-    public String deleteProduct() {
+    @PostMapping("/delete-product/{id}")
+    public String deleteProduct2(@PathVariable("id") Long id) {
 
-        if (itemId == -1l)
-            return "error";
+        adminService.deleteProduct(id);
 
-        adminService.deleteProduct(itemId);
-        itemId = -1l;
         return "admin/admin";
     }
 
     @GetMapping("/product-grid")
     public String productGrid(Model model) {
-        model.addAttribute("products", productService.getViewOfProducts());
+
+        var products = productService.getViewOfProducts();
+
+        System.out.println(products.size());
+        model.addAttribute("products",products);
 
         return "admin/product-grid";
     }
