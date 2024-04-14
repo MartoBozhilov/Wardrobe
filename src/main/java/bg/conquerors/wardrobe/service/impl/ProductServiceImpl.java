@@ -28,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
         this.discountRepository = discountRepository;
     }
+
     @Override
     public List<ViewProductsDTO> getViewOfProducts() {
 
@@ -72,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setPrice(product.getPrice());
             productDTO.setImgUrl(product.getFirstImgUrl());
 
-            if(!productNumbers.contains(product.getProductNumber())) {
+            if (!productNumbers.contains(product.getProductNumber())) {
                 productNumbers.add(product.getProductNumber());
                 returnProducts.add(productDTO);
             }
@@ -80,6 +81,7 @@ public class ProductServiceImpl implements ProductService {
 
         return returnProducts;
     }
+
     private BigDecimal calculateProduct(List<Product> products) {
         Discount productDiscount = discountRepository.findById(products.get(0).getId()).orElse(null);
 
@@ -97,4 +99,5 @@ public class ProductServiceImpl implements ProductService {
 
         return products.get(0).getPrice();
     }
+
 }
