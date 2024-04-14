@@ -58,7 +58,14 @@
                             <ul class="sub-menu">
                                 <li><a href="/users/login">Login</a></li>
                                 <li><a href="/users/register">Register</a></li>
-                                <li><a href="/users/logout">Logout</a></li>
+                                <li>
+                                    <form action="/users/logout"
+                                          method="post"
+                                          id="logout"
+                                          name="logout">
+                                        <a href="#" onclick="document.getElementById('logout').submit();">Logout</a>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                     </ul>

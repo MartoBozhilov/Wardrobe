@@ -41,6 +41,7 @@ public class SecurityConfiguration {
                         logout -> logout
                                 .logoutUrl("/users/logout")
                                 .logoutSuccessUrl("/")
+                                .permitAll()
                                 .invalidateHttpSession(true)
                 ).sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
