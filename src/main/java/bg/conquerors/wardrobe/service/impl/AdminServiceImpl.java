@@ -1,8 +1,11 @@
 package bg.conquerors.wardrobe.service.impl;
 
+import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.entity.Discount;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.entity.Tag;
+import bg.conquerors.wardrobe.repository.DiscountRepository;
 import bg.conquerors.wardrobe.repository.ProductRepository;
 import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.service.AdminService;
@@ -16,11 +19,24 @@ public class AdminServiceImpl implements AdminService {
     private final ProductRepository productRepository;
     private final TagRepository tagRepository;
 
+    private final DiscountRepository discountRepository;
+
     public AdminServiceImpl(ProductRepository productRepository,
-                            TagRepository tagRepository) {
+                            TagRepository tagRepository,
+                            DiscountRepository discountRepository) {
         this.productRepository = productRepository;
         this.tagRepository = tagRepository;
+        this.discountRepository = discountRepository;
     }
+
+
+    /*
+    *
+    *
+    *                           Product
+    *
+    *
+    * */
 
     @Override
     public void addProduct(AddProductDTO addProductDTO) {
@@ -53,11 +69,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteProduct(Long id) {
-        var product = productRepository.getReferenceById(id);
+        var product = productRepository.findAllById(id);
         Tag tag = product.getTag();
-        System.out.println(tag.getId());
-      /*  productRepository.delete(product);
-        tagRepository.delete(tag);*/
+        productRepository.delete(product);
+        tagRepository.delete(tag);
     }
 
     private Product getNewProduct(AddProductDTO addProductDTO) {
@@ -164,6 +179,74 @@ public class AdminServiceImpl implements AdminService {
             isChange = true;
         }
            if(isChange) tagRepository.save(tag);
+    }
+
+    /*
+     *
+     *
+     *                           Discount
+     *
+     *
+     * */
+
+    @Override
+    public void addDiscount(AddDiscountDTO addDiscountDTO) {
+
+        Discount newDiscount = getNewDiscount(addDiscountDTO);
+
+        discountRepository.save(newDiscount);
+    }
+
+    private Discount getNewDiscount(AddDiscountDTO addDiscountDTO) {
+        Discount discount = new Discount();
+
+        discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
+        discount.setStartDate(addDiscountDTO.getStartDate());
+        discount.setEndDate(addDiscountDTO.getEndDate());
+
+        return discount;
+    }
+
+    @Override
+    public void editDiscount(Long id, AddDiscountDTO addDiscountDTO) {
+        Discount discount = setDiscount(discountRepository.findAllById(id),addDiscountDTO);
+
+        discountRepository.save(discount);
+    }
+
+    private Discount setDiscount(Discount discount, AddDiscountDTO addDiscountDTO) {
+
+        discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
+        discount.setStartDate(addDiscountDTO.getStartDate());
+        discount.setEndDate(addDiscountDTO.getEndDate());
+
+        return discount;
+    }
+
+    @Override
+    public AddDiscountDTO getDiscountById(Long id) {
+
+        Discount discount = discountRepository.findAllById(id);
+
+        if (discount == null)
+            return null;
+
+        return createDiscountDTO(discount);
+    }
+
+    private AddDiscountDTO createDiscountDTO(Discount discount) {
+        AddDiscountDTO addDiscountDTO = new AddDiscountDTO();
+
+        addDiscountDTO.setDiscountPercentage(discount.getDiscountPercentage());
+        addDiscountDTO.setStartDate(discount.getStartDate());
+        addDiscountDTO.setEndDate(discount.getEndDate());
+
+        return addDiscountDTO;
+    }
+
+    @Override
+    public void deleteDiscount(Long id) {
+        discountRepository.delete(discountRepository.findAllById(id));
     }
 
 }

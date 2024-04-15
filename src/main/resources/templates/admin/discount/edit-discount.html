@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Edit Discount</h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{'/admin/edit-discount/' + ${discountId}}"
+                          th:method="post">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="startDate"
+                                   name="startDate"
+                                   th:value="*{startDate}">
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <input type="date"
+                                   class="form-control"
+                                   dateformat="YYYY-MM-DD"
+                                   id="endDate"
+                                   name="endDate"
+                                   th:value="*{endDate}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="discountPercentage">Min Price</label>
+                            <input type="number"
+                                   min="0"
+                                   max="100"
+                                   class="form-control"
+                                   id="discountPercentage"
+                                   name="discountPercentage"
+                                   th:value="*{addDiscountDTO.discountPercentage}">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save Discount</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

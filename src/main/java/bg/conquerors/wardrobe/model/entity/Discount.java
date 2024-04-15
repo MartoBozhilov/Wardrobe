@@ -27,6 +27,6 @@ public class Discount extends BaseEntity {
     private Date endDate;
 
     @Column(name = "discount_percentage")
-    private String discountPercentage;
+    private int discountPercentage;
 
 }

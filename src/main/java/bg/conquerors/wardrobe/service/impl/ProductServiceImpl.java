@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
 
         if (productDiscount != null) {
             BigDecimal discountPercent = BigDecimal
-                    .valueOf(Double.parseDouble(productDiscount.getDiscountPercentage())
+                    .valueOf(productDiscount.getDiscountPercentage()
                     );
 
             BigDecimal discountPrice = (discountPercent.multiply(products.get(0).getPrice())).divide(BigDecimal.valueOf(100));

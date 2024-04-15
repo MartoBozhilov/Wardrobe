@@ -1,5 +1,6 @@
 package bg.conquerors.wardrobe.controller;
 
+import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.enums.CategoryEnum;
@@ -8,15 +9,18 @@ import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.model.enums.StyleEnum;
 import bg.conquerors.wardrobe.service.AdminService;
 import bg.conquerors.wardrobe.service.ProductService;
+import jakarta.validation.Valid;
+import lombok.Data;
 import org.hibernate.annotations.processing.Find;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,16 +30,16 @@ public class AdminController {
     private final AdminService adminService;
     private final ProductService productService;
 
-    public AdminController(AdminService adminService,ProductService productService) {
+    public AdminController(AdminService adminService, ProductService productService) {
         this.adminService = adminService;
         this.productService = productService;
     }
 
     /*
-    *
-    *                               Products Controls
-    *
-    * */
+     *
+     *                               Products Controls
+     *
+     * */
 
     @GetMapping("")
     public String admin() {
@@ -72,7 +76,7 @@ public class AdminController {
             return "error";
 
         model.addAttribute("addProductDTO", addProductDTO);
-        model.addAttribute("productId",id);
+        model.addAttribute("productId", id);
         model.addAttribute("categoryOptions", CategoryEnum.values());
         model.addAttribute("genderOptions", GenderEnum.values());
         model.addAttribute("sizeOptions", SizeEnum.values());
@@ -84,12 +88,12 @@ public class AdminController {
     @PostMapping("/edit-product/{id}")
     public String editProduct(@PathVariable("id") Long id, AddProductDTO addProductDTO) {
 
-        adminService.editProduct(id,addProductDTO);
+        adminService.editProduct(id, addProductDTO);
         return "admin/admin";
     }
 
     @GetMapping("/delete-product/{id}")
-    public String deleteProduct(@PathVariable("id") Long id) {
+    public String deleteProductGet(@PathVariable("id") Long id) {
 
         adminService.deleteProduct(id);
 
@@ -97,7 +101,7 @@ public class AdminController {
     }
 
     @PostMapping("/delete-product/{id}")
-    public String deleteProduct2(@PathVariable("id") Long id) {
+    public String deleteProductPost(@PathVariable("id") Long id) {
 
         adminService.deleteProduct(id);
 
@@ -107,14 +111,10 @@ public class AdminController {
     @GetMapping("/product-grid")
     public String productGrid(Model model) {
 
-        var products = productService.getViewOfProducts();
-
-        System.out.println(products.size());
-        model.addAttribute("products",products);
+        model.addAttribute("products", productService.getViewOfProducts());
 
         return "admin/product-grid";
     }
-
 
 
     /*
@@ -123,72 +123,63 @@ public class AdminController {
      *
      * */
 
-   /* @GetMapping("/add-order")
-    public String addOrder(Model model) {
 
-        model.addAttribute("addProductDTO", new AddOrderDTO());
-        model.addAttribute("categoryOptions", CategoryEnum.values());
-        model.addAttribute("genderOptions", GenderEnum.values());
-        model.addAttribute("sizeOptions", SizeEnum.values());
-        model.addAttribute("styleOptions", StyleEnum.values());
 
-        return "admin/Order/add-Order";
+    /*
+     *
+     *                              Discount Controls
+     *
+     * */
+
+    @GetMapping("/add-discount")
+    public String addDiscount(Model model) {
+
+        model.addAttribute("addDiscountDTO", new AddDiscountDTO());
+
+        return "admin/discount/add-discount";
     }
 
-    @PostMapping("/add-Order")
-    public String addOrder(AddOrderDTO addOrderDTO) {
-
-        adminService.addOrder(addOrderDTO);
+    @PostMapping("/add-discount")
+    public String addDiscount(AddDiscountDTO addDiscountDTO) {
+        adminService.addDiscount(addDiscountDTO);
         return "admin/admin";
     }
 
-    private  Long orderId = -1l;
+    @GetMapping("/edit-discount/{id}")
+    public String editDiscount(@PathVariable("id") Long id, Model model) {
 
-    @GetMapping("/edit-Order/{id}")
-    public String editOrder(@PathVariable("id") Long id, Model model) {
-
-        itemId = id;
-        AddOrderDTO addOrderDTO = adminService.getOrderById(id);
-
-
-        if (addOrderDTO == null)
-            return "error";
-        model.addAttribute("addProductDTO", addOrderDTO);
-        model.addAttribute("categoryOptions", CategoryEnum.values());
-        model.addAttribute("genderOptions", GenderEnum.values());
-        model.addAttribute("sizeOptions", SizeEnum.values());
-        model.addAttribute("styleOptions", StyleEnum.values());
-
-        return "admin/product/edit-product";
-    }
-
-    @PostMapping("/edit-order")
-    public String editOrder(AddOrderDTO addOrderDTO) {
-
-        if (itemId == -1l)
+        AddDiscountDTO addDiscountDTO = adminService.getDiscountById(id);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        if (addDiscountDTO == null)
             return "error";
 
-        adminService.editOrder(itemId,addOrderDTO);
-        itemId = -1l;
+        model.addAttribute("addDiscountDTO", addDiscountDTO);
+        model.addAttribute("startDate",format.format(addDiscountDTO.getStartDate()));
+        model.addAttribute("endDate",format.format(addDiscountDTO.getEndDate()));
+        model.addAttribute("discountId", id);
+
+        return "admin/discount/edit-discount";
+    }
+
+    @PostMapping("/edit-discount/{id}")
+    public String editDiscount(@PathVariable("id") Long id, AddDiscountDTO addDiscountDTO) {
+        adminService.editDiscount(id, addDiscountDTO);
         return "admin/admin";
     }
 
-    @GetMapping("/delete-order/{id}")
-    public String deleteOrder(@PathVariable("id") Long id) {
+    @GetMapping("/delete-discount/{id}")
+    public String deleteDiscountGet(@PathVariable("id") Long id) {
 
-        adminService.deleteOrder(id);
+        adminService.deleteDiscount(id);
 
         return "admin/admin";
     }
 
-    @PostMapping("/delete-order")
-    public String deleteOrder() {
+    @PostMapping("/delete-discount/{id}")
+    public String deleteDiscountPost(@PathVariable("id") Long id) {
 
-        if (itemId == -1l)
-            return "error";
+        adminService.deleteDiscount(id);
 
-        adminService.deleteOrder(itemId);
-        itemId = -1l;
         return "admin/admin";
-    }*/
+    }
 }
