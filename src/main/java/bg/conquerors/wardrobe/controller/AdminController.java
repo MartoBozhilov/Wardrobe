@@ -64,7 +64,7 @@ public class AdminController {
     public String addProduct(AddProductDTO addProductDTO) {
 
         adminService.addProduct(addProductDTO);
-        return "admin/admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/edit-product/{id}")
@@ -90,7 +90,7 @@ public class AdminController {
     public String editProduct(@PathVariable("id") Long id, AddProductDTO addProductDTO) {
 
         adminService.editProduct(id, addProductDTO);
-        return "admin/admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/delete-product/{id}")
@@ -98,7 +98,7 @@ public class AdminController {
 
         adminService.deleteProduct(id);
 
-        return "admin/admin";
+        return "redirect:/admin";
     }
 
     @PostMapping("/delete-product/{id}")
@@ -106,7 +106,7 @@ public class AdminController {
 
         adminService.deleteProduct(id);
 
-        return "admin/admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/product-grid")

@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Product</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- custom css-->
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
 </head>
-<body>
 
+<body>
+<div>
+    <nav th:replace="~{/admin/admin_fragments/admin-navbar}"></nav>
+</div>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,40 +23,27 @@
                     <h2 class="card-title">Add Product</h2>
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/admin/add-product}"
-                          th:method="post">
+                    <form th:action="@{/admin/add-product}" th:method="post">
                         <div class="form-group">
                             <label for="productNumber">Product Number</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="productNumber"
-                                   name="productNumber">
+                            <input type="text" class="form-control" id="productNumber" name="productNumber">
                         </div>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="name"
-                                   name="name">
+                            <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="form-group">
-                         <label for="size">Size</label>
-                            <select class="form-control"
-                                    id="size"
-                                    name="size"
-                                    th:field="*{addProductDTO.size}">
+                            <label for="size">Size</label>
+                            <select class="form-control" id="size" name="size" th:field="*{addProductDTO.size}">
                                 <option th:each="option : ${sizeOptions}"
                                         th:value="${option}"
-                                        th:text="${option}"></option>
+                                        th:text="${option}">
+                                </option>
                             </select>
                         </div>
-                        <!--                        -->
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="description"
-                                   name="description">
+                            <textarea class="form-control" id="description" name="description"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="imageUrl1">Image Url1</label>
@@ -129,6 +125,7 @@
                                         th:text="${option}"></option>
                             </select>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Add Product</button>
                     </form>
                 </div>
@@ -137,5 +134,10 @@
     </div>
 </div>
 
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fragments</title>
+</head>
+<body>
+
+<!-- Define your sidebar fragment here -->
+<nav th:fragment="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="/admin">
+                    Product grid
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Manage discounts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Orders
+                </a>
+            </li>
+            <!-- Add other navigation items here -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Dashboard
+                </a>
+            </li>
+        </ul>
+        <ul class="nav flex-column nav-bottom">
+            <li class="nav-item">
+                <a class="nav-link" href="index">
+                    Back to the shop
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+</body>
+</html>
