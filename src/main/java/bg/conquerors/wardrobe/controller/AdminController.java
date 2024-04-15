@@ -14,6 +14,7 @@ import lombok.Data;
 import org.hibernate.annotations.processing.Find;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,8 @@ public class AdminController {
      * */
 
     @GetMapping("")
-    public String admin() {
-
+    public String admin(Model model) {
+        model.addAttribute("products",productService.getViewOfProducts());
         return "admin/admin";
     }
 
