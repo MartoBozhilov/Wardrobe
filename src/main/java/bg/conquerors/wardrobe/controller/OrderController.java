@@ -1,42 +1,25 @@
 package bg.conquerors.wardrobe.controller;
 
-import bg.conquerors.wardrobe.model.entity.Order;
-import jakarta.validation.Valid;
+import bg.conquerors.wardrobe.model.enums.SizeEnum;
+import bg.conquerors.wardrobe.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class OrderController {
 
-    private  List<Order> orders = new ArrayList<>();
+    private final OrderService orderService;
 
-    @GetMapping("/orders")
-    public String Orders(Model model){
-        model.addAttribute("orders", orders);
-        return "orders";
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
-    @GetMapping("/orders/test")
-    public String OrdersTest(Model model){
-        for (int i = 1 ; i < 21  ; i++){
-            orders.add(new Order(i));
-        }
+    public String addProductToCart(Model model,
+                                   @PathVariable("productNumber") String productNumber,
+                                   @PathVariable("size") SizeEnum size) {
 
-        model.addAttribute("orders", orders);
-        return "redirect:/orders";
-    }
-
-    @PostMapping("/post")
-    public String post(@Valid Order order, BindingResult result, Model model){
-        orders.add(new Order(orders.size()));
-        model.addAttribute("orders", orders);
-        return "redirect:/orders";
+        return "redirect:/shop/product/{productNumber}";
     }
 
 }
