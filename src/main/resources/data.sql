@@ -31,7 +31,7 @@ values
 
 INSERT INTO `wardrobe_shop_database`.`products` (`id`, `description`, `first_img_url`, `min_price`, `name`, `price`, `product_number`, `quantity`, `second_img_url`, `size`, `third_img_url`, `tag_id`)
 VALUES
-    ('1', 'grdedge', '/images/products/jackets/Calvin_Klein_Jeans_black_1.png', '54.99', 'Calvin Klein Black Jacket', '74.99', '1111', '12', '/images/products/jackets/Calvin_Klein_Jeans_black_2.png', 'S', '/images/products/jackets/Calvin_Klein_Jeans_black_3.png', '1'),
+       ('1', 'grdedge', '/images/products/jackets/Calvin_Klein_Jeans_black_1.png', '54.99', 'Calvin Klein Black Jacket', '74.99', '1111', '12', '/images/products/jackets/Calvin_Klein_Jeans_black_2.png', 'S', '/images/products/jackets/Calvin_Klein_Jeans_black_3.png', '1'),
        ('2', 'grdedge', '/images/products/jackets/Calvin_Klein_Jeans_black_1.png', '54.99', 'Calvin Klein Black Jacket', '74.99', '1111', '20', '/images/products/jackets/Calvin_Klein_Jeans_black_2.png', 'M', '/images/products/jackets/Calvin_Klein_Jeans_black_3.png', '1'),
        ('3', 'grdedge', '/images/products/jackets/Calvin_Klein_Jeans_black_1.png', '54.99', 'Calvin Klein Black Jacket', '74.99', '1111', '16', '/images/products/jackets/Calvin_Klein_Jeans_black_2.png', 'L', '/images/products/jackets/Calvin_Klein_Jeans_black_3.png', '1'),
        ('4', 'grdedge', '/images/products/jackets/Calvin_Klein_Jeans_black_1.png', '54.99', 'Calvin Klein Black Jacket', '74.99', '1111', '27', '/images/products/jackets/Calvin_Klein_Jeans_black_2.png', 'XL', '/images/products/jackets/Calvin_Klein_Jeans_black_3.png', '1'),
