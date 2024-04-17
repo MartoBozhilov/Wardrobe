@@ -259,7 +259,7 @@
 								<!-- If no image URL, show placeholder -->
 								<div th:if="${product.imgUrl == null}" class="product-image-placeholder">No Image Available</div>
 								<!-- If image URL exists, wrap the image with an anchor tag -->
-								<a th:if="${product.imgUrl != null}" th:href="@{'/shop/product/' + ${product.productNumber}}">
+								<a th:if="${product.imgUrl != null}" th:href="@{'/shop/product-detail/' + ${product.productNumber}}">
 									<img th:src="@{${product.imgUrl}}" class="product-image" alt="Product Image">
 								</a>
 								<!--								&lt;!&ndash; Quick view button &ndash;&gt;-->

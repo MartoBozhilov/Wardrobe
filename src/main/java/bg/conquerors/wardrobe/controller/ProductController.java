@@ -32,7 +32,7 @@ public class ProductController {
 //
 //        return "product-detail";
 //    }
-   @GetMapping("/shop/product/{productNumber}")
+   @GetMapping("/shop/product-detail/{productNumber}")
     public String viewProduct(Model model, @PathVariable String productNumber) {
 
         model.addAttribute("product", productService.getProductByProductNumber(productNumber));

@@ -426,10 +426,10 @@
                                 </div>
 
                                 <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
+                                    <div class="rs1-select2 bor8">
                                         <!-- Update the select to use Thymeleaf for dynamic options -->
-                                        <select class="js-select2" id="size" name="size" onchange="updateSelectedSize(this)">
-                                            <option th:each="option : ${sizes}" th:value="${option}" th:text="${option}"></option>
+                                        <select class="js-select2" id="sizeSelect" name="size">
+                                            <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"></option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
@@ -440,35 +440,24 @@
                             <div class="size-204 flex-w flex-m respon6-next">
                                 <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                        <i class="fs-16 zmdi zmdi-minus"></i>
+                                        <i class="fs-16 zmdi zmdi-minus" onclick="decreaseQuantity()"></i>
                                     </div>
 
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1" id="quantityInput">
 
                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                        <i class="fs-16 zmdi zmdi-plus" onclick="increaseQuantity()"></i>
                                     </div>
                                 </div>
 
-<!--                                &lt;!&ndash; Add a hidden input field to store the selected size &ndash;&gt;-->
-<!--                                <input type="hidden" id="selectedSize" name="selectedSize" th:value="${product.size}" />-->
-
-<!--                                &lt;!&ndash; Button to add to cart &ndash;&gt;-->
-<!--                                <button type="submit"-->
-<!--                                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"-->
-<!--                                        th:href="@{'/add-to-cart/' + ${productNumber} + '/' + ${selectedSize}}">-->
-<!--                                    Add to cart-->
-<!--                                </button>-->
+                                <button type="button" onclick="redirectToPage()"
+                                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                    Add to cart
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <script th:inline="javascript">
-                        /* Update the hidden input field with the selected size */
-                        function updateSelectedSize(select) {
-                            document.getElementById('selectedSize').value = select.value;
-                        }
-                    </script>
 
 
                     <!--  -->
@@ -1436,6 +1425,30 @@
 <!--===============================================================================================-->
 <script th:src="@{/js/main.js}"></script>
 
+<script>
+         function redirectToPage() {
+            var selectedOption = document.getElementById('sizeSelect').value;
+            var quantity = document.getElementById('quantityInput').value;
+            var currentUrl = window.location.href;
+            var productNumber = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
+            var addToCartUrl = '/add-to-cart/' + productNumber + '/' + selectedOption + '/' + quantity;
+            window.location.href = addToCartUrl;
+        }
+
+        function increaseQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var currentQuantity = parseInt(quantityInput.value);
+            quantityInput.value = currentQuantity + 1;
+        }
+
+        function decreaseQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity > 1) { // Ensures the quantity does not go below 1
+                quantityInput.value = currentQuantity - 1;
+            }
+        }
+</script>
 
 </body>
 </html>
