@@ -21,6 +21,11 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping("/users/account")
+    public String account() {
+        return "account";
+    }
+
     @GetMapping("/users/register")
     public String register(Model model) {
         model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
