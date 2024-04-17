@@ -9,4 +9,6 @@ public interface OrderService {
 
     void addProductToCart(String productNumber, SizeEnum size);
 
+    void removeProductFromCart(Long id);
+
 }
