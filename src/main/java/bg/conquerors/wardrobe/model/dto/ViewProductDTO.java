@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 @Setter
 @Getter
@@ -29,6 +28,6 @@ public class ViewProductDTO {
 
     private BigDecimal price;
 
-    private Map<SizeEnum, Integer> sizeQuantityMap;
+    private SizeEnum size;
 
 }

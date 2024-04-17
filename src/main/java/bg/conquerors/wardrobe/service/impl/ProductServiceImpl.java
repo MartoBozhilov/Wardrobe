@@ -51,11 +51,6 @@ public class ProductServiceImpl implements ProductService {
         }
 
         viewProductDTO.setPrice(calculateProduct(products));
-        viewProductDTO.setSizeQuantityMap(new HashMap<>());
-        viewProductDTO.getSizeQuantityMap().put(SizeEnum.S, products.get(0).getQuantity());
-        viewProductDTO.getSizeQuantityMap().put(SizeEnum.M, products.get(1).getQuantity());
-        viewProductDTO.getSizeQuantityMap().put(SizeEnum.L, products.get(2).getQuantity());
-        viewProductDTO.getSizeQuantityMap().put(SizeEnum.XL, products.get(3).getQuantity());
 
         return viewProductDTO;
     }

@@ -34,8 +34,9 @@ public class ProductController {
 //    }
    @GetMapping("/shop/product/{productNumber}")
     public String viewProduct(Model model, @PathVariable String productNumber) {
-        model.addAttribute("product",
-                productService.getProductByProductNumber(productNumber));
+
+        model.addAttribute("product", productService.getProductByProductNumber(productNumber));
+        model.addAttribute("sizes", SizeEnum.values());
 
         return "product-detail";
     }
