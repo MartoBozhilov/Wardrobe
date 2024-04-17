@@ -76,10 +76,4 @@ public class HomeController {
         return "product-detail";
     }
 
-    @GetMapping("/shopping-cart")
-    public String shopingCart() {
-
-        return "shoping-cart";
-    }
-
 }

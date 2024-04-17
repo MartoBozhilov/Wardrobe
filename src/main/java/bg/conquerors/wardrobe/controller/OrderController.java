@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class OrderController {
@@ -32,6 +31,14 @@ public class OrderController {
 
         orderService.removeProductFromCart(id);
         return "redirect:/shopping-cart";
+    }
+
+    @GetMapping("/shopping-cart")
+    public String shopingCart(Model model) {
+
+        model.addAttribute("cartView", orderService.getCart());
+
+        return "shoping-cart";
     }
 
 }
