@@ -27,22 +27,16 @@ public class ProductController {
         return "shop";
     }
 
-    @GetMapping("/shop1")
-    public String getViewProductsForShop(Model model) {
-        model.addAttribute("products", productService.getViewOfProducts());
-
-        return "shop1";
-    }
-
 //    @GetMapping("/product-detail/{id}")
 //    public String productDetail(@PathVariable("id") Long id, Model model) {
 //
 //        return "product-detail";
 //    }
-   /* @GetMapping("/shop/product/{productNumber}")
+   @GetMapping("/shop/product/{productNumber}")
     public String viewProduct(Model model, @PathVariable String productNumber) {
-        model.addAttribute("product", productService.getProductByProductNumber(productNumber));
+        model.addAttribute("product",
+                productService.getProductByProductNumber(productNumber));
 
-        return "viewProduct";
-    }*/
+        return "product-detail";
+    }
 }

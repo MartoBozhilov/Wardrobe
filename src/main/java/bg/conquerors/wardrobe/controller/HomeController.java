@@ -62,13 +62,13 @@ public class HomeController {
         return "product";
     }
 
-    @GetMapping("/product-detail/{id}")
-    public String productDetailWithId(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("product", adminService.getProductById(id));
-        model.addAttribute("itemId", id);
-        model.addAttribute("sizeOptions", SizeEnum.values());
-        return "product-detail";
-    }
+//    @GetMapping("/product-detail/{id}")
+//    public String productDetailWithId(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("product", adminService.getProductById(id));
+//        model.addAttribute("itemId", id);
+//        model.addAttribute("sizeOptions", SizeEnum.values());
+//        return "product-detail";
+//    }
 
     @GetMapping("/product-detail")
     public String productDetail() {

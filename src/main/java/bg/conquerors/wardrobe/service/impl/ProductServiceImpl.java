@@ -71,6 +71,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setName(product.getName());
             productDTO.setPrice(product.getPrice());
             productDTO.setImgUrl(product.getFirstImgUrl());
+            productDTO.setProductNumber(product.getProductNumber());
 
             if (!productNumbers.contains(product.getProductNumber())) {
                 productNumbers.add(product.getProductNumber());

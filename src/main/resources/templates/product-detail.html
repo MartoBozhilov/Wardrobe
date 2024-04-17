@@ -341,7 +341,7 @@
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
-			<span class="stext-109 cl4" th:text="${itemId}">asd</span>
+			<span class="stext-109 cl4" th:text="${product.name}">asd</span>
 		</div>
 	</div>
 		
@@ -357,31 +357,31 @@
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" th:data-thumb="@{/{imageName}(imageName=${product.imageUrl1})}">
+								<div class="item-slick3" th:src="@{${product.firstImgUrl}}">
 									<div class="wrap-pic-w pos-relative">
-										<img th:src="@{/{imageName}(imageName=${product.imageUrl1})}" alt="IMG-PRODUCT">
+										<img th:src="@{{imageName}(imageName=${product.firstImgUrl})}" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{/{imageName}(imageName=${product.imageUrl1})}">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{{imageName}(imageName=${product.firstImgUrl})}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
 
-								<div class="item-slick3" th:data-thumb="@{/{imageName}(imageName=${product.imageUrl2})}">
+								<div class="item-slick3" th:src="@{${product.secondImgUrl}}">
 									<div class="wrap-pic-w pos-relative">
-										<img th:src="@{/{imageName}(imageName=${product.imageUrl2})}" alt="IMG-PRODUCT">
+										<img th:src="@{{imageName}(imageName=${product.secondImgUrl})}" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{/{imageName}(imageName=${product.imageUrl2})}">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{{imageName}(imageName=${product.secondImgUrl})}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
 
-								<div class="item-slick3" th:data-thumb="@{/{imageName}(imageName=${product.imageUrl3})}">
+								<div class="item-slick3" th:src="@{${product.thirdImgUrl}}">
 									<div class="wrap-pic-w pos-relative">
-										<img th:src="@{/{imageName}(imageName=${product.imageUrl3})}" alt="IMG-PRODUCT">
+										<img th:src="@{{imageName}(imageName=${product.thirdImgUrl})}" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{/{imageName}(imageName=${product.imageUrl3})}">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{{imageName}(imageName=${product.thirdImgUrl})}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -415,20 +415,20 @@
 												Size
 											</div>
 
-											<div class="size-204 respon6-next">
-												<div class="rs1-select2 bor8 bg0">
-													<!-- Update the select to use Thymeleaf for dynamic options -->
-													<select class="js-select2"
-															id="size"
-															name="size"
-															th:field="*{product.size}">
-														<option th:each="option : ${sizeOptions}"
-																th:value="${option}"
-																th:text="${option}"></option>
-													</select>
-													<div class="dropDownSelect2"></div>
-												</div>
-											</div>
+<!--											<div class="size-204 respon6-next">-->
+<!--												<div class="rs1-select2 bor8 bg0">-->
+<!--													&lt;!&ndash; Update the select to use Thymeleaf for dynamic options &ndash;&gt;-->
+<!--													<select class="js-select2"-->
+<!--															id="size"-->
+<!--															name="size"-->
+<!--															th:field="*{product.getSizeQuantityMap().keySet()}">-->
+<!--														<option th:each="option : ${product.getSizeQuantityMap().keySet()}"-->
+<!--																th:value="${option}"-->
+<!--																th:text="${option}"></option>-->
+<!--													</select>-->
+<!--													<div class="dropDownSelect2"></div>-->
+<!--												</div>-->
+<!--											</div>-->
 										</div>
 									</div>
 
