@@ -93,18 +93,18 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/delete-product/{id}")
-    public String deleteProductGet(@PathVariable("id") Long id) {
+    @GetMapping("/delete-product/{productNumber}")
+    public String deleteProductGet(@PathVariable("productNumber") String productNumber) {
 
-        adminService.deleteProduct(id);
+        adminService.deleteProduct(productNumber);
 
         return "redirect:/admin";
     }
 
-    @PostMapping("/delete-product/{id}")
-    public String deleteProductPost(@PathVariable("id") Long id) {
+    @PostMapping("/delete-product/{productNumber}")
+    public String deleteProductPost(@PathVariable("productNumber") String productNumber) {
 
-        adminService.deleteProduct(id);
+        adminService.deleteProduct(productNumber);
 
         return "redirect:/admin";
     }

@@ -14,15 +14,15 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="filterByGender('all')">
 						All Products
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="filterByGender('female')">
 						Women
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="filterByGender('male')">
 						Men
 					</button>
 
@@ -30,6 +30,7 @@
 						SALE
 					</button>
 				</div>
+
 
 				<div class="flex-w flex-c-m m-tb-10">
 					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
@@ -248,12 +249,11 @@
 
 
 			<!-- Product -->
-
-
 			<div class="container">
 				<div class="row">
 					<!-- Start of the Thymeleaf loop for each product -->
-					<div th:each="product : ${products}" class="col-md-4 col-sm-6 mb-4">
+<!--					 trqbva da se napravi da moje da se vzima taga na produkta, za 256 red - th:data-gender="${product.tag.gender}"-->
+					<div th:each="product : ${products}" class="col-md-4 col-sm-6 mb-4 product" >
 						<div class="block2 h-100">
 							<div class="block2-pic hov-img0">
 								<!-- If no image URL, show placeholder -->
@@ -262,14 +262,10 @@
 								<a th:if="${product.imgUrl != null}" th:href="@{'/shop/product-detail/' + ${product.productNumber}}">
 									<img th:src="@{${product.imgUrl}}" class="product-image" alt="Product Image">
 								</a>
-								<!--								&lt;!&ndash; Quick view button &ndash;&gt;-->
-<!--								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">-->
-<!--									Quick View-->
-<!--								</a>-->
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class="block2-txt-child1 flex-col-l ">
+								<div class="block2-txt-child1 flex-col-l">
 									<!-- Product name -->
 									<div th:text="${product.name}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Product Name
@@ -286,8 +282,6 @@
 					<!-- End of the Thymeleaf loop for each product -->
 				</div>
 			</div>
-
-
 
 			<!-- Dynamic Products End -->
 
@@ -599,6 +593,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</div>
 
 			<div th:replace="~{fragments/scripts}"></div>
+
+			<script>function filterByGender(gender) {
+    const products = document.querySelectorAll('.product'); // Ensure your product divs have the class 'product'
+
+    products.forEach(product => {
+        const productGender = product.getAttribute('data-gender');
+        if (gender === 'all' || productGender === gender) {
+            product.style.display = ''; // Show the product
+        } else {
+            product.style.display = 'none'; // Hide the product
+        }
+    });
+}
+</script>
 
 </body>
 </html>

@@ -7,7 +7,7 @@ public interface AdminService {
 
     void addProduct(AddProductDTO addProductDTO);
     void editProduct(Long id,AddProductDTO addProductDTO);
-    void deleteProduct(Long id);
+    void deleteProduct(String productNumber);
     AddProductDTO getProductById(Long id);
 
 

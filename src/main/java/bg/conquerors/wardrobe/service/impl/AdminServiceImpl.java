@@ -12,6 +12,7 @@ import bg.conquerors.wardrobe.service.AdminService;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.TemporalAdjuster;
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -68,12 +69,21 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteProduct(Long id) {
-        var product = productRepository.findAllById(id);
-        Tag tag = product.getTag();
-        productRepository.delete(product);
-        tagRepository.delete(tag);
+    public void deleteProduct(String productNumber) {
+        List<Product> products = productRepository.findAllByProductNumber(productNumber);
+        if (!products.isEmpty()) {
+            for (Product product : products) {
+                 Tag tag = product.getTag();
+                productRepository.delete(product);
+                 if (tag != null) {
+                     tagRepository.delete(tag);
+                 }
+            }
+        } else {
+            throw new IllegalArgumentException("No products found with product number: " + productNumber);
+        }
     }
+
 
     private Product getNewProduct(AddProductDTO addProductDTO) {
         Product createProduct = new Product();
