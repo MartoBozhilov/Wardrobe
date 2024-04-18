@@ -4,9 +4,11 @@ import bg.conquerors.wardrobe.model.dto.ViewProductDTO;
 import bg.conquerors.wardrobe.model.dto.ViewProductsDTO;
 import bg.conquerors.wardrobe.model.entity.Discount;
 import bg.conquerors.wardrobe.model.entity.Product;
+import bg.conquerors.wardrobe.model.entity.Tag;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.repository.DiscountRepository;
 import bg.conquerors.wardrobe.repository.ProductRepository;
+import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.service.ProductService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -67,6 +69,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setPrice(product.getPrice());
             productDTO.setImgUrl(product.getFirstImgUrl());
             productDTO.setProductNumber(product.getProductNumber());
+            productDTO.setTag(product.getTag());
 
             if (!productNumbers.contains(product.getProductNumber())) {
                 productNumbers.add(product.getProductNumber());

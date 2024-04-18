@@ -252,8 +252,8 @@
 			<div class="container">
 				<div class="row">
 					<!-- Start of the Thymeleaf loop for each product -->
-<!--					 trqbva da se napravi da moje da se vzima taga na produkta, za 256 red - th:data-gender="${product.tag.gender}"-->
-					<div th:each="product : ${products}" class="col-md-4 col-sm-6 mb-4 product" >
+<!--					 trqbva da se napravi da moje da se vzima taga na produkta, za 256 red - " -->
+					<div th:each="product : ${products}"  th:data-gender="${product.tag.gender}" class="col-md-4 col-sm-6 mb-4 product" >
 						<div class="block2 h-100">
 							<div class="block2-pic hov-img0">
 								<!-- If no image URL, show placeholder -->
@@ -594,16 +594,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 			<div th:replace="~{fragments/scripts}"></div>
 
-			<script>function filterByGender(gender) {
-    const products = document.querySelectorAll('.product'); // Ensure your product divs have the class 'product'
+			<script>
+				function filterByGender(gender) {
+				const products = document.querySelectorAll('.product'); // Ensure your product divs have the class 'product'
 
-    products.forEach(product => {
-        const productGender = product.getAttribute('data-gender');
-        if (gender === 'all' || productGender === gender) {
-            product.style.display = ''; // Show the product
-        } else {
-            product.style.display = 'none'; // Hide the product
-        }
+   				products.forEach(product => {
+       			 const productGender = product.getAttribute('data-gender');
+
+					if (gender === 'all' || productGender.toLowerCase() === gender) {
+						product.style.display = ''; // Show the product
+					} else {
+						product.style.display = 'none'; // Hide the product
+					}
     });
 }
 </script>

@@ -1,5 +1,6 @@
 package bg.conquerors.wardrobe.model.dto;
 
+import bg.conquerors.wardrobe.model.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,7 @@ public class ViewProductsDTO {
     private String imgUrl;
 
     private BigDecimal price;
+
+    private Tag tag;
 
 }

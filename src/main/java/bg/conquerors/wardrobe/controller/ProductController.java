@@ -1,6 +1,7 @@
 package bg.conquerors.wardrobe.controller;
 
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.dto.ViewProductsDTO;
 import bg.conquerors.wardrobe.model.enums.CategoryEnum;
 import bg.conquerors.wardrobe.model.enums.GenderEnum;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -23,7 +26,6 @@ public class ProductController {
     @GetMapping("/shop")
     public String getViewProducts(Model model) {
         model.addAttribute("products", productService.getViewOfProducts());
-
         return "shop";
     }
 

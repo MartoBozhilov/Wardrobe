@@ -1,6 +1,7 @@
 package bg.conquerors.wardrobe.service;
 
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
+import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
 
 public interface AdminService {
@@ -15,4 +16,9 @@ public interface AdminService {
     void editDiscount(Long id, AddDiscountDTO addDiscountDTO);
     void deleteDiscount(Long id);
     AddDiscountDTO getDiscountById(Long id);
+
+    void addOrder(AddOrderDTO addOrderDTO);
+    void editOrder(Long id, AddOrderDTO addOrderDTO);
+    void deleteOrder(Long id);
+    AddOrderDTO getOrderById(Long id);
 }
