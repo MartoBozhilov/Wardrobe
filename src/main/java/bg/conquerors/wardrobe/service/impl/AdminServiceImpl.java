@@ -1,6 +1,7 @@
 package bg.conquerors.wardrobe.service.impl;
 
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
+import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
 import bg.conquerors.wardrobe.model.entity.Discount;
 import bg.conquerors.wardrobe.model.entity.Product;
@@ -242,6 +243,26 @@ public class AdminServiceImpl implements AdminService {
             return null;
 
         return createDiscountDTO(discount);
+    }
+
+    @Override
+    public void addOrder(AddOrderDTO addOrderDTO) {
+
+    }
+
+    @Override
+    public void editOrder(Long id, AddOrderDTO addOrderDTO) {
+
+    }
+
+    @Override
+    public void deleteOrder(Long id) {
+
+    }
+
+    @Override
+    public AddOrderDTO getOrderById(Long id) {
+        return null;
     }
 
     private AddDiscountDTO createDiscountDTO(Discount discount) {
