@@ -1,12 +1,10 @@
 package bg.conquerors.wardrobe.controller;
 
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
+import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
 import bg.conquerors.wardrobe.model.entity.Product;
-import bg.conquerors.wardrobe.model.enums.CategoryEnum;
-import bg.conquerors.wardrobe.model.enums.GenderEnum;
-import bg.conquerors.wardrobe.model.enums.SizeEnum;
-import bg.conquerors.wardrobe.model.enums.StyleEnum;
+import bg.conquerors.wardrobe.model.enums.*;
 import bg.conquerors.wardrobe.service.AdminService;
 import bg.conquerors.wardrobe.service.ProductService;
 import jakarta.validation.Valid;
@@ -17,11 +15,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,16 +33,12 @@ public class AdminController {
     private final AdminService adminService;
     private final ProductService productService;
 
+
     public AdminController(AdminService adminService, ProductService productService) {
         this.adminService = adminService;
         this.productService = productService;
     }
 
-    /*
-     *
-     *                               Products Controls
-     *
-     * */
 
     @GetMapping("")
     public String admin(Model model) {
@@ -48,10 +46,20 @@ public class AdminController {
         return "admin/admin";
     }
 
+    //region <Products CRUD>
     @GetMapping("/add-product")
     public String addProduct(Model model) {
 
-        model.addAttribute("addProductDTO", new AddProductDTO());
+        AddProductDTO addProductDTO = new AddProductDTO();
+        Map<String,Integer> quantity = new Hashtable<>();
+
+        for (SizeEnum sizeEnum : SizeEnum.values()){
+            quantity.put(sizeEnum.toString(),0);
+        }
+
+        addProductDTO.setQuantities(quantity);
+
+        model.addAttribute("addProductDTO", addProductDTO);
         model.addAttribute("categoryOptions", CategoryEnum.values());
         model.addAttribute("genderOptions", GenderEnum.values());
         model.addAttribute("sizeOptions", SizeEnum.values());
@@ -61,23 +69,29 @@ public class AdminController {
     }
 
     @PostMapping("/add-product")
-    public String addProduct(AddProductDTO addProductDTO) {
+    public String addProduct(AddProductDTO addProductDTO, BindingResult result) {
+
+        if (result.hasErrors()) {
+
+            return "error";
+        }
 
         adminService.addProduct(addProductDTO);
+
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit-product/{id}")
-    public String editProduct(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/edit-product/{productNumber}")
+    public String editProduct(@PathVariable("productNumber") String productNumber, Model model) {
 
-        AddProductDTO addProductDTO = adminService.getProductById(id);
+        AddProductDTO addProductDTO = adminService.getProductByProductNumber(productNumber);
 
 
         if (addProductDTO == null)
             return "error";
 
         model.addAttribute("addProductDTO", addProductDTO);
-        model.addAttribute("productId", id);
+        model.addAttribute("productId", productNumber);
         model.addAttribute("categoryOptions", CategoryEnum.values());
         model.addAttribute("genderOptions", GenderEnum.values());
         model.addAttribute("sizeOptions", SizeEnum.values());
@@ -86,10 +100,10 @@ public class AdminController {
         return "admin/product/edit-product";
     }
 
-    @PostMapping("/edit-product/{id}")
-    public String editProduct(@PathVariable("id") Long id, AddProductDTO addProductDTO) {
+    @PostMapping("/edit-product/{productNumber}")
+    public String editProduct(@PathVariable("productNumber") String productNumber,AddProductDTO addProductDTO) {
 
-        adminService.editProduct(id, addProductDTO);
+        adminService.editProduct(productNumber, addProductDTO);
         return "redirect:/admin";
     }
 
@@ -116,22 +130,68 @@ public class AdminController {
 
         return "admin/product-grid";
     }
+    //endregion
+
+    //region <Orders CRUD>
+
+    @GetMapping("/add-order")
+    public String addOrder(Model model) {
+
+        model.addAttribute("addOrderDTO", new AddOrderDTO());
+        model.addAttribute("orderStatusOptions", OrderStatusEnum.values());
+
+        return "admin/order/add-order";
+    }
+
+    @PostMapping("/add-order")
+    public String addOrder(AddOrderDTO addOrderDTO) {
+
+        adminService.addOrder(addOrderDTO);
+        return "admin/admin";
+    }
+
+    @GetMapping("/edit-order/{id}")
+    public String editOrder(@PathVariable("id") Long id, Model model) {
+
+        AddOrderDTO addOrderDTO = adminService.getOrderById(id);
 
 
-    /*
-     *
-     *                              Orders Controls
-     *
-     * */
+        if (addOrderDTO == null)
+            return "error";
 
+        model.addAttribute("addOrderDTO", addOrderDTO);
+        model.addAttribute("productId", id);
+        model.addAttribute("orderStatusOptions", OrderStatusEnum.values());
 
+        return "admin/order/edit-order";
+    }
 
-    /*
-     *
-     *                              Discount Controls
-     *
-     * */
+    @PostMapping("/edit-order/{id}")
+    public String editOrder(@PathVariable("id") Long id, AddOrderDTO addOrderDTO) {
 
+        adminService.editOrder(id, addOrderDTO);
+        return "admin/admin";
+    }
+
+    @GetMapping("/delete-order/{id}")
+    public String deleteOrderGet(@PathVariable("id") Long id) {
+
+        adminService.deleteOrder(id);
+
+        return "admin/admin";
+    }
+
+    @PostMapping("/delete-order/{id}")
+    public String deleteOrderPost(@PathVariable("id") Long id) {
+
+        adminService.deleteOrder(id);
+
+        return "admin/admin";
+    }
+
+    //endregion
+
+    //region <Discount CRUD>
     @GetMapping("/add-discount")
     public String addDiscount(Model model) {
 
@@ -183,4 +243,5 @@ public class AdminController {
 
         return "admin/admin";
     }
+    //endregion
 }

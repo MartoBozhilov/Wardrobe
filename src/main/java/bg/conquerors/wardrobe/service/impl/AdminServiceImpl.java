@@ -4,16 +4,22 @@ import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
 import bg.conquerors.wardrobe.model.entity.Discount;
+import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.entity.Tag;
+import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.repository.DiscountRepository;
+import bg.conquerors.wardrobe.repository.OrderRepository;
 import bg.conquerors.wardrobe.repository.ProductRepository;
 import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.service.AdminService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.temporal.TemporalAdjuster;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -23,50 +29,52 @@ public class AdminServiceImpl implements AdminService {
 
     private final DiscountRepository discountRepository;
 
+    private final OrderRepository orderRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+
     public AdminServiceImpl(ProductRepository productRepository,
                             TagRepository tagRepository,
-                            DiscountRepository discountRepository) {
+                            DiscountRepository discountRepository,
+                            OrderRepository orderRepository) {
         this.productRepository = productRepository;
         this.tagRepository = tagRepository;
         this.discountRepository = discountRepository;
+        this.orderRepository = orderRepository;
     }
 
 
-    /*
-    *
-    *
-    *                           Product
-    *
-    *
-    * */
-
+    //region <Product CRUD>
     @Override
     public void addProduct(AddProductDTO addProductDTO) {
+
         Tag tag = getTag(addProductDTO);
 
-        Product newProduct = getNewProduct(addProductDTO);
-        newProduct.setTag(tag);
-
-        productRepository.save(newProduct);
+        for (Product newProduct : getNewProduct(addProductDTO)) {
+            newProduct.setTag(tag);
+            productRepository.save(newProduct);
+        }
     }
 
     @Override
-    public void editProduct(Long id,AddProductDTO addProductDTO) {
-        Product product = setProduct(productRepository.findAllById(id),addProductDTO);
+    public void editProduct(String productNumber, AddProductDTO addProductDTO) {
 
-        productRepository.save(product);
+        List<Product> products = setProduct(productRepository.findAllByProductNumber(productNumber), addProductDTO);
+
+        for (Product product : products) {
+            productRepository.save(product);
+        }
     }
 
     @Override
-    public AddProductDTO getProductById(Long id) {
+    public AddProductDTO getProductByProductNumber(String productNumber) {
 
+        List<Product> products = productRepository.findAllByProductNumber(productNumber);
 
-        Product product = productRepository.findAllById(id);
-
-        if (product == null)
+        if (products == null)
             return null;
 
-        return createProductDTO(product);
+        return createProductDTO(products);
     }
 
     @Override
@@ -74,81 +82,112 @@ public class AdminServiceImpl implements AdminService {
         List<Product> products = productRepository.findAllByProductNumber(productNumber);
         if (!products.isEmpty()) {
             for (Product product : products) {
-                 Tag tag = product.getTag();
+                Tag tag = product.getTag();
+                System.out.println(tag);
                 productRepository.delete(product);
-                 if (tag != null) {
-                     tagRepository.delete(tag);
-                 }
+               /* if (tag != null) {
+                    tagRepository.delete(tag);
+                }*/
             }
         } else {
             throw new IllegalArgumentException("No products found with product number: " + productNumber);
         }
     }
 
+    private List<Product> getNewProduct(AddProductDTO addProductDTO) {
 
-    private Product getNewProduct(AddProductDTO addProductDTO) {
-        Product createProduct = new Product();
+        List<Product> createProducts = new ArrayList<>();
 
-        createProduct.setProductNumber(addProductDTO.getProductNumber());
-        createProduct.setName(addProductDTO.getName());
-        createProduct.setSize(addProductDTO.getSize());
-        createProduct.setDescription(addProductDTO.getDescription());
-        createProduct.setQuantity(addProductDTO.getQuantity());
-        createProduct.setPrice(addProductDTO.getPrice());
-        createProduct.setMinPrice(addProductDTO.getMinPrice());
+        for (var sizeValue : addProductDTO.getQuantities().keySet()) {
 
-        createProduct.setFirstImgUrl(addProductDTO.getImageUrl1());
-        createProduct.setSecondImgUrl(addProductDTO.getImageUrl2());
-        createProduct.setThirdImgUrl(addProductDTO.getImageUrl3());
+            SizeEnum size = SizeEnum.valueOf(sizeValue);
 
-        return createProduct;
+            Product createProduct = new Product();
+            createProduct.setProductNumber(addProductDTO.getProductNumber());
+            createProduct.setName(addProductDTO.getName());
+            createProduct.setSize(size);
+            createProduct.setDescription(addProductDTO.getDescription());
+            createProduct.setQuantity(addProductDTO.getQuantities().get(sizeValue));
+            createProduct.setPrice(addProductDTO.getPrice());
+            createProduct.setMinPrice(addProductDTO.getMinPrice());
+
+            createProduct.setFirstImgUrl(addProductDTO.getFirstImgUrl());
+            createProduct.setSecondImgUrl(addProductDTO.getSecondImgUrl());
+            createProduct.setThirdImgUrl(addProductDTO.getThirdImgUrl());
+
+            createProducts.add(createProduct);
+        }
+
+
+        return createProducts;
     }
 
-    private AddProductDTO createProductDTO(Product product){
+    private AddProductDTO createProductDTO(List<Product> products) {
 
         AddProductDTO addProductDTO = new AddProductDTO();
 
+        Product product = products.get(0);
+
         addProductDTO.setProductNumber(product.getProductNumber());
         addProductDTO.setName(product.getName());
-        addProductDTO.setSize(product.getSize());
         addProductDTO.setDescription(product.getDescription());
-        addProductDTO.setQuantity(product.getQuantity());
         addProductDTO.setPrice(product.getPrice());
         addProductDTO.setMinPrice(product.getMinPrice());
 
-        addProductDTO.setImageUrl1(product.getFirstImgUrl());
-        addProductDTO.setImageUrl2(product.getSecondImgUrl());
-        addProductDTO.setImageUrl3(product.getThirdImgUrl());
+        addProductDTO.setFirstImgUrl(product.getFirstImgUrl());
+        addProductDTO.setSecondImgUrl(product.getSecondImgUrl());
+        addProductDTO.setThirdImgUrl(product.getThirdImgUrl());
 
         addProductDTO.setCategory(product.getTag().getCategory());
         addProductDTO.setGender(product.getTag().getGender());
         addProductDTO.setStyle(product.getTag().getStyle());
 
+        Map<String,Integer> quantity = new Hashtable<>();
+
+        for (Product p : products){
+            quantity.put(p.getSize().toString(),p.getQuantity());
+        }
+
+        addProductDTO.setQuantities(quantity);
+
         return addProductDTO;
     }
 
-    private Product setProduct(Product product,AddProductDTO addProductDTO) {
+    private List<Product> setProduct(List<Product> products, AddProductDTO addProductDTO) {
 
-        product.setProductNumber(addProductDTO.getProductNumber());
-        product.setName(addProductDTO.getName());
-        product.setSize(addProductDTO.getSize());
-        product.setDescription(addProductDTO.getDescription());
-        product.setQuantity(addProductDTO.getQuantity());
-        product.setPrice(addProductDTO.getPrice());
-        product.setMinPrice(addProductDTO.getMinPrice());
+        for (var sizeValue : addProductDTO.getQuantities().keySet()) {
 
-        product.setFirstImgUrl(addProductDTO.getImageUrl1());
-        product.setSecondImgUrl(addProductDTO.getImageUrl2());
-        product.setThirdImgUrl(addProductDTO.getImageUrl3());
+            SizeEnum size = SizeEnum.valueOf(sizeValue);
 
-        updateTag(addProductDTO,product.getTag());
+            Product updatedProduct =  products.stream().filter(product1 -> product1.getSize().equals(size)).findFirst().get();
 
-        return product;
+            int index = products.indexOf(updatedProduct);
+
+            System.out.println(updatedProduct.getId());
+
+            updatedProduct.setProductNumber(addProductDTO.getProductNumber());
+            updatedProduct.setName(addProductDTO.getName());
+            updatedProduct.setSize(size);
+            updatedProduct.setDescription(addProductDTO.getDescription());
+            updatedProduct.setQuantity(addProductDTO.getQuantities().get(sizeValue));
+            updatedProduct.setPrice(addProductDTO.getPrice());
+            updatedProduct.setMinPrice(addProductDTO.getMinPrice());
+
+            updatedProduct.setFirstImgUrl(addProductDTO.getFirstImgUrl());
+            updatedProduct.setSecondImgUrl(addProductDTO.getSecondImgUrl());
+            updatedProduct.setThirdImgUrl(addProductDTO.getThirdImgUrl());
+
+            updateTag(addProductDTO, updatedProduct.getTag());
+
+           products.set(index,updatedProduct);
+        }
+
+        return products;
     }
 
     private Tag getTag(AddProductDTO addProductDTO) {
 
-        /*Tag searchedTag = tagRepository
+        Tag searchedTag = tagRepository
                 .findByGenderAndCategoryAndStyle(
                         addProductDTO.getGender(),
                         addProductDTO.getCategory(),
@@ -157,7 +196,7 @@ public class AdminServiceImpl implements AdminService {
 
         if (searchedTag != null) {
             return searchedTag;
-        }*/
+        }
 
         Tag newTag = new Tag(
                 addProductDTO.getGender(),
@@ -170,7 +209,7 @@ public class AdminServiceImpl implements AdminService {
         return newTag;
     }
 
-    private void updateTag(AddProductDTO addProductDTO, Tag tag){
+    private void updateTag(AddProductDTO addProductDTO, Tag tag) {
 
 
         boolean isChange = false;
@@ -189,17 +228,64 @@ public class AdminServiceImpl implements AdminService {
             tag.setStyle(addProductDTO.getStyle());
             isChange = true;
         }
-           if(isChange) tagRepository.save(tag);
+        if (isChange) tagRepository.save(tag);
     }
 
-    /*
-     *
-     *
-     *                           Discount
-     *
-     *
-     * */
+    //endregion
 
+    //region <Orders CRUD>
+    @Override
+    public void addOrder(AddOrderDTO addOrderDTO) {
+
+    }
+
+    private Order getNewOrder(AddOrderDTO addOrderDTO) {
+        Order order = new Order();
+
+       /* discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
+        discount.setStartDate(addDiscountDTO.getStartDate());
+        discount.setEndDate(addDiscountDTO.getEndDate());*/
+
+        return order;
+    }
+
+    @Override
+    public void editOrder(Long id, AddOrderDTO addOrderDTO) {
+
+    }
+
+    private Order setOrder(Order order, AddOrderDTO addOrderDTO) {
+
+        /*discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
+        discount.setStartDate(addDiscountDTO.getStartDate());
+        discount.setEndDate(addDiscountDTO.getEndDate());*/
+
+        return order;
+    }
+
+    @Override
+    public void deleteOrder(Long id) {
+
+    }
+
+    @Override
+    public AddOrderDTO getOrderById(Long id) {
+        return null;
+    }
+
+    private AddOrderDTO createOrderDTO(Order order) {
+
+        AddOrderDTO addOrderDTO = new AddOrderDTO();
+
+        /*addDiscountDTO.setDiscountPercentage(discount.getDiscountPercentage());
+        addDiscountDTO.setStartDate(discount.getStartDate());
+        addDiscountDTO.setEndDate(discount.getEndDate());*/
+
+        return addOrderDTO;
+    }
+    //endregion
+
+    //region <Discount CRUD>
     @Override
     public void addDiscount(AddDiscountDTO addDiscountDTO) {
 
@@ -220,7 +306,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void editDiscount(Long id, AddDiscountDTO addDiscountDTO) {
-        Discount discount = setDiscount(discountRepository.findAllById(id),addDiscountDTO);
+        Discount discount = setDiscount(discountRepository.findAllById(id), addDiscountDTO);
 
         discountRepository.save(discount);
     }
@@ -245,26 +331,6 @@ public class AdminServiceImpl implements AdminService {
         return createDiscountDTO(discount);
     }
 
-    @Override
-    public void addOrder(AddOrderDTO addOrderDTO) {
-
-    }
-
-    @Override
-    public void editOrder(Long id, AddOrderDTO addOrderDTO) {
-
-    }
-
-    @Override
-    public void deleteOrder(Long id) {
-
-    }
-
-    @Override
-    public AddOrderDTO getOrderById(Long id) {
-        return null;
-    }
-
     private AddDiscountDTO createDiscountDTO(Discount discount) {
         AddDiscountDTO addDiscountDTO = new AddDiscountDTO();
 
@@ -279,5 +345,5 @@ public class AdminServiceImpl implements AdminService {
     public void deleteDiscount(Long id) {
         discountRepository.delete(discountRepository.findAllById(id));
     }
-
+    //endregion
 }

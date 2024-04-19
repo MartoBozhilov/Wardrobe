@@ -33,7 +33,7 @@
                                 <div class="mt-auto">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <form th:action="@{'/admin/edit-product/' + ${product.id}}">
+                                            <form th:action="@{'/admin/edit-product/' + ${product.productNumber}}">
                                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Edit</button>
                                             </form>
                                             <a th:href="@{'/admin/delete-product/' + ${product.productNumber}}" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>

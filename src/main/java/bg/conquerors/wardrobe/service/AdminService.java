@@ -3,13 +3,14 @@ package bg.conquerors.wardrobe.service;
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface AdminService {
 
     void addProduct(AddProductDTO addProductDTO);
-    void editProduct(Long id,AddProductDTO addProductDTO);
+    void editProduct(String productNumber,AddProductDTO addProductDTO);
     void deleteProduct(String productNumber);
-    AddProductDTO getProductById(Long id);
+    AddProductDTO getProductByProductNumber(String id);
 
 
     void addDiscount(AddDiscountDTO addDiscountDTO);
