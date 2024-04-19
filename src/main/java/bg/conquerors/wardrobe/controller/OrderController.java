@@ -1,11 +1,14 @@
 package bg.conquerors.wardrobe.controller;
 
+import bg.conquerors.wardrobe.model.dto.FinishOrderDTO;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class OrderController {
@@ -27,7 +30,7 @@ public class OrderController {
         return "redirect:/shop/product-detail/{productNumber}";
     }
 
-    @GetMapping("/cart/remove-from-cart/{id}")
+    @PostMapping("/cart/remove-from-cart/{id}")
     public String removeProductFromCart(@PathVariable("id") Long id) {
 
         orderService.removeProductFromCart(id);
@@ -41,4 +44,15 @@ public class OrderController {
 
         return "shoping-cart";
     }
+
+    @PostMapping("/cart/proceed-to-checkout")
+    public String saveOrder(FinishOrderDTO finishOrderDTO,
+                            @RequestParam("id") Long cartItemId) {
+
+        finishOrderDTO.setId(cartItemId);
+        orderService.saveOrder(finishOrderDTO);
+
+        return "redirect:/index";
+    }
+
 }

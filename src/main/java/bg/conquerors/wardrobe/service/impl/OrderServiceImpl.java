@@ -2,6 +2,7 @@ package bg.conquerors.wardrobe.service.impl;
 
 import bg.conquerors.wardrobe.model.dto.CartItemDTO;
 import bg.conquerors.wardrobe.model.dto.CartViewDTO;
+import bg.conquerors.wardrobe.model.dto.FinishOrderDTO;
 import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
@@ -20,8 +21,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -109,6 +113,34 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return cartViewDTO;
+    }
+
+    @Override
+    public void saveOrder(FinishOrderDTO finishOrderDTO) {
+
+        Order orderToSave = orderRepository.findAllById(finishOrderDTO.getId());
+        orderToSave.setAddress(finishOrderDTO.getAddress());
+
+        Date date = new Date();
+        orderToSave.setOrderDate(date);
+        orderToSave.setStatus(OrderStatusEnum.ORDERED);
+
+        BigDecimal totalPrice = new BigDecimal("0");
+
+        for (OrderDetail orderDetail : orderToSave.getOrderInventories()) {
+            BigDecimal orderDetailTotalSum =
+                    orderDetail.getProduct().getPrice()
+                            .multiply(BigDecimal.valueOf(orderDetail.getQuantity()));
+
+            totalPrice = totalPrice.add(orderDetailTotalSum);
+        }
+
+        orderToSave.setTotalPrice(totalPrice);
+        orderRepository.save(orderToSave);
+
+        createNewOrder(getLoggedUser());
+
+
     }
 
     private static Order getCart(User loggedUser) {
