@@ -3424,3 +3424,12 @@ input.num-product::-webkit-inner-spin-button {
         background-color: #c82333;
         border-color: #bd2130;
     }
+    .restricted-width {
+        max-width: 800px; /* Adjust the max width as needed */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .h5-custom-color {
+        color: #555;
+        font-weight: 500;
+    }

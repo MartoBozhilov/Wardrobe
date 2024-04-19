@@ -34,24 +34,24 @@ public class HomeController {
 
         return "about";
     }
-    @GetMapping("/blog")
-    public String Test1() {
+    @GetMapping("/faq")
+    public String faqPage() {
 
-        return "blog";
+        return "faq";
     }
-    @GetMapping("/blog-detail")
-    public String Test2() {
+    @GetMapping("/buy-policy")
+    public String buyPolicy() {
 
-        return "index";
+        return "buy-policy";
     }
 
     @GetMapping("/contact")
-    public String Test4() {
+    public String contactPage() {
 
         return "contact";
     }
     @GetMapping("/index")
-    public String Test5() {
+    public String homeIndex() {
 
         return "index";
     }
