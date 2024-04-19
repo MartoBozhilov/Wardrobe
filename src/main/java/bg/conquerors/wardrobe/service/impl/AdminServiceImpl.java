@@ -83,11 +83,15 @@ public class AdminServiceImpl implements AdminService {
         if (!products.isEmpty()) {
             for (Product product : products) {
                 Tag tag = product.getTag();
+                Long countOfTags = productRepository.countByTagId(tag.getId());
                 System.out.println(tag);
+                System.out.println(countOfTags);
+                product.setTag(null);
+                productRepository.save(product);
                 productRepository.delete(product);
-               /* if (tag != null) {
+                if (tag != null && countOfTags <= 4) {
                     tagRepository.delete(tag);
-                }*/
+                }
             }
         } else {
             throw new IllegalArgumentException("No products found with product number: " + productNumber);

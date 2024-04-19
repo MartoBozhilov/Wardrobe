@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class HomeController {
     private final ProductService productService;
     private final AdminService adminService;
-    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+    //private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 
     public HomeController(AdminService adminService, ProductService productService) {
         this.adminService = adminService;
