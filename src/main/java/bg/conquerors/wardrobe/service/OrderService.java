@@ -8,7 +8,7 @@ public interface OrderService {
 
     void createNewOrder(User user);
 
-    void addProductToCart(String productNumber, SizeEnum size);
+    void addProductToCart(String productNumber, SizeEnum size, Integer quantity);
 
     void removeProductFromCart(Long id);
 

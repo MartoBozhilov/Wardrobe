@@ -58,14 +58,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public void addProductToCart(String productNumber, SizeEnum size) {
+    public void addProductToCart(String productNumber, SizeEnum size, Integer quantity) {
         Product productToAdd = productRepository
                 .findByProductNumberAndSize(productNumber, size);
 
         Product mergedProduct = entityManager.merge(productToAdd);
 
         OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setQuantity(1);
+        orderDetail.setQuantity(quantity);
         orderDetail.setProduct(mergedProduct);
 
         User loggedUser = getLoggedUser();

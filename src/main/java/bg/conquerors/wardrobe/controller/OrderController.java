@@ -16,14 +16,15 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/add-to-cart/{productNumber}/{size}")
+    @GetMapping("/add-to-cart/{productNumber}/{size}/{quantity}")
     public String addProductToCart(Model model,
                                    @PathVariable("productNumber") String productNumber,
-                                   @PathVariable("size") SizeEnum size) {
+                                   @PathVariable("size") SizeEnum size,
+                                   @PathVariable("quantity") Integer quantity) {
 
-        orderService.addProductToCart(productNumber, size);
+        orderService.addProductToCart(productNumber, size, quantity);
 
-        return "redirect:/shop/product/{productNumber}";
+        return "redirect:/shop/product-detail/{productNumber}";
     }
 
     @GetMapping("/cart/remove-from-cart/{id}")

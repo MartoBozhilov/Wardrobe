@@ -29,11 +29,6 @@ public class ProductController {
         return "shop";
     }
 
-//    @GetMapping("/product-detail/{id}")
-//    public String productDetail(@PathVariable("id") Long id, Model model) {
-//
-//        return "product-detail";
-//    }
    @GetMapping("/shop/product-detail/{productNumber}")
     public String viewProduct(Model model, @PathVariable String productNumber) {
 
