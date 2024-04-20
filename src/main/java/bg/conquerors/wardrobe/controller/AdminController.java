@@ -190,7 +190,7 @@ public class AdminController {
     }
 
     @GetMapping("/delete-order-product/{orderDetailId},{orderId}")
-    public String deleteOrderProductGet(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId,Model model) {
+    public String deleteOrderProductGet(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId) {
 
         adminService.deleteOrderProduct(orderDetailId);
 
@@ -198,9 +198,25 @@ public class AdminController {
     }
 
     @PostMapping("/delete-order-product/{orderDetailId},{orderId}")
-    public String deleteOrderProductPost(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId,Model model) {
+    public String deleteOrderProductPost(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId) {
 
         adminService.deleteOrderProduct(orderDetailId);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
+    @GetMapping("/add-order-product/{orderId},{productId},{quantity}")
+    public String addOrderProductGet(@PathVariable("orderId") Long orderId,@PathVariable("productId") Long productId,@PathVariable("quantity") Integer quantity ) {
+
+        adminService.addOrderProduct(orderId,productId,quantity);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
+    @PostMapping("/add-order-product/{orderDetailId},{orderId}")
+    public String addOrderProductPost(@PathVariable("orderId") Long orderId,@PathVariable("productId") Long productId,@PathVariable("quantity") Integer quantity) {
+
+        adminService.addOrderProduct(orderId,productId,quantity);
 
         return "redirect:/admin/edit-order/"+orderId;
     }
