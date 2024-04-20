@@ -1,3 +1,3 @@
 
-# [Admin tools](Admin/Admin tools.md)
+# [Admin tools](Admin/Admin.md)
 
