@@ -21,5 +21,6 @@ public interface AdminService {
     //void addOrder(AddOrderDTO addOrderDTO);
     void editOrder(Long id, AddOrderDTO addOrderDTO);
     void deleteOrder(Long id);
+    void deleteOrderProduct(Long id);
     AddOrderDTO getOrderById(Long id);
 }

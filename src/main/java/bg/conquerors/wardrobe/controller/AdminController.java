@@ -189,6 +189,22 @@ public class AdminController {
         return "admin/admin";
     }
 
+    @GetMapping("/delete-order-product/{orderDetailId},{orderId}")
+    public String deleteOrderProductGet(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId,Model model) {
+
+        adminService.deleteOrderProduct(orderDetailId);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
+    @PostMapping("/delete-order-product/{orderDetailId},{orderId}")
+    public String deleteOrderProductPost(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId,Model model) {
+
+        adminService.deleteOrderProduct(orderDetailId);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
     //endregion
 
     //region <Discount CRUD>

@@ -283,6 +283,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public void deleteOrderProduct(Long id) {
+        OrderDetail orderDetail = orderDetailRepository.findAllById(id);
+
+        orderDetailRepository.delete(orderDetail);
+    }
+
+    @Override
     public AddOrderDTO getOrderById(Long id) {
         Order order = orderRepository.findAllById(id);
 
