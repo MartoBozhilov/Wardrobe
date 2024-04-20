@@ -15,5 +15,5 @@ public interface OrderService {
 
     CartViewDTO getCart();
 
-    void saveOrder(FinishOrderDTO finishOrderDTO);
+    void saveOrder(FinishOrderDTO finishOrderDTO) throws Exception;
 }

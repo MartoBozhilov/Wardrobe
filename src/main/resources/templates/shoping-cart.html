@@ -30,10 +30,11 @@
                             <tr class="table_head">
                                 <th class="column-1">Product</th>
                                 <th class="column-2"></th>
-                                <th class="column-3">Price</th>
-                                <th class="column-4">Quantity</th>
-                                <th class="column-5">Total</th>
-                                <th class="column-6">Remove</th>
+                                <th class="column-3">Size</th>
+                                <th class="column-4">Price</th>
+                                <th class="column-5">Quantity</th>
+                                <th class="column-6">Total</th>
+                                <th class="column-7">Remove</th>
                             </tr>
 
                             <tr th:each="cartItem : ${cartView.cartItems}">
@@ -41,10 +42,11 @@
                                     <img th:src="${cartItem.productImageUrl}" alt="Product Image"
                                          style="width: 70px; height: auto;"></td>
                                 <td class="column-2" th:text="${cartItem.productName}"></td>
-                                <td class="column-3" th:text="${cartItem.price}"></td>
-                                <td class="column-4" th:text="${cartItem.quantity}"></td>
-                                <td class="column-5" th:text="${cartItem.price * cartItem.quantity}"></td>
-                                <td class="column-6">
+                                <td class="column-3" th:text="${cartItem.size}"></td>
+                                <td class="column-4" th:text="${cartItem.price}"></td>
+                                <td class="column-5" th:text="${cartItem.quantity}"></td>
+                                <td class="column-6" th:text="${cartItem.price * cartItem.quantity}"></td>
+                                <td class="column-7">
                                     <form th:action="@{/cart/remove-from-cart/{id}(id=${cartItem.id})}"
                                           method="post">
                                         <button type="submit">Remove</button>

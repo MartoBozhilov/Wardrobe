@@ -17,6 +17,11 @@ VALUES
     (1, 2),
     (2, 2);
 
+insert into orders(`id`, `status`, `user_id`)
+VALUES
+    (1, 'CART', 1),
+    (2, 'CART', 2);
+
 insert into tags(`id`, `category`, `gender`, `style`)
 values
     (1, 'JACKET', 'Male', 'CASUAL'),

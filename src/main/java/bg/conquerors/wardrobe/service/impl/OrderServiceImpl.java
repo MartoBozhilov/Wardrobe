@@ -120,6 +120,7 @@ public class OrderServiceImpl implements OrderService {
 
             Product currentProduct = cartDetail.getProduct();
             cartItemDTO.setPrice(currentProduct.getPrice());
+            cartItemDTO.setSize(currentProduct.getSize());
             cartItemDTO.setProductName(currentProduct.getName());
             cartItemDTO.setProductImageUrl(currentProduct.getFirstImgUrl());
 
@@ -130,7 +131,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void saveOrder(FinishOrderDTO finishOrderDTO) {
+    public void saveOrder(FinishOrderDTO finishOrderDTO) throws Exception {
 
         Order orderToSave = orderRepository.findAllById(finishOrderDTO.getId());
         orderToSave.setAddress(finishOrderDTO.getAddress());
@@ -148,12 +149,21 @@ public class OrderServiceImpl implements OrderService {
         createNewOrder(getLoggedUser());
     }
 
-    private void changeProductsInventoriesQuantity(Order orderToSave) {
+    private void changeProductsInventoriesQuantity(Order orderToSave) throws Exception {
         Set<OrderDetail> orderDetailSet = orderToSave.getOrderInventories();
 
         for (OrderDetail orderDetail : orderDetailSet) {
             Product productToAlter = orderDetail.getProduct();
-            productToAlter.setQuantity(productToAlter.getQuantity() - orderDetail.getQuantity());
+
+            if (productToAlter.getQuantity() - orderDetail.getQuantity() >= 0) {
+
+                productToAlter.setQuantity(
+                        productToAlter.getQuantity() - orderDetail.getQuantity()
+                );
+            } else {
+                throw new Exception("Not enough quantity of product with id=" + productToAlter.getId());
+            }
+
             productRepository.saveAndFlush(productToAlter);
         }
 

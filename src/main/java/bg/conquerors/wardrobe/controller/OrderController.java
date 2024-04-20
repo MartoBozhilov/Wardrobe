@@ -47,7 +47,7 @@ public class OrderController {
 
     @PostMapping("/cart/proceed-to-checkout")
     public String saveOrder(FinishOrderDTO finishOrderDTO,
-                            @RequestParam("id") Long cartItemId) {
+                            @RequestParam("id") Long cartItemId) throws Exception {
 
         finishOrderDTO.setId(cartItemId);
         orderService.saveOrder(finishOrderDTO);

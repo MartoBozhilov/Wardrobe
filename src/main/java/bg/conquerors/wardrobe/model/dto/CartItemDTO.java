@@ -1,5 +1,6 @@
 package bg.conquerors.wardrobe.model.dto;
 
+import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,7 @@ public class CartItemDTO {
     private String productImageUrl;
 
     private BigDecimal price;
+
+    private SizeEnum size;
 
 }
