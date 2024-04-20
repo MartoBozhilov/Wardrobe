@@ -83,6 +83,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void removeProductFromCart(Long id) {
 
+        OrderDetail itemToDelete = orderDetailRepository.findAllById(id);
+        itemToDelete.setProduct(null);
+        orderDetailRepository.saveAndFlush(itemToDelete);
+
         orderDetailRepository.deleteById(id);
     }
 
@@ -125,6 +129,27 @@ public class OrderServiceImpl implements OrderService {
         orderToSave.setOrderDate(date);
         orderToSave.setStatus(OrderStatusEnum.ORDERED);
 
+        BigDecimal totalPrice = getTotalPrice(orderToSave);
+        changeProductsInventoriesQuantity(orderToSave);
+
+        orderToSave.setTotalPrice(totalPrice);
+        orderRepository.save(orderToSave);
+
+        createNewOrder(getLoggedUser());
+    }
+
+    private void changeProductsInventoriesQuantity(Order orderToSave) {
+        Set<OrderDetail> orderDetailSet = orderToSave.getOrderInventories();
+
+        for (OrderDetail orderDetail : orderDetailSet) {
+            Product productToAlter = orderDetail.getProduct();
+            productToAlter.setQuantity(productToAlter.getQuantity() - orderDetail.getQuantity());
+            productRepository.saveAndFlush(productToAlter);
+        }
+
+    }
+
+    private static BigDecimal getTotalPrice(Order orderToSave) {
         BigDecimal totalPrice = new BigDecimal("0");
 
         for (OrderDetail orderDetail : orderToSave.getOrderInventories()) {
@@ -134,13 +159,7 @@ public class OrderServiceImpl implements OrderService {
 
             totalPrice = totalPrice.add(orderDetailTotalSum);
         }
-
-        orderToSave.setTotalPrice(totalPrice);
-        orderRepository.save(orderToSave);
-
-        createNewOrder(getLoggedUser());
-
-
+        return totalPrice;
     }
 
     private static Order getCart(User loggedUser) {
