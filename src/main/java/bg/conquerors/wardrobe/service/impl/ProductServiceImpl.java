@@ -4,19 +4,13 @@ import bg.conquerors.wardrobe.model.dto.ViewProductDTO;
 import bg.conquerors.wardrobe.model.dto.ViewProductsDTO;
 import bg.conquerors.wardrobe.model.entity.Discount;
 import bg.conquerors.wardrobe.model.entity.Product;
-import bg.conquerors.wardrobe.model.entity.Tag;
-import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.repository.DiscountRepository;
 import bg.conquerors.wardrobe.repository.ProductRepository;
-import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.service.ProductService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service

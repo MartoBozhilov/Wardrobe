@@ -29,6 +29,8 @@ values
     (8, 'SHIRT', 'Male', 'CASUAL'),
     (9, 'T_SHIRT', 'Male', 'OFFICIAL');
 
+insert into tags(`id`, `category`, `gender`, `style`)
+values
     (10, 'JACKET', 'Female', 'CASUAL'),
     (11, 'T_SHIRT', 'Female', 'CASUAL'),
     (12, 'JACKET', 'Female', 'OVERSIZE'),
@@ -139,6 +141,8 @@ VALUES
        ('95', 'xkosdsjds', "/images/products/T-shirts/Tommy_jeans_white_1.png", '24.99', "Tommy Jeans White T-Shirt", '35.99', '1134', '17', "/images/products/T-shirts/Tommy_jeans_white_2.png", 'L', "/images/products/T-shirts/Tommy_jeans_white_3.png", '2'),
        ('96', 'xkosdsjds', "/images/products/T-shirts/Tommy_jeans_white_1.png", '24.99', "Tommy Jeans White T-Shirt", '35.99', '1134', '20', "/images/products/T-shirts/Tommy_jeans_white_2.png", 'XL', "/images/products/T-shirts/Tommy_jeans_white_3.png", '2');
 
+INSERT INTO `wardrobe_shop_database`.`products` (`id`, `description`, `first_img_url`, `min_price`, `name`, `price`, `product_number`, `quantity`, `second_img_url`, `size`, `third_img_url`, `tag_id`)
+VALUES
     ('97', 'Stylish Calvin Klein black jacket perfect for cold weather.', '/images/products/jackets/Calvin_Klein_jacket_1.png', '120.00', 'Calvin Klein Black Jacket', '150.00', '1135', '15', '/images/products/jackets/Calvin_Klein_jacket_2.png', 'S', '/images/products/jackets/Calvin_Klein_jacket_3.png', '12'),
     ('98', 'Stylish Calvin Klein black jacket perfect for cold weather.', '/images/products/jackets/Calvin_Klein_jacket_1.png', '120.00', 'Calvin Klein Black Jacket', '150.00', '1135', '15', '/images/products/jackets/Calvin_Klein_jacket_2.png', 'M', '/images/products/jackets/Calvin_Klein_jacket_3.png', '12'),
     ('99', 'Stylish Calvin Klein black jacket perfect for cold weather.', '/images/products/jackets/Calvin_Klein_jacket_1.png', '120.00', 'Calvin Klein Black Jacket', '150.00', '1135', '15', '/images/products/jackets/Calvin_Klein_jacket_2.png', 'L', '/images/products/jackets/Calvin_Klein_jacket_3.png', '12'),

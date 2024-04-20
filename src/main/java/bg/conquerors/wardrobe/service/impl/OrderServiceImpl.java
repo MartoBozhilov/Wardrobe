@@ -25,7 +25,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -77,7 +76,18 @@ public class OrderServiceImpl implements OrderService {
         Order cart = getCart(loggedUser);
 
         orderDetail.setOrder(cart);
-        orderDetailRepository.save(orderDetail);
+
+        OrderDetail detailFromDB = orderDetailRepository
+                .findAllByOrderIdAndProductId(
+                        orderDetail.getOrder().getId(),
+                        productToAdd.getId()
+                );
+
+        if (detailFromDB == null) {
+            orderDetailRepository.save(orderDetail);
+        } else {
+            detailFromDB.setQuantity(detailFromDB.getQuantity() + quantity);
+        }
     }
 
     @Override
