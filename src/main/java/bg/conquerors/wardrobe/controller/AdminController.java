@@ -192,6 +192,38 @@ public class AdminController {
         return "admin/admin";
     }
 
+    @GetMapping("/delete-order-product/{orderDetailId},{orderId}")
+    public String deleteOrderProductGet(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId) {
+
+        adminService.deleteOrderProduct(orderDetailId);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
+    @PostMapping("/delete-order-product/{orderDetailId},{orderId}")
+    public String deleteOrderProductPost(@PathVariable("orderDetailId") Long orderDetailId,@PathVariable("orderId") Long orderId) {
+
+        adminService.deleteOrderProduct(orderDetailId);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
+    @GetMapping("/add-order-product/{orderId},{productId},{quantity}")
+    public String addOrderProductGet(@PathVariable("orderId") Long orderId,@PathVariable("productId") Long productId,@PathVariable("quantity") Integer quantity ) {
+
+        adminService.addOrderProduct(orderId,productId,quantity);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
+    @PostMapping("/add-order-product/{orderDetailId},{orderId}")
+    public String addOrderProductPost(@PathVariable("orderId") Long orderId,@PathVariable("productId") Long productId,@PathVariable("quantity") Integer quantity) {
+
+        adminService.addOrderProduct(orderId,productId,quantity);
+
+        return "redirect:/admin/edit-order/"+orderId;
+    }
+
     //endregion
 
     //region <Discount CRUD>

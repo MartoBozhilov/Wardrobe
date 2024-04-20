@@ -40,4 +40,5 @@ public class AddOrderDTO {
 
     @NotBlank(message = "You need to specify an products!")
     private Set<OrderDetail> orderInventories;
+
 }
