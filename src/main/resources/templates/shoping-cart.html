@@ -70,24 +70,18 @@
                         <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                             <div class="size-208 w-full-ssm">
                                 <span class="stext-110 cl2">Address:</span>
+                                <br>
                                 <input type="text"
                                        id="address"
                                        name="address"
                                        class="input-address"
-                                       placeholder="Enter your address">
+                                       placeholder="example@wardrobe.com">
                             </div>
                         </div>
 
                         <div class="flex-w flex-t p-t-27 p-b-33">
                             <div class="size-208">
                                 <span class="mtext-101 cl2">Total: </span>
-                            </div>
-                            <div th:with="totalPrice=0">
-                                <th:block th:each="cartItem : ${cartView.cartItems}">
-                                    <th:block th:with="itemTotal=${cartItem.price * cartItem.quantity}">
-                                        <th:block th:with="totalPrice=${totalPrice + itemTotal}"></th:block>
-                                    </th:block>
-                                </th:block>
                             </div>
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2" th:text="${totalPrice}"></span>

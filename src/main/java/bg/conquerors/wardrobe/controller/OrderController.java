@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+
 @Controller
 public class OrderController {
 
@@ -40,7 +42,13 @@ public class OrderController {
     @GetMapping("/shopping-cart")
     public String shopingCart(Model model) {
 
-        model.addAttribute("cartView", orderService.getCart());
+        var cartView = orderService.getCart();
+        model.addAttribute("cartView", cartView);
+
+        BigDecimal totalPrice = cartView.getCartItems().stream()
+                .map(cartItemDTO -> cartItemDTO.getPrice().multiply(new BigDecimal(cartItemDTO.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        model.addAttribute("totalPrice", totalPrice);
 
         return "shoping-cart";
     }

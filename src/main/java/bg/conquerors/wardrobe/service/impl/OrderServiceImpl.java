@@ -149,6 +149,8 @@ public class OrderServiceImpl implements OrderService {
         createNewOrder(getLoggedUser());
     }
 
+
+
     private void changeProductsInventoriesQuantity(Order orderToSave) throws Exception {
         Set<OrderDetail> orderDetailSet = orderToSave.getOrderInventories();
 
@@ -188,6 +190,11 @@ public class OrderServiceImpl implements OrderService {
                 .filter(order -> order.getStatus().equals(OrderStatusEnum.CART))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();  // Using Spring Data JPA repository method findAll()
     }
 
     private User getLoggedUser() {

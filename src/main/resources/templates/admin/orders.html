@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders Table</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
 </head>
 <body>
-
+<div>
+    <nav th:replace="~{/admin/admin_fragments/admin-navbar}"></nav>
+</div>
 <div class="container mt-4">
     <h2>Orders</h2>
     <table class="table table-striped table-hover table-bordered">
@@ -22,16 +25,15 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Sample row -->
-        <tr>
-            <td>1</td>
-            <td>101</td>
-            <td>123 Example St, City</td>
-            <td>2024-04-15</td>
-            <td>Shipped</td>
-            <td>$199.99</td>
+        <!-- Dynamically generate rows for each order using Thymeleaf -->
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">Order ID</td>
+            <td th:text="${order.user.id}">User ID</td>
+            <td th:text="${order.address}">Address</td>
+            <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd')}">Order Date</td>
+            <td th:text="${order.status}">Status</td>
+            <td th:text="${order.totalPrice}">Total Price</td>
         </tr>
-        <!-- Repeat rows for each order -->
         </tbody>
     </table>
 </div>

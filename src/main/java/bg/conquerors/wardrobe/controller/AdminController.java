@@ -7,6 +7,7 @@ import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.enums.*;
 import bg.conquerors.wardrobe.service.AdminService;
+import bg.conquerors.wardrobe.service.OrderService;
 import bg.conquerors.wardrobe.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.Data;
@@ -32,11 +33,13 @@ public class AdminController {
     private final AdminService adminService;
     private final ProductService productService;
     private final DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private final OrderService orderService;
 
 
-    public AdminController(AdminService adminService, ProductService productService) {
+    public AdminController(AdminService adminService, ProductService productService, OrderService orderService) {
         this.adminService = adminService;
         this.productService = productService;
+        this.orderService = orderService;
     }
 
 
@@ -243,5 +246,12 @@ public class AdminController {
 
         return "admin/admin";
     }
-    //endregion
+//    endregion
+
+    @GetMapping("/orders")
+    public String orders(Model model) {
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "admin/orders";
+    }
+
 }
