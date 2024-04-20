@@ -3,6 +3,7 @@ package bg.conquerors.wardrobe.controller;
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.enums.*;
 import bg.conquerors.wardrobe.service.AdminService;
@@ -20,10 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,6 +31,7 @@ public class AdminController {
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
     private final AdminService adminService;
     private final ProductService productService;
+    private final DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 
     public AdminController(AdminService adminService, ProductService productService) {
@@ -134,7 +134,7 @@ public class AdminController {
 
     //region <Orders CRUD>
 
-    @GetMapping("/add-order")
+    /*@GetMapping("/add-order")
     public String addOrder(Model model) {
 
         model.addAttribute("addOrderDTO", new AddOrderDTO());
@@ -148,19 +148,19 @@ public class AdminController {
 
         adminService.addOrder(addOrderDTO);
         return "admin/admin";
-    }
+    }*/
 
     @GetMapping("/edit-order/{id}")
     public String editOrder(@PathVariable("id") Long id, Model model) {
 
         AddOrderDTO addOrderDTO = adminService.getOrderById(id);
 
-
         if (addOrderDTO == null)
             return "error";
 
         model.addAttribute("addOrderDTO", addOrderDTO);
-        model.addAttribute("productId", id);
+        model.addAttribute("orderDate", format.format(addOrderDTO.getOrderDate()));
+        model.addAttribute("orderId", id);
         model.addAttribute("orderStatusOptions", OrderStatusEnum.values());
 
         return "admin/order/edit-order";
@@ -210,7 +210,7 @@ public class AdminController {
     public String editDiscount(@PathVariable("id") Long id, Model model) {
 
         AddDiscountDTO addDiscountDTO = adminService.getDiscountById(id);
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         if (addDiscountDTO == null)
             return "error";
 

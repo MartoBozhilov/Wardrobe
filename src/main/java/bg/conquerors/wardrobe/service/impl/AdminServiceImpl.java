@@ -3,21 +3,13 @@ package bg.conquerors.wardrobe.service.impl;
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
-import bg.conquerors.wardrobe.model.entity.Discount;
-import bg.conquerors.wardrobe.model.entity.Order;
-import bg.conquerors.wardrobe.model.entity.Product;
-import bg.conquerors.wardrobe.model.entity.Tag;
+import bg.conquerors.wardrobe.model.entity.*;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
-import bg.conquerors.wardrobe.repository.DiscountRepository;
-import bg.conquerors.wardrobe.repository.OrderRepository;
-import bg.conquerors.wardrobe.repository.ProductRepository;
-import bg.conquerors.wardrobe.repository.TagRepository;
+import bg.conquerors.wardrobe.repository.*;
 import bg.conquerors.wardrobe.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
 
@@ -30,17 +22,24 @@ public class AdminServiceImpl implements AdminService {
     private final DiscountRepository discountRepository;
 
     private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
+
+    private final UserRepository userRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     public AdminServiceImpl(ProductRepository productRepository,
                             TagRepository tagRepository,
                             DiscountRepository discountRepository,
-                            OrderRepository orderRepository) {
+                            OrderRepository orderRepository,
+                            OrderDetailRepository orderDetailRepository,
+                            UserRepository userRepository) {
         this.productRepository = productRepository;
         this.tagRepository = tagRepository;
         this.discountRepository = discountRepository;
         this.orderRepository = orderRepository;
+        this.orderDetailRepository =orderDetailRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -238,7 +237,7 @@ public class AdminServiceImpl implements AdminService {
     //endregion
 
     //region <Orders CRUD>
-    @Override
+   /* @Override
     public void addOrder(AddOrderDTO addOrderDTO) {
 
     }
@@ -246,47 +245,69 @@ public class AdminServiceImpl implements AdminService {
     private Order getNewOrder(AddOrderDTO addOrderDTO) {
         Order order = new Order();
 
-       /* discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
+        discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
         discount.setStartDate(addDiscountDTO.getStartDate());
-        discount.setEndDate(addDiscountDTO.getEndDate());*/
+        discount.setEndDate(addDiscountDTO.getEndDate());
 
         return order;
-    }
+    }*/
 
     @Override
     public void editOrder(Long id, AddOrderDTO addOrderDTO) {
 
+        System.out.println(addOrderDTO.getOrderInventories().size());
+        //Order order = setOrder(orderRepository.findAllById(id), addOrderDTO);
+
+        //orderRepository.save(order);
     }
 
     private Order setOrder(Order order, AddOrderDTO addOrderDTO) {
 
-        /*discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
-        discount.setStartDate(addDiscountDTO.getStartDate());
-        discount.setEndDate(addDiscountDTO.getEndDate());*/
+        order.setOrderDate(addOrderDTO.getOrderDate());
+        order.setStatus(addOrderDTO.getStatus());
+        order.setAddress(addOrderDTO.getAddress());
+        order.setTotalPrice(addOrderDTO.getTotalPrice());
+        order.setUser(userRepository.findById(addOrderDTO.getUserId()).get());
+        order.setOrderInventories(addOrderDTO.getOrderInventories());
 
         return order;
     }
 
     @Override
     public void deleteOrder(Long id) {
+        Order order = orderRepository.findAllById(id);
 
+        orderDetailRepository.deleteAll(order.getOrderInventories());
+
+        orderRepository.delete(order);
     }
 
     @Override
     public AddOrderDTO getOrderById(Long id) {
-        return null;
+        Order order = orderRepository.findAllById(id);
+
+        if (order == null)
+            return null;
+
+        return createOrderDTO(order);
     }
 
     private AddOrderDTO createOrderDTO(Order order) {
 
         AddOrderDTO addOrderDTO = new AddOrderDTO();
 
-        /*addDiscountDTO.setDiscountPercentage(discount.getDiscountPercentage());
-        addDiscountDTO.setStartDate(discount.getStartDate());
-        addDiscountDTO.setEndDate(discount.getEndDate());*/
+        addOrderDTO.setOrderDate(order.getOrderDate());
+        addOrderDTO.setStatus(order.getStatus());
+        addOrderDTO.setAddress(order.getAddress());
+        addOrderDTO.setTotalPrice(order.getTotalPrice());
+        addOrderDTO.setUserId(order.getUser().getId());
+        addOrderDTO.setOrderInventories(order.getOrderInventories());
+
 
         return addOrderDTO;
     }
+
+
     //endregion
 
     //region <Discount CRUD>

@@ -1,6 +1,7 @@
 package bg.conquerors.wardrobe.model.dto;
 
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
+import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.entity.User;
 import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 
 @Getter
@@ -32,4 +34,10 @@ public class AddOrderDTO {
 
     @NotBlank(message = "You need to specify an order address!")
     private String address;
+
+    @NotBlank(message = "You need to specify an user id!")
+    private Long userId;
+
+    @NotBlank(message = "You need to specify an products!")
+    private Set<OrderDetail> orderInventories;
 }

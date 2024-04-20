@@ -18,7 +18,7 @@ public interface AdminService {
     void deleteDiscount(Long id);
     AddDiscountDTO getDiscountById(Long id);
 
-    void addOrder(AddOrderDTO addOrderDTO);
+    //void addOrder(AddOrderDTO addOrderDTO);
     void editOrder(Long id, AddOrderDTO addOrderDTO);
     void deleteOrder(Long id);
     AddOrderDTO getOrderById(Long id);
