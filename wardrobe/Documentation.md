@@ -1,2 +1,3 @@
 
-# [[Admin tools]]
+# [Admin tools](Admin/Admin.md)
+
