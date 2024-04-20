@@ -23,10 +23,15 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authorizeRequests -> authorizeRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-//                                .requestMatchers("/").permitAll()
-//                                .requestMatchers("/users/login").permitAll()
-//                                .requestMatchers("/users/register").permitAll()
-//                                .anyRequest().authenticated()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/", "/index").permitAll()
+                                .requestMatchers("/users/login", "/users/register").permitAll()
+                                .requestMatchers("/shop", "/shop/product-detail/**").permitAll()
+                                .requestMatchers(
+                                        "/add-to-cart/**",
+                                        "/cart/remove-from-cart/**",
+                                        "/shopping-cart",
+                                        "/cart/proceed-to-checkout").authenticated()
                                 .anyRequest().permitAll()
 
                 ).formLogin(
