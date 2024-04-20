@@ -1,0 +1,168 @@
+{
+  "main": {
+    "id": "c5a4edda58b163df",
+    "type": "split",
+    "children": [
+      {
+        "id": "4da546d91ddd10c8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "41696bf718d8c2a3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Admin/tools/Discount.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1b581bd9380ec910",
+    "type": "split",
+    "children": [
+      {
+        "id": "add151b832daddfa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "45e0ad9f3ea90bc3",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6770af2799f2fd91",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "fe710b520f3447ad",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c68016665b808748",
+    "type": "split",
+    "children": [
+      {
+        "id": "d40b99b0a2b4a7d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e80545267983358c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Admin/tools/Discount.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "39a2a5d0f6f85cd6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Admin/tools/Discount.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "97c470d4bfe92543",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "e08eb755bc537d15",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Admin/tools/Discount.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "41696bf718d8c2a3",
+  "lastOpenFiles": [
+    "Admin/Admin tools.md",
+    "Documentation.md",
+    "Admin/tools/Discount.md",
+    "Admin/Admin.md",
+    "Images/add-discount.png",
+    "Images/add-di.png",
+    "Images/Screenshot 2024-04-20 193130.png",
+    "Images",
+    "New folder",
+    "create a link.md",
+    "Welcome.md",
+    "Admin/tools/Users.md",
+    "Admin/tools/Product.md",
+    "Admin/tools/Order.md",
+    "Admin/tools",
+    "Admin"
+  ]
+}
