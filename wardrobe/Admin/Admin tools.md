@@ -1,5 +1,5 @@
 
 
-# [[Discount]]
+# [Discount](tools/Discount.md)
 
 
