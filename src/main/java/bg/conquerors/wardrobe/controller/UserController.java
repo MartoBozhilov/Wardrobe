@@ -1,7 +1,11 @@
 package bg.conquerors.wardrobe.controller;
 
 import bg.conquerors.wardrobe.model.dto.UserRegistrationDTO;
+import bg.conquerors.wardrobe.model.entity.User;
+import bg.conquerors.wardrobe.repository.UserRepository;
+import bg.conquerors.wardrobe.service.OrderService;
 import bg.conquerors.wardrobe.service.UserService;
+import bg.conquerors.wardrobe.service.impl.OrderServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
+    private final UserRepository userRepository;
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/users/login")
@@ -22,7 +27,9 @@ public class UserController {
     }
 
     @GetMapping("/users/account")
-    public String account() {
+    public String account(Model model) {
+        User currentUser = userService.findCurrentUser();
+        model.addAttribute("user",currentUser);
         return "account";
     }
 

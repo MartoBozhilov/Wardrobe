@@ -16,31 +16,29 @@
                     <div class="card-body p-3 text-center">
                         <div class="mb-md-3 mt-md-4 pb-5">
                             <h2 class="fw-bold mb-2 text-uppercase">User Information</h2>
-                            <p class="text-white-50 mb-3">Current user details:</p>
-
                             <div class="form-outline form-white mb-4">
-                                <p id="email" name="email">Email: </p>
+                                <p id="email" name="email" th:text="'Email: ' + ${user.email}">Email: </p>
                             </div>
 
                             <div class="form-outline form-white mb-4">
-                                <p id="username" name="username">Username: </p>
+                                <p id="username" name="username" th:text="'Username: ' + ${user.username}">Username: </p>
                             </div>
 
                             <div class="form-outline form-white mb-4">
-                                <p id="firstName" name="firstName">First Name: </p>
+                                <p id="firstName" name="firstName" th:text="'First Name: ' + ${user.firstName}">First Name: </p>
                             </div>
 
                             <div class="form-outline form-white mb-4">
-                                <p id="lastName" name="lastName">Last Name: </p>
+                                <p id="lastName" name="lastName" th:text="'Last Name: ' + ${user.lastName}">Last Name: </p>
                             </div>
 
                             <div class="form-outline form-white mb-4">
-                                <p id="phoneNumber" name="phoneNumber">Phone Number: </p>
+                                <p id="phoneNumber" name="phoneNumber" th:text="'Phone Number: ' + ${user.phoneNumber}">Phone Number: </p>
                             </div>
 
                             <div class="form-outline form-white mb-4">
                                 <i class="icon"></i>
-                                <p id="points" name="points">Points: </p>
+                                <p id="points" name="points" th:text="'Points: ' + ${user.points}">Points: </p>
                             </div>
 
                             <a href="account-update" class="btn btn-outline-light btn-lg px-3">Update Information</a>
