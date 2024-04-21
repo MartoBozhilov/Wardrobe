@@ -26,6 +26,11 @@ public class UserController {
         return "account";
     }
 
+    @GetMapping("/users/account-update")
+    public String account_update() {
+        return "account-update";
+    }
+
     @GetMapping("/users/register")
     public String register(Model model) {
         model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
