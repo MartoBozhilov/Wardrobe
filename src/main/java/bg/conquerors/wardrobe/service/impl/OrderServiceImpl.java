@@ -22,10 +22,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -53,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
     public void createNewOrder(User user) {
         Order order = new Order();
         order.setStatus(OrderStatusEnum.CART);
-        order.setOrderInventories(new HashSet<>());
+        order.setOrderInventories(new ArrayList<>());
         order.setUser(user);
 
         orderRepository.save(order);
@@ -106,11 +105,11 @@ public class OrderServiceImpl implements OrderService {
 
         Order cartOfUser = getCart(loggedUser);
 
-        Set<OrderDetail> orderDetails = cartOfUser.getOrderInventories();
+        List<OrderDetail> orderDetails = cartOfUser.getOrderInventories();
 
         CartViewDTO cartViewDTO = new CartViewDTO();
         cartViewDTO.setId(cartOfUser.getId());
-        cartViewDTO.setCartItems(new HashSet<>());
+        cartViewDTO.setCartItems(new ArrayList<>());
 
         for (OrderDetail cartDetail : orderDetails) {
             CartItemDTO cartItemDTO = new CartItemDTO();
@@ -150,9 +149,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-
     private void changeProductsInventoriesQuantity(Order orderToSave) throws Exception {
-        Set<OrderDetail> orderDetailSet = orderToSave.getOrderInventories();
+        List<OrderDetail> orderDetailSet = orderToSave.getOrderInventories();
 
         for (OrderDetail orderDetail : orderDetailSet) {
             Product productToAlter = orderDetail.getProduct();

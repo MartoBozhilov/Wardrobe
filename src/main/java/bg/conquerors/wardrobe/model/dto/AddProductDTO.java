@@ -2,10 +2,8 @@ package bg.conquerors.wardrobe.model.dto;
 
 import bg.conquerors.wardrobe.model.enums.CategoryEnum;
 import bg.conquerors.wardrobe.model.enums.GenderEnum;
-import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.model.enums.StyleEnum;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,10 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.util.Dictionary;
 import java.util.Map;
 
 @Getter
@@ -57,7 +53,7 @@ public class AddProductDTO {
 
     @NotNull(message = "You need to specify a price!")
     @NotBlank(message = "You need to specify a price!")
-    @Min(value = 0,message = "The price can not be negative number!")
+    @Min(value = 0, message = "The price can not be negative number!")
     private BigDecimal price;
 
     // @Max(value = price, message = "The min price can not be more then price!")

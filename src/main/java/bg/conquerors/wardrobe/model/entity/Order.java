@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,10 +35,9 @@ public class Order extends BaseEntity {
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Set<OrderDetail> orderInventories;
+    private List<OrderDetail> orderInventories;
 
-
-    public Order(long id){
+    public Order(long id) {
         super();
         this.setId(id);
     }

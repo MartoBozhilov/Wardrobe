@@ -3,16 +3,28 @@ package bg.conquerors.wardrobe.service.impl;
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
-import bg.conquerors.wardrobe.model.entity.*;
+import bg.conquerors.wardrobe.model.entity.Discount;
+import bg.conquerors.wardrobe.model.entity.Order;
+import bg.conquerors.wardrobe.model.entity.OrderDetail;
+import bg.conquerors.wardrobe.model.entity.Product;
+import bg.conquerors.wardrobe.model.entity.Tag;
 import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
-import bg.conquerors.wardrobe.repository.*;
+import bg.conquerors.wardrobe.repository.DiscountRepository;
+import bg.conquerors.wardrobe.repository.OrderDetailRepository;
+import bg.conquerors.wardrobe.repository.OrderRepository;
+import bg.conquerors.wardrobe.repository.ProductRepository;
+import bg.conquerors.wardrobe.repository.TagRepository;
+import bg.conquerors.wardrobe.repository.UserRepository;
 import bg.conquerors.wardrobe.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -333,7 +345,7 @@ public class AdminServiceImpl implements AdminService {
 
         if (order.getStatus() == OrderStatusEnum.ORDERED)
             order.setStatus(OrderStatusEnum.SHIPPED);
-         else if (order.getStatus() == OrderStatusEnum.SHIPPED)
+        else if (order.getStatus() == OrderStatusEnum.SHIPPED)
             order.setStatus(OrderStatusEnum.DELIVERED);
 
         orderRepository.save(order);
