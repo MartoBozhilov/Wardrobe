@@ -63,4 +63,9 @@ public class OrderController {
         return "redirect:/index";
     }
 
+    @GetMapping("/checkout")
+    public String checkout() {
+        return "checkout";
+    }
+
 }
