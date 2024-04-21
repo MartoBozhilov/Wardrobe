@@ -267,10 +267,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void editOrder(Long id, AddOrderDTO addOrderDTO) {
 
-        System.out.println(addOrderDTO.getOrderInventories().size());
-        //Order order = setOrder(orderRepository.findAllById(id), addOrderDTO);
+        Order order = setOrder(orderRepository.findAllById(id), addOrderDTO);
 
-        //orderRepository.save(order);
+        orderRepository.save(order);
     }
 
     private Order setOrder(Order order, AddOrderDTO addOrderDTO) {
