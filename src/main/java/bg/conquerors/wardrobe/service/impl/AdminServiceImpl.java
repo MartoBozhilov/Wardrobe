@@ -8,6 +8,8 @@ import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.entity.Tag;
+import bg.conquerors.wardrobe.model.dto.AddUserDTO;
+import bg.conquerors.wardrobe.model.entity.*;
 import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.repository.DiscountRepository;
@@ -16,15 +18,13 @@ import bg.conquerors.wardrobe.repository.OrderRepository;
 import bg.conquerors.wardrobe.repository.ProductRepository;
 import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.repository.UserRepository;
+import bg.conquerors.wardrobe.model.enums.UserRoleEnum;
 import bg.conquerors.wardrobe.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -38,6 +38,7 @@ public class AdminServiceImpl implements AdminService {
     private final OrderDetailRepository orderDetailRepository;
 
     private final UserRepository userRepository;
+
 
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
@@ -413,4 +414,83 @@ public class AdminServiceImpl implements AdminService {
         discountRepository.delete(discountRepository.findAllById(id));
     }
     //endregion
+
+    //region <Users CRUD>
+
+    @Override
+    public void editUser(Long id, AddUserDTO addUserDTO) {
+
+        User user = setUser(userRepository.findAllById(Collections.singleton(id)).get(0), addUserDTO);
+
+        userRepository.save(user);
+    }
+
+    private User setUser(User user, AddUserDTO addUserDTO) {
+
+        if (addUserDTO.isAdmin()){
+            if (!user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);})){
+                List<UserRole> userRoles = user.getRoles();
+                userRoles.add(new UserRole(UserRoleEnum.ADMIN));
+                user.setRoles(userRoles);
+            }
+        }
+        else {
+            if (user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);})){
+                List<UserRole> userRoles = user.getRoles();
+                userRoles.remove(new UserRole(UserRoleEnum.ADMIN));
+                user.setRoles(userRoles);
+            }
+        }
+
+        user.setEmail(addUserDTO.getEmail());
+        user.setPassword(addUserDTO.getPassword());
+        user.setPoints(addUserDTO.getPoints());
+        user.setUsername(addUserDTO.getUsername());
+        user.setFirstName(addUserDTO.getFirstName());
+        user.setLastName(addUserDTO.getLastName());
+        user.setPhoneNumber(addUserDTO.getPhoneNumber());
+
+        return user;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        User user = (User) userRepository.findAllById(Collections.singleton(id));
+
+        if (user == null)
+            return;
+
+        userRepository.delete(user);
+    }
+
+    @Override
+    public AddUserDTO getUserById(Long id) {
+
+        User user = userRepository.findAllById(Collections.singleton(id)).get(0);
+
+        if (user == null)
+            return null;
+
+        return createUserDTO(user);
+    }
+
+    private AddUserDTO createUserDTO(User user) {
+
+        AddUserDTO addUserDTO = new AddUserDTO();
+
+        addUserDTO.setAdmin(user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);}));
+        addUserDTO.setEmail(user.getEmail());
+        addUserDTO.setPassword(user.getPassword());
+        addUserDTO.setPoints(user.getPoints());
+        addUserDTO.setUsername(user.getUsername());
+        addUserDTO.setFirstName(user.getFirstName());
+        addUserDTO.setLastName(user.getLastName());
+        addUserDTO.setPhoneNumber(user.getPhoneNumber());
+
+
+        return addUserDTO;
+    }
+
+    //endregion
+
 }

@@ -3,6 +3,7 @@ package bg.conquerors.wardrobe.controller;
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.dto.AddUserDTO;
 import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
@@ -296,6 +297,52 @@ public class AdminController {
     }
 //    endregion
 
+    //region <Users CRUD>
 
+    @GetMapping("/edit-user/{id}")
+    public String editUser(@PathVariable("id") Long id, Model model) {
+
+        AddUserDTO addUserDTO = adminService.getUserById(id);
+
+        if (addUserDTO == null)
+            return "error";
+
+        model.addAttribute("addUserDTO", addUserDTO);
+        model.addAttribute("userId", id);
+
+        return "admin/user/edit-user";
+    }
+
+    @PostMapping("/edit-user/{id}")
+    public String editUser(@PathVariable("id") Long id, AddUserDTO addUserDTO) {
+
+        adminService.editUser(id, addUserDTO);
+
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/delete-user/{id}")
+    public String deleteUserGet(@PathVariable("id") Long id) {
+
+        adminService.deleteUser(id);
+
+        return "admin/admin";
+    }
+
+    @PostMapping("/delete-user/{id}")
+    public String deleteUserPost(@PathVariable("id") Long id) {
+
+        adminService.deleteUser(id);
+
+        return "admin/admin";
+    }
+
+    @GetMapping("/users")
+    public String usersGet(Model model) {
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "admin/orders";
+    }
+
+    //endregion
 
 }
