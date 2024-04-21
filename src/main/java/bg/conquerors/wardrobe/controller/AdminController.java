@@ -238,7 +238,7 @@ public class AdminController {
 
         adminService.changeStatus(orderId);
 
-        return "redirect:/admin/orders";
+        return "redirect:/admin/orders?status=ordered";
     }
 
     //endregion
