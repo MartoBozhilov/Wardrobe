@@ -40,6 +40,6 @@ public class AddOrderDTO {
     private Long userId;
 
     @NotBlank(message = "You need to specify an products!")
-    private List<OrderDetail> orderInventories;
+    private Set<OrderDetail> orderInventories;
 
 }
