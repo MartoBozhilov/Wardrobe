@@ -3,6 +3,7 @@ package bg.conquerors.wardrobe.controller;
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.enums.*;
@@ -173,6 +174,7 @@ public class AdminController {
     public String editOrder(@PathVariable("id") Long id, AddOrderDTO addOrderDTO) {
 
         adminService.editOrder(id, addOrderDTO);
+
         return "admin/admin";
     }
 
@@ -222,6 +224,20 @@ public class AdminController {
         adminService.addOrderProduct(orderId,productId,quantity);
 
         return "redirect:/admin/edit-order/"+orderId;
+    }
+
+    @GetMapping("/orders")
+    public String ordersGet(Model model) {
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "admin/orders";
+    }
+
+    @PostMapping("/orders/{orderId}")
+    public String ordersPost(@PathVariable("orderId") Long orderId) {
+
+        adminService.changeStatus(orderId);
+
+        return "redirect:/admin/orders";
     }
 
     //endregion
@@ -280,10 +296,6 @@ public class AdminController {
     }
 //    endregion
 
-    @GetMapping("/orders")
-    public String orders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
-        return "admin/orders";
-    }
+
 
 }

@@ -3,6 +3,7 @@ package bg.conquerors.wardrobe.service;
 import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.entity.Order;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface AdminService {
@@ -24,4 +25,5 @@ public interface AdminService {
     void deleteOrderProduct(Long id);
     void addOrderProduct(Long orderId,Long productId,Integer quantity);
     AddOrderDTO getOrderById(Long id);
+    void changeStatus(Long id);
 }

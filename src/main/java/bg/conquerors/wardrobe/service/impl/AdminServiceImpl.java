@@ -4,6 +4,7 @@ import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
 import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
 import bg.conquerors.wardrobe.model.entity.*;
+import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
 import bg.conquerors.wardrobe.repository.*;
 import bg.conquerors.wardrobe.service.AdminService;
@@ -38,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
         this.tagRepository = tagRepository;
         this.discountRepository = discountRepository;
         this.orderRepository = orderRepository;
-        this.orderDetailRepository =orderDetailRepository;
+        this.orderDetailRepository = orderDetailRepository;
         this.userRepository = userRepository;
     }
 
@@ -145,10 +146,10 @@ public class AdminServiceImpl implements AdminService {
         addProductDTO.setGender(product.getTag().getGender());
         addProductDTO.setStyle(product.getTag().getStyle());
 
-        Map<String,Integer> quantity = new Hashtable<>();
+        Map<String, Integer> quantity = new Hashtable<>();
 
-        for (Product p : products){
-            quantity.put(p.getSize().toString(),p.getQuantity());
+        for (Product p : products) {
+            quantity.put(p.getSize().toString(), p.getQuantity());
         }
 
         addProductDTO.setQuantities(quantity);
@@ -162,11 +163,9 @@ public class AdminServiceImpl implements AdminService {
 
             SizeEnum size = SizeEnum.valueOf(sizeValue);
 
-            Product updatedProduct =  products.stream().filter(product1 -> product1.getSize().equals(size)).findFirst().get();
+            Product updatedProduct = products.stream().filter(product1 -> product1.getSize().equals(size)).findFirst().get();
 
             int index = products.indexOf(updatedProduct);
-
-            System.out.println(updatedProduct.getId());
 
             updatedProduct.setProductNumber(addProductDTO.getProductNumber());
             updatedProduct.setName(addProductDTO.getName());
@@ -182,7 +181,7 @@ public class AdminServiceImpl implements AdminService {
 
             updateTag(addProductDTO, updatedProduct.getTag());
 
-           products.set(index,updatedProduct);
+            products.set(index, updatedProduct);
         }
 
         return products;
@@ -290,7 +289,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addOrderProduct(Long orderId,Long productId,Integer quantity) {
+    public void addOrderProduct(Long orderId, Long productId, Integer quantity) {
         OrderDetail orderDetail = new OrderDetail();
         Order order = orderRepository.findAllById(orderId);
         Product product = productRepository.findAllById(productId);
@@ -328,7 +327,17 @@ public class AdminServiceImpl implements AdminService {
         return addOrderDTO;
     }
 
+    @Override
+    public void changeStatus(Long id) {
+        Order order = orderRepository.findAllById(id);
 
+        if (order.getStatus() == OrderStatusEnum.ORDERED)
+            order.setStatus(OrderStatusEnum.SHIPPED);
+         else if (order.getStatus() == OrderStatusEnum.SHIPPED)
+            order.setStatus(OrderStatusEnum.DELIVERED);
+
+        orderRepository.save(order);
+    }
     //endregion
 
     //region <Discount CRUD>

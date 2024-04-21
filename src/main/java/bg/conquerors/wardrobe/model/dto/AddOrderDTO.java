@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,6 +40,6 @@ public class AddOrderDTO {
     private Long userId;
 
     @NotBlank(message = "You need to specify an products!")
-    private Set<OrderDetail> orderInventories;
+    private List<OrderDetail> orderInventories;
 
 }
