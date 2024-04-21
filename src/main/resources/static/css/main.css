@@ -2455,10 +2455,15 @@ input.num-product::-webkit-inner-spin-button {
   height: 40px;
 }
 
-.size-108 {
-  width: 40px;
-  height: 40px;
-}
+ .size-108 {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 23px; /* if you want rounded corners */
+        overflow: hidden; /* this can help ensure nothing spills outside the button */
+    }
 
 .size-109 {
   width: 60px;
