@@ -76,4 +76,28 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
     }
 
+    @Override
+    public void editUserInformation(Long id, UserRegistrationDTO userRegistrationDTO) {
+        // Find the existing user
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + id));
+
+        // Update user's information
+        user.setEmail(userRegistrationDTO.getEmail());
+        user.setUsername(userRegistrationDTO.getUsername());
+        user.setFirstName(userRegistrationDTO.getFirstName());
+        user.setLastName(userRegistrationDTO.getLastName());
+        user.setPhoneNumber(userRegistrationDTO.getPhoneNumber());
+
+        // Assume that if the password field is not empty, the user wants to change their password.
+        if (userRegistrationDTO.getPassword() != null && !userRegistrationDTO.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
+        }
+
+        // Save the updated user
+        userRepository.save(user);
+    }
+
+
+
 }

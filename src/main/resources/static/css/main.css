@@ -3438,3 +3438,27 @@ input.num-product::-webkit-inner-spin-button {
         color: #555;
         font-weight: 500;
     }
+    /* Style for the form container */
+    .card-body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center the items horizontally */
+    }
+
+    /* Style for each form-outline to control width */
+    .form-outline {
+        flex: 1 1 200px; /* Adjust the flex-basis value to suit the desired width */
+        margin: 0.5rem;
+    }
+
+    /* Style for input and label to make them full width */
+    .form-outline input,
+    .form-outline label {
+        width: 100%;
+    }
+
+    /* Style for button */
+    .btn {
+        flex: 0 0 100%; /* Take full width */
+        margin-top: 1rem; /* Add some margin at the top */
+    }

@@ -1,9 +1,12 @@
 package bg.conquerors.wardrobe.model.dto;
 
+import bg.conquerors.wardrobe.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Optional;
 
 @Getter
 @Setter

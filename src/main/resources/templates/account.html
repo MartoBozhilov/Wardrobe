@@ -41,7 +41,7 @@
                                 <p id="points" name="points" th:text="'Points: ' + ${user.points}">Points: </p>
                             </div>
 
-                            <a href="account-update" class="btn btn-outline-light btn-lg px-3">Update Information</a>
+                            <a th:href="@{'/users/account-update/' + ${user.id}}" class="btn btn-outline-light btn-lg px-3">Update Information</a>
                         </div>
                     </div>
                 </div>
