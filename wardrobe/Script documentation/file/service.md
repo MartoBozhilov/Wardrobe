@@ -6,41 +6,41 @@ This document outlines the structure of the service layer in the project. The se
 
 ### Service Interfaces
 
-#### [`AdminService`](AdminService.java.md)
+#### [`AdminService`](service/AdminService.java.md)
 
 - Defines contract for administration-related operations.
 
-#### [`OrderService`](OrderService.java.md)
+#### [`OrderService`](service/OrderService.java.md)
 
 - Specifies the business operations available for order processing.
 
-#### [`ProductService`](ProductService.java.md)
+#### [`ProductService`](service/ProductService.java.md)
 
 - Outlines the service operations for managing products.
 
-#### [`UserService`](UserService.java.md)
+#### [`UserService`](service/UserService.java.md)
 
 - Establishes the business logic for user management.
 
 ### Service Implementations
 
-#### [`AdminServiceImpl`](AdminServiceImpl.java.md)
+#### [`AdminServiceImpl`](service/AdminServiceImpl.java.md)
 
 - Implements the `AdminService`, containing business logic for administrative functions.
 
-#### [`OrderServiceImpl`](OrderServiceImpl.java.md)
+#### [`OrderServiceImpl`](service/OrderServiceImpl.java.md)
 
 - Implements the `OrderService`, detailing the order management and processing logic.
 
-#### [`ProductServiceImpl`](ProductServiceImpl.java.md)
+#### [`ProductServiceImpl`](service/ProductServiceImpl.java.md)
 
 - Implements the `ProductService`, with logic for product catalog management.
 
-#### [`UserServiceImpl`](UserServiceImpl.java.md)
+#### [`UserServiceImpl`](service/UserServiceImpl.java.md)
 
 - Implements the `UserService`, providing user-related business processes.
 
-#### [`WardrobeUserDetailsService`](WardrobeUserDetailsService.java.md)
+#### [`WardrobeUserDetailsService`](service/WardrobeUserDetailsService.java.md)
 
 - A custom service that likely extends user details handling, specific to the concept of a "Wardrobe".
 
