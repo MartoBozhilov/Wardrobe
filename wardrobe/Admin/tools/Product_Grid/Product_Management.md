@@ -6,13 +6,13 @@ When you enter the product page on this address `http://localhost:8080/admin`, w
 
 To begin with, you can add a product when clicking on the button at the top right of the page. Here is a visual representation of where the button is: 
 
-![Image of add-discount](add-product-button.png)
+![Image of add-discount](../../../Images/add-product-button.png)
 
 The add product page is located on this page `http://localhost:8080/admin/add-product`.
 
 When you open it in a browser it will show this page :
 
-![Image of add-discount](add-product.png)
+![Image of add-discount](../../../Images/add-product.png)
 
 ### Steps to Add a New Product
 
