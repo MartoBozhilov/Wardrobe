@@ -13,7 +13,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Script_documentation/Basic_Structure_of_the_Project.md",
+                "file": "User/User.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "cfb781bdb2c439d9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "User/User.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Script_documentation/Basic_Structure_of_the_Project.md",
+                "file": "User/User.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Script_documentation/Basic_Structure_of_the_Project.md",
+                "file": "User/User.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Script_documentation/Basic_Structure_of_the_Project.md"
+                "file": "User/User.md"
               }
             }
           }
@@ -148,51 +160,51 @@
   },
   "active": "afa5aac335a8ef4f",
   "lastOpenFiles": [
-    "Documentation.md",
-    "Script_documentation/Basic_Structure_of_the_Project.md",
-    "Script documentation/Untitled.md",
-    "Admin/Admin.md",
-    "User/User.md",
     "User/Cart/Cart.md",
-    "User/Cart",
-    "User",
-    "Images/shop-page.png",
-    "Images/shop-page-nav.png",
-    "Images/register-page.png",
-    "Images/profile-icon.png",
-    "Images/product-page.png",
-    "Images/product-grid.png",
-    "Images/order-page.png",
-    "Images/menu-admin-page.png",
-    "Images/login-page.png",
-    "Images/filter.png",
-    "Admin/tools/Product_Grid/Product_Management.md",
-    "Admin/tools/Product_Grid",
-    "Admin/tools/Orders/Orders.md",
-    "Admin/tools/Orders/Edit.md",
-    "Admin/tools/Orders",
-    "Admin/tools/Discount/Discount.md",
-    "Admin/tools/Discount",
-    "Admin/tools/Dashboard/Dashboard.md",
-    "Admin/tools/Dashboard",
-    "Script_documentation/file/model/Entities/User.java.md",
+    "User/User.md",
+    "Documentation.md",
+    "Images/faqs-page.png",
+    "Images/faq-nav.png",
+    "Images/contact-page.png",
+    "Images/contact-nav.png",
+    "Images/order-successful.png",
+    "Images/cart-page.png",
+    "Script_documentation/file/model/Enums/UserRoleEnum.java.md",
+    "Script_documentation/file/model/Enums/SizeEnum.java.md",
+    "Script_documentation/file/model/Enums/StyleEnum.java.md",
+    "Script_documentation/file/model/Enums/OrderStatusEnum.java.md",
+    "Script_documentation/file/model/Enums/GenderEnum.java.md",
+    "Script_documentation/file/model/Enums/CategoryEnum.java.md",
     "Script_documentation/file/model/Entities/UserRole.java.md",
-    "Script_documentation/file/model/Entities/Tag.java.md",
+    "Script_documentation/file/model/Entities/User.java.md",
     "Script_documentation/file/model/Entities/Product.java.md",
+    "Script_documentation/file/model/Entities/Tag.java.md",
     "Script_documentation/file/model/Entities/OrderDetail.java.md",
     "Script_documentation/file/model/Entities/Order.java.md",
     "Script_documentation/file/model/Entities/Discount.java.md",
     "Script_documentation/file/model/Entities/BaseEntity.java.md",
-    "Script_documentation/file/model/Enums/UserRoleEnum.java.md",
-    "Script_documentation/file/model/Enums/StyleEnum.java.md",
-    "Script_documentation/file/model/Enums/OrderStatusEnum.java.md",
     "Script_documentation/file/model/DTOs/ViewProductsDTO.java.md",
-    "Script_documentation/file/model/Enums/SizeEnum.java.md",
-    "Script_documentation/file/model/Enums/GenderEnum.java.md",
-    "Script_documentation/file/model/Enums/CategoryEnum.java.md",
-    "Script_documentation/file/model/Entities",
+    "Script_documentation/file/model/DTOs/ViewProductDTO.java.md",
+    "Script_documentation/file/model/DTOs/UserRegistrationDTO.java.md",
+    "Script_documentation/file/model/DTOs/FinishOrderDTO.java.md",
+    "Script_documentation/file/model/DTOs/AddUserDTO.java.md",
+    "Script_documentation/file/model/DTOs/CartViewDTO.java.md",
+    "Script_documentation/file/model/DTOs/CartItemDTO.java.md",
+    "Script_documentation/file/model/DTOs/AddProductDTO.java.md",
+    "Script_documentation/file/model/DTOs/AddOrderDTO.java.md",
     "Script_documentation/file/model/Enums",
+    "Script_documentation/file/model/Entities",
     "Script_documentation/file/model/DTOs",
-    "Script_documentation/file/service"
+    "Script_documentation/file/service",
+    "Script_documentation/file/repository",
+    "Script_documentation/file/model",
+    "Script_documentation/file/exeptions",
+    "Script_documentation/file/controller",
+    "Script_documentation/file",
+    "Script_documentation",
+    "Images/shop-page.png",
+    "Images/shop-page-nav.png",
+    "Images/register-page.png",
+    "Images/profile-icon.png"
   ]
 }

@@ -1,4 +1,5 @@
 Firstly, as a user you can either register if you do not have a profile already created or you can just log into your profile in order to buy the clothes you've liked.
+
 ## How to Register
 
 In order to register from the home page(`http://localhost:8080/index#`), click on the "Profile icon" located at the top right at the page and then click "Register" from the drop down menu. Here is how it looks like:
@@ -70,6 +71,7 @@ Here's how to change your information:
     - **Phone Number**: Correct or update your contact number for order confirmations or customer service communications.
 4. **Save Changes**: Once you've made the necessary updates click on "Update user information". Clicking this will apply the changes to your account.
 
+
 ## How to See And Buy Products
 
 ### How to See Products
@@ -106,6 +108,35 @@ Here's how to navigate and use the product page:
 4. **Quantity Selector**: You can usually choose how many of the item you'd like to order using a '+' to increase the quantity and a '-' to decrease it.
     
 5. **Add to Cart**: Once you've selected the size and quantity, you can add the item to your shopping cart by clicking the "ADD TO CART" button. Then you must go to your [cart](Cart/Cart.md) if you are ready with your order.
+
+
+## How to contact us
+
+If you want to contact us you can click on the "Contact" button located at the navbar above. 
+
+![Image of add-discount](../Images/contact-nav.png)
+
+It leads you to this address `http://localhost:8080/contact` and this page:
+
+![Image of add-discount](../Images/contact-page.png)
+
+Here you can send us a message or you can call our phone number.
+
+
+## Frequently Asked Questions
+
+If you want to find the most common questions that customers may have, you will want to read the FAQs page. You can go there by clicking the "FAQs" button located at the navbar above.
+
+![Image of add-discount](../Images/faq-nav.png)
+
+It leads you to this address `http://localhost:8080/faq` and this page:
+
+![Image of add-discount](../Images/faqs-page.png)
+
+Here you can click on whatever question you may have or is related to in order to find an answer.
+
+
+
 
 
 
