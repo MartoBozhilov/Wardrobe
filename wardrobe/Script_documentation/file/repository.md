@@ -4,31 +4,31 @@ This section outlines the repository structure of the project. Each repository i
 
 ### Repositories
 
-#### [`DiscountRepository`](DiscountRepository.java.md)
+#### [`DiscountRepository`](repository/DiscountRepository.java.md)
 
 - Manages interactions with the discount data.
 
-#### [`OrderDetailRepository`](OrderDetailRepository.java.md)
+#### [`OrderDetailRepository`](repository/OrderDetailRepository.java.md)
 
 - Handles data operations for order line items.
 
-#### [`OrderRepository`](OrderRepository.java.md)
+#### [`OrderRepository`](repository/OrderRepository.java.md)
 
 - Responsible for operations related to order entities.
 
-#### [`ProductRepository`](ProductRepository.java.md)
+#### [`ProductRepository`](repository/ProductRepository.java.md)
 
 - Facilitates data access for product-related operations.
 
-#### [`RoleRepository`](RoleRepository.java.md)
+#### [`RoleRepository`](repository/RoleRepository.java.md)
 
 - Manages role data for access control purposes.
 
-#### [`TagRepository`](TagRepository.java.md)
+#### [`TagRepository`](repository/TagRepository.java.md)
 
 - Deals with operations surrounding product tags.
 
-#### [`UserRepository`](UserRepository.java.md)
+#### [`UserRepository`](repository/UserRepository.java.md)
 
 - Handles data persistence and retrieval for user entities.
 
