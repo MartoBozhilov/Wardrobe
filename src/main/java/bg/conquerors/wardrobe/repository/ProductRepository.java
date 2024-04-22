@@ -20,4 +20,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Long countByTagId(Long tagId);
 
+    List<Product> findByDiscountIsNotNull();
+
+
+
 }

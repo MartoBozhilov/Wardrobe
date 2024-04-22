@@ -1,9 +1,6 @@
 package bg.conquerors.wardrobe.controller;
 
-import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
-import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
-import bg.conquerors.wardrobe.model.dto.AddProductDTO;
-import bg.conquerors.wardrobe.model.dto.AddUserDTO;
+import bg.conquerors.wardrobe.model.dto.*;
 import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
@@ -17,6 +14,7 @@ import org.hibernate.annotations.processing.Find;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -176,7 +174,7 @@ public class AdminController {
 
         adminService.editOrder(id, addOrderDTO);
 
-        return "admin/admin";
+        return "redirect:/admin/orders?status=ordered";
     }
 
     @GetMapping("/delete-order/{id}")
@@ -184,7 +182,7 @@ public class AdminController {
 
         adminService.deleteOrder(id);
 
-        return "admin/admin";
+        return "redirect:/admin/orders?status=ordered";
     }
 
     @PostMapping("/delete-order/{id}")
@@ -192,7 +190,7 @@ public class AdminController {
 
         adminService.deleteOrder(id);
 
-        return "admin/admin";
+        return "redirect:/admin/orders?status=ordered";
     }
 
     @GetMapping("/delete-order-product/{orderDetailId},{orderId}")
@@ -238,12 +236,21 @@ public class AdminController {
 
         adminService.changeStatus(orderId);
 
-        return "redirect:/admin/orders";
+        return "redirect:/admin/orders?status=ordered";
     }
 
     //endregion
 
     //region <Discount CRUD>
+
+    @GetMapping("/discounts")
+    public String discountsHome(Model model) {
+        List<ViewProductsDTO> onSaleProducts = adminService.findAllByDiscount();
+        model.addAttribute("products", onSaleProducts);
+        model.addAttribute("products", productService.getViewOfProducts());
+        return "admin/discounts";
+    }
+
     @GetMapping("/add-discount")
     public String addDiscount(Model model) {
 
@@ -294,6 +301,40 @@ public class AdminController {
         adminService.deleteDiscount(id);
 
         return "admin/admin";
+    }
+
+    @GetMapping("/set-discount-to-product/{id}")
+    public String setDiscountToProductGet(@PathVariable("id") Long discountId, Model model, SetDiscountToProductDTO setDiscountToProductDTO) {
+
+        List<Product> products = adminService.getAllProducts();
+
+        setDiscountToProductDTO.setDiscountId(discountId);
+
+        model.addAttribute("setDiscountToProductDTO",setDiscountToProductDTO);
+        model.addAttribute("products",products);
+
+        return "admin/admin/set-discount-to-product";
+    }
+
+    @PostMapping("/add-product-id-to-discount/{id}")
+    public String addProductIdToDiscountPost(@PathVariable("id") String productId,SetDiscountToProductDTO setDiscountToProductDTO,Model model) {
+
+        List<Product> products = adminService.getAllProducts();
+
+        setDiscountToProductDTO.getProductsProductNumbers().add(productId);
+
+        model.addAttribute("setDiscountToProductDTO",setDiscountToProductDTO);
+        model.addAttribute("products",products);
+
+        return "redirect:/admin/set-discount-to-product/" + setDiscountToProductDTO.getDiscountId();
+    }
+
+    @PostMapping("/set-discount-to-product/{id}")
+    public String setDiscountToProductPost(@PathVariable("id") Long discountId,SetDiscountToProductDTO setDiscountToProductDTO) {
+
+        adminService.setDiscountToProduct(setDiscountToProductDTO);
+
+        return "redirect:/admin/discount";
     }
 //    endregion
 

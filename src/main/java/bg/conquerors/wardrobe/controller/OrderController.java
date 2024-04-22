@@ -60,7 +60,7 @@ public class OrderController {
         finishOrderDTO.setId(cartItemId);
         orderService.saveOrder(finishOrderDTO);
 
-        return "redirect:/index";
+        return "redirect:/order-successful";
     }
 
     @GetMapping("/checkout")

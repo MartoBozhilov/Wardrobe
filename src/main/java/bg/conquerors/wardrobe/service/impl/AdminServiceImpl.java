@@ -1,14 +1,11 @@
 package bg.conquerors.wardrobe.service.impl;
 
-import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
-import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
-import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.dto.*;
 import bg.conquerors.wardrobe.model.entity.Discount;
 import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.entity.Tag;
-import bg.conquerors.wardrobe.model.dto.AddUserDTO;
 import bg.conquerors.wardrobe.model.entity.*;
 import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
@@ -20,10 +17,14 @@ import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.repository.UserRepository;
 import bg.conquerors.wardrobe.model.enums.UserRoleEnum;
 import bg.conquerors.wardrobe.service.AdminService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -39,6 +40,8 @@ public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
@@ -246,31 +249,31 @@ public class AdminServiceImpl implements AdminService {
         if (isChange) tagRepository.save(tag);
     }
 
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
     //endregion
 
     //region <Orders CRUD>
-   /* @Override
-    public void addOrder(AddOrderDTO addOrderDTO) {
-
-    }
-
-    private Order getNewOrder(AddOrderDTO addOrderDTO) {
-        Order order = new Order();
-
-        discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
-        discount.setStartDate(addDiscountDTO.getStartDate());
-        discount.setEndDate(addDiscountDTO.getEndDate());
-
-        return order;
-    }*/
 
     @Override
     public void editOrder(Long id, AddOrderDTO addOrderDTO) {
 
-        System.out.println(addOrderDTO.getOrderInventories().size());
-        //Order order = setOrder(orderRepository.findAllById(id), addOrderDTO);
+        Order order = setOrder(orderRepository.findAllById(id), addOrderDTO);
 
-        //orderRepository.save(order);
+        orderRepository.save(order);
+
+        deleteNullOrderDetails();
+    }
+
+    private void deleteNullOrderDetails() {
+        List<OrderDetail> orderDetails = orderDetailRepository.findAll();
+        for (var orderDetail : orderDetails) {
+            if (orderDetail.getOrder() == null) {
+                orderDetailRepository.delete(orderDetail);
+            }
+        }
     }
 
     private Order setOrder(Order order, AddOrderDTO addOrderDTO) {
@@ -278,9 +281,21 @@ public class AdminServiceImpl implements AdminService {
         order.setOrderDate(addOrderDTO.getOrderDate());
         order.setStatus(addOrderDTO.getStatus());
         order.setAddress(addOrderDTO.getAddress());
-        order.setTotalPrice(addOrderDTO.getTotalPrice());
+
         order.setUser(userRepository.findById(addOrderDTO.getUserId()).get());
-        order.setOrderInventories(addOrderDTO.getOrderInventories());
+
+        List<OrderDetail> newOrderDetails = new ArrayList<>();
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (var orderDetail : addOrderDTO.getOrderInventories()) {
+            OrderDetail orderDetail1 = orderDetailRepository.findAllById(orderDetail.getId());
+            orderDetail1.setQuantity(addOrderDTO.getOrderInventories().get(addOrderDTO.getOrderInventories().indexOf(orderDetail)).getQuantity());
+            newOrderDetails.add(orderDetail1);
+            totalPrice = updateTotalPrice(totalPrice, orderDetail1);
+        }
+
+        order.setOrderInventories(newOrderDetails);
+
+        order.setTotalPrice(totalPrice);
 
         return order;
     }
@@ -297,23 +312,49 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteOrderProduct(Long id) {
         OrderDetail orderDetail = orderDetailRepository.findAllById(id);
+        Order order = orderDetail.getOrder();
 
+        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(), orderDetail, true));
+
+        orderRepository.save(order);
         orderDetailRepository.delete(orderDetail);
     }
 
     @Override
+    @Transactional
     public void addOrderProduct(Long orderId, Long productId, Integer quantity) {
+
         OrderDetail orderDetail = new OrderDetail();
+
         Order order = orderRepository.findAllById(orderId);
         Product product = productRepository.findAllById(productId);
+        Product mergedProduct = entityManager.merge(product);
 
         orderDetail.setOrder(order);
-        orderDetail.setProduct(product);
+        orderDetail.setProduct(mergedProduct);
         orderDetail.setQuantity(quantity);
+
+        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(), orderDetail));
+
+        orderRepository.save(order);
 
         orderDetailRepository.save(orderDetail);
     }
 
+    public BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail)
+    {
+       return updateTotalPrice(totalPrice, orderDetail, false);
+    }
+
+    private BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail, boolean isMinus) {
+        if (!isMinus) {
+            totalPrice = orderDetail.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity())).add(totalPrice);
+            return totalPrice;
+        }else {
+            totalPrice = totalPrice.subtract(orderDetail.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity())));
+            return totalPrice;
+        }
+    }
 
     @Override
     public AddOrderDTO getOrderById(Long id) {
@@ -351,6 +392,7 @@ public class AdminServiceImpl implements AdminService {
 
         orderRepository.save(order);
     }
+
     //endregion
 
     //region <Discount CRUD>
@@ -413,6 +455,21 @@ public class AdminServiceImpl implements AdminService {
     public void deleteDiscount(Long id) {
         discountRepository.delete(discountRepository.findAllById(id));
     }
+
+    @Override
+    public void setDiscountToProduct(SetDiscountToProductDTO setDiscountToProductDTO) {
+
+        Discount discount = discountRepository.findAllById(setDiscountToProductDTO.getDiscountId());
+
+        for (String productNumber : setDiscountToProductDTO.getProductsProductNumbers()) {
+            List<Product> products = productRepository.findAllByProductNumber(productNumber);
+            for (var product : products) {
+                product.setDiscount(discount);
+                productRepository.save(product);
+            }
+        }
+
+    }
     //endregion
 
     //region <Users CRUD>
@@ -427,15 +484,18 @@ public class AdminServiceImpl implements AdminService {
 
     private User setUser(User user, AddUserDTO addUserDTO) {
 
-        if (addUserDTO.isAdmin()){
-            if (!user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);})){
+        if (addUserDTO.isAdmin()) {
+            if (!user.getRoles().stream().anyMatch((a) -> {
+                return a.getRole().equals(UserRoleEnum.ADMIN);
+            })) {
                 List<UserRole> userRoles = user.getRoles();
                 userRoles.add(new UserRole(UserRoleEnum.ADMIN));
                 user.setRoles(userRoles);
             }
-        }
-        else {
-            if (user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);})){
+        } else {
+            if (user.getRoles().stream().anyMatch((a) -> {
+                return a.getRole().equals(UserRoleEnum.ADMIN);
+            })) {
                 List<UserRole> userRoles = user.getRoles();
                 userRoles.remove(new UserRole(UserRoleEnum.ADMIN));
                 user.setRoles(userRoles);
@@ -478,7 +538,9 @@ public class AdminServiceImpl implements AdminService {
 
         AddUserDTO addUserDTO = new AddUserDTO();
 
-        addUserDTO.setAdmin(user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);}));
+        addUserDTO.setAdmin(user.getRoles().stream().anyMatch((a) -> {
+            return a.getRole().equals(UserRoleEnum.ADMIN);
+        }));
         addUserDTO.setEmail(user.getEmail());
         addUserDTO.setPassword(user.getPassword());
         addUserDTO.setPoints(user.getPoints());
@@ -492,5 +554,64 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //endregion
+
+
+    //region <Statistic>
+    @Override
+    public StatisticDTO getStatistics(Date startDate, Date endDate) {
+        List<Order> ordersInRange = orderRepository
+                .findAllByOrderDateBetweenAndStatusNot(
+                        startDate, endDate, OrderStatusEnum.CART
+                );
+
+        StatisticDTO statisticDTO = new StatisticDTO();
+        statisticDTO.setStartDate(startDate);
+        statisticDTO.setEndDate(endDate);
+
+        for (Order currentOrder : ordersInRange) {
+            statisticDTO.getOrders().add(mapOrderToAddOrderDTO(currentOrder));
+
+            statisticDTO.setTotalIncome(
+                    statisticDTO.getTotalIncome().add(currentOrder.getTotalPrice())
+            );
+
+            if (currentOrder.getStatus().equals(OrderStatusEnum.ORDERED)) {
+                statisticDTO.setOrderedIncome(
+                        statisticDTO.getOrderedIncome().add(currentOrder.getTotalPrice())
+                );
+            } else if (currentOrder.getStatus().equals(OrderStatusEnum.SHIPPED)) {
+                statisticDTO.setShippedIncome(
+                        statisticDTO.getShippedIncome().add(currentOrder.getTotalPrice())
+                );
+            } else if (currentOrder.getStatus().equals(OrderStatusEnum.DELIVERED)) {
+                statisticDTO.setDeliveredIncome(
+                        statisticDTO.getDeliveredIncome().add(currentOrder.getTotalPrice())
+                );
+            }
+        }
+
+        return statisticDTO;
+    }
+
+    private AddOrderDTO mapOrderToAddOrderDTO(Order order) {
+        AddOrderDTO addOrderDTO = new AddOrderDTO();
+
+        addOrderDTO.setOrderDate(order.getOrderDate());
+        addOrderDTO.setOrderInventories(order.getOrderInventories());
+        addOrderDTO.setStatus(order.getStatus());
+        addOrderDTO.setTotalPrice(order.getTotalPrice());
+        addOrderDTO.setAddress(order.getAddress());
+        addOrderDTO.setUserId(order.getUser().getId());
+
+        return addOrderDTO;
+    }
+//endregion
+
+    @Override
+    public List<ViewProductsDTO> findAllByDiscount() {
+        return ProductServiceImpl.mapProductView(productRepository.findByDiscountIsNotNull());
+    }
+
+
 
 }

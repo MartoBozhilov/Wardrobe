@@ -84,7 +84,7 @@
                                    id="isAdmin"
                                    name="isAdmin"
                                    th:checked="${addUserDTO.isAdmin}"
-                                   value="true">
+                                   th:value="${!addUserDTO.isAdmin}">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Save Discount</button>
