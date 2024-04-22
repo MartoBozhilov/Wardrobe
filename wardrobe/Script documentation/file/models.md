@@ -42,9 +42,9 @@
 
 **Contents**:
 
-- [`CategoryEnum`](CategoryEnum.java.md): Enumerates product categories.
-- [`GenderEnum`](GenderEnum.java.md): Enumerates gender options for products or users.
-- [`OrderStatusEnum`](OrderStatusEnum.java.md): Enumerates the different statuses an order can have.
-- [`SizeEnum`](SizeEnum.java.md): Enumerates available sizes for products.
-- [`StyleEnum`](StyleEnum.java.md): Enumerates styles associated with products.
-- [`UserRoleEnum`](UserRoleEnum.java.md): Enumerates roles that a user can hold.
+- [`CategoryEnum`](model/Enums/CategoryEnum.java.md): Enumerates product categories.
+- [`GenderEnum`](model/Enums/GenderEnum.java.md): Enumerates gender options for products or users.
+- [`OrderStatusEnum`](model/Enums/OrderStatusEnum.java.md): Enumerates the different statuses an order can have.
+- [`SizeEnum`](model/Enums/SizeEnum.java.md): Enumerates available sizes for products.
+- [`StyleEnum`](model/Enums/StyleEnum.java.md): Enumerates styles associated with products.
+- [`UserRoleEnum`](model/Enums/UserRoleEnum.java.md): Enumerates roles that a user can hold.
