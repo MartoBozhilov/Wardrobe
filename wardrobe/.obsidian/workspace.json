@@ -13,13 +13,98 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "Script documentation/Basic Structure of the Project.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9527c6a769956606",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "Admin/Admin.md",
                 "mode": "source",
                 "source": false
               }
             }
+          },
+          {
+            "id": "a6c569ba2cf96c2c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Script documentation/file/config.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "61b9f62929e7285b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Script documentation/file/src.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "faa64d5ad2a6a88b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Script documentation/file/controller.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6e33dcd3423e442d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Script documentation/file/src.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "3f8865bd88c0958f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Script documentation/file/controller.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d82a7e2c4427fdc5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Script documentation/file/service/UserService.java.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -48,7 +133,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#Documentation",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -85,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Admin/Admin.md",
+                "file": "Script documentation/file/service/UserService.java.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Admin/Admin.md",
+                "file": "Script documentation/file/service/UserService.java.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +210,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Admin/Admin.md"
+                "file": "Script documentation/file/service/UserService.java.md"
               }
             }
           }
@@ -146,23 +231,46 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "141e80e8501cb0f0",
+  "active": "d82a7e2c4427fdc5",
   "lastOpenFiles": [
-    "Admin/tools/Users.md",
-    "Admin/tools/Product.md",
-    "Admin/tools/Order.md",
-    "Admin/tools/Discount.md",
-    "Admin/Admin mm.md",
-    "Admin/Admin.md",
-    "Documentation.md",
+    "Script documentation/file/service/ProductService.java.md",
+    "Script documentation/file/service/OrderService.java.md",
+    "Script documentation/file/service/AdminService.java.md",
+    "Script documentation/file/service/WardrobeUserDetailsService.java.md",
+    "Script documentation/file/service/UserServiceImpl.java.md",
+    "Script documentation/file/service/ProductServiceImpl.java.md",
+    "Script documentation/file/service/OrderServiceImpl.java.md",
+    "Script documentation/file/service/AdminServiceImpl.java.md",
+    "Script documentation/file/repository/UserRepository.java.md",
+    "Script documentation/file/repository/TagRepository.java.md",
+    "Script documentation/file/repository/RoleRepository.java.md",
+    "Script documentation/file/repository/ProductRepository.java.md",
+    "Script documentation/file/repository/OrderRepository.java.md",
+    "Script documentation/file/repository/OrderDetailRepository.java.md",
+    "Script documentation/file/models.md",
+    "Script documentation/file/src.md",
+    "Script documentation/file/repository.md",
+    "Script documentation/Basic Structure of the Project.md",
+    "Script documentation/file/repository/DiscountRepository.java.md",
+    "Script documentation/file/service.md",
+    "Script documentation/file/config.md",
+    "Script documentation/file/controller.md",
+    "Script documentation/file/exeptions.md",
+    "Script documentation/file/model/Enums/UserRoleEnum.java.md",
+    "Script documentation/file/service/UserService.java.md",
+    "Script documentation/file/service",
+    "Script documentation/file/repository",
+    "().md",
+    "file/exeptions",
+    "exeptions",
+    "Script documentation/file/model/Enums",
+    "Script documentation/file/model/Entities",
+    "DTO",
+    "Script documentation/file/model/DTOs",
+    "Script documentation/file/model",
+    "Script documentation/file/exeptions",
     "Images/add-discount.png",
     "Images/add-di.png",
-    "Images/Screenshot 2024-04-20 193130.png",
-    "Images",
-    "New folder",
-    "create a link.md",
-    "Welcome.md",
-    "Admin/tools",
-    "Admin"
+    "Images/Screenshot 2024-04-20 193130.png"
   ]
 }
