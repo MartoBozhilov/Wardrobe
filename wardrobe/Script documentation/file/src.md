@@ -2,8 +2,8 @@
 	- [config](config.md): Contains Java classes for configuring various aspects of the application, including security.
 	- [`controller`](controller.md): Defines Spring MVC controllers that handle incoming HTTP requests and responses.
 	- [`exceptions`](exeptions.md): Specialized classes for handling exceptions that may be thrown by the application.
-	- [`model`](obsidian://open?vault=wardrobe&file=Script%20documentation%2Ffile%2Fmodels): Describes the domain models representing the data structures with which the application operates.
-	- [`repository`](obsidian://open?vault=wardrobe&file=Script%20documentation%2Ffile%2Frepository): Packages that contain interfaces for Spring Data JPA repositories to interact with the database.
-	- [`service`](obsidian://open?vault=wardrobe&file=Script%20documentation%2Ffile%2Fservice): A layer for business logic where the core functionality of the application is processed.
+	- [`model`](models.md): Describes the domain models representing the data structures with which the application operates.
+	- [`repository`](repository.md): Packages that contain interfaces for Spring Data JPA repositories to interact with the database.
+	- [`service`](service.md): A layer for business logic where the core functionality of the application is processed.
 	- `WardrobeApplication`: The startup class for the Spring Boot application.
 - `src/main/resources`: Resources such as properties files, configuration XML files, and other resources needed for the application.
