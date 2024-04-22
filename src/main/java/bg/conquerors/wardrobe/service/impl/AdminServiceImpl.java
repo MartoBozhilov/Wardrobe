@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -289,17 +290,21 @@ public class AdminServiceImpl implements AdminService {
         order.setOrderDate(addOrderDTO.getOrderDate());
         order.setStatus(addOrderDTO.getStatus());
         order.setAddress(addOrderDTO.getAddress());
-        order.setTotalPrice(addOrderDTO.getTotalPrice());
+
         order.setUser(userRepository.findById(addOrderDTO.getUserId()).get());
 
         List<OrderDetail> newOrderDetails = new ArrayList<>();
+        BigDecimal totalPrice = new BigDecimal(0);
         for (var orderDetail : addOrderDTO.getOrderInventories()){
             OrderDetail orderDetail1 = orderDetailRepository.findAllById(orderDetail.getId());
             orderDetail1.setQuantity(addOrderDTO.getOrderInventories().get(addOrderDTO.getOrderInventories().indexOf(orderDetail)).getQuantity());
             newOrderDetails.add(orderDetail1);
+            totalPrice = orderDetail1.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail1.getQuantity())).add(totalPrice);
         }
 
         order.setOrderInventories(newOrderDetails);
+
+        order.setTotalPrice(totalPrice);
 
         return order;
     }
@@ -332,7 +337,6 @@ public class AdminServiceImpl implements AdminService {
 
         orderDetailRepository.save(orderDetail);
     }
-
 
     @Override
     public AddOrderDTO getOrderById(Long id) {
@@ -370,6 +374,7 @@ public class AdminServiceImpl implements AdminService {
 
         orderRepository.save(order);
     }
+
     //endregion
 
     //region <Discount CRUD>
