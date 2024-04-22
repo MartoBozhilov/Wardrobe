@@ -35,5 +35,11 @@ public class HomeController {
 
         return "index";
     }
+    
+    @GetMapping("/order-successful")
+    public String orderSuccessful() {
+
+        return "/order-successful";
+    }
 
 }
