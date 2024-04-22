@@ -10,7 +10,7 @@ gradle - Contains Gradle wrapper scripts and the associated binary version, allo
 
 images_for_github - Likely contains images used for project documentation on GitHub, such as README.md.
 
-[src](file/src.md) - The main directory of your application's source code, which includes the package bg.conquerors.wardrobe.
+[src](src.md) - The main directory of your application's source code, which includes the package bg.conquerors.wardrobe.
 
 wardrobe - This may be the main working directory for the application or an additional directory related to the project.
 

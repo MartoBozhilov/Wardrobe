@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Documentation.md",
+                "file": "Script_documentation/Basic_Structure_of_the_Project.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Documentation.md",
+                "file": "Script_documentation/Basic_Structure_of_the_Project.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Documentation.md",
+                "file": "Script_documentation/Basic_Structure_of_the_Project.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Documentation.md"
+                "file": "Script_documentation/Basic_Structure_of_the_Project.md"
               }
             }
           }
@@ -148,8 +148,10 @@
   },
   "active": "afa5aac335a8ef4f",
   "lastOpenFiles": [
-    "Admin/Admin.md",
     "Documentation.md",
+    "Script_documentation/Basic_Structure_of_the_Project.md",
+    "Script documentation/Untitled.md",
+    "Admin/Admin.md",
     "User/User.md",
     "User/Cart/Cart.md",
     "User/Cart",
@@ -173,26 +175,24 @@
     "Admin/tools/Discount",
     "Admin/tools/Dashboard/Dashboard.md",
     "Admin/tools/Dashboard",
-    "Script documentation/file/model/Entities/User.java.md",
-    "Script documentation/file/model/Entities/UserRole.java.md",
-    "Script documentation/file/model/Entities/Tag.java.md",
-    "Script documentation/file/model/Entities/Product.java.md",
-    "Script documentation/file/model/Entities/OrderDetail.java.md",
-    "Script documentation/file/model/Entities/Order.java.md",
-    "Script documentation/file/model/Entities/Discount.java.md",
-    "Script documentation/file/model/Entities/BaseEntity.java.md",
-    "Script documentation/file/model/Enums/UserRoleEnum.java.md",
-    "Script documentation/file/model/Enums/StyleEnum.java.md",
-    "Script documentation/file/model/Enums/OrderStatusEnum.java.md",
-    "Script documentation/file/model/DTOs/ViewProductsDTO.java.md",
-    "Script documentation/file/model/Enums/SizeEnum.java.md",
-    "Script documentation/file/model/Enums/GenderEnum.java.md",
-    "Script documentation/file/model/Enums/CategoryEnum.java.md",
-    "Script documentation/file/model/DTOs/ViewProductDTO.java.md",
-    "Script documentation/file/model/DTOs/UserRegistrationDTO.java.md",
-    "Script documentation/file/model/Entities",
-    "Script documentation/file/model/Enums",
-    "Script documentation/file/model/DTOs",
-    "Script documentation/file/service"
+    "Script_documentation/file/model/Entities/User.java.md",
+    "Script_documentation/file/model/Entities/UserRole.java.md",
+    "Script_documentation/file/model/Entities/Tag.java.md",
+    "Script_documentation/file/model/Entities/Product.java.md",
+    "Script_documentation/file/model/Entities/OrderDetail.java.md",
+    "Script_documentation/file/model/Entities/Order.java.md",
+    "Script_documentation/file/model/Entities/Discount.java.md",
+    "Script_documentation/file/model/Entities/BaseEntity.java.md",
+    "Script_documentation/file/model/Enums/UserRoleEnum.java.md",
+    "Script_documentation/file/model/Enums/StyleEnum.java.md",
+    "Script_documentation/file/model/Enums/OrderStatusEnum.java.md",
+    "Script_documentation/file/model/DTOs/ViewProductsDTO.java.md",
+    "Script_documentation/file/model/Enums/SizeEnum.java.md",
+    "Script_documentation/file/model/Enums/GenderEnum.java.md",
+    "Script_documentation/file/model/Enums/CategoryEnum.java.md",
+    "Script_documentation/file/model/Entities",
+    "Script_documentation/file/model/Enums",
+    "Script_documentation/file/model/DTOs",
+    "Script_documentation/file/service"
   ]
 }
