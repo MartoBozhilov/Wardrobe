@@ -1,5 +1,5 @@
 - `src/main/java/bg/conquerors/wardrobe`: The main package of the application contains all Java files.
-	- [config](config.md): Contains Java classes for configuring various aspects of the application, including security.
+	- [`config`](config.md): Contains Java classes for configuring various aspects of the application, including security.
 	- [`controller`](controller.md): Defines Spring MVC controllers that handle incoming HTTP requests and responses.
 	- [`exceptions`](exeptions.md): Specialized classes for handling exceptions that may be thrown by the application.
 	- [`model`](models.md): Describes the domain models representing the data structures with which the application operates.
