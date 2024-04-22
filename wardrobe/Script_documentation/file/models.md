@@ -10,16 +10,16 @@
 
 **Contents**:
 
-- [`AddDiscountDTO`](model/Dtos/AddDiscountDTO.java.md): Represents the data needed to add a new discount.
-- [`AddOrderDTO`](model/Dtos/AddOrderDTO.java.md): Contains information required to place a new order.
-- [`AddProductDTO`](model/Dtos/AddProductDTO.java.md): Encapsulates data necessary for adding a product.
-- [`AddUserDTO`](model/Dtos/AddUserDTO.java.md): Carries data for user creation.
-- [`CartItemDTO`](model/Dtos/CartItemDTO.java.md): Defines the data structure for an item in the shopping cart.
-- [`CartViewDTO`](model/Dtos/CartViewDTO.java.md): Represents the view model of the shopping cart for the user interface.
-- [`FinishOrderDTO`](model/Dtos/FinishOrderDTO.java.md): Holds the data required to finalize an order.
-- [`UserRegistrationDTO`](model/Dtos/UserRegistrationDTO.java.md): Contains information for registering a new user.
-- [`ViewProductDTO`](model/Dtos/ViewProductDTO.java.md): Represents the detailed view of a product.
-- [`ViewProductsDTO`](model/Dtos/ViewProductsDTO.java.md): Contains data for the view of multiple products.
+- [`AddDiscountDTO`](model/DTOs/AddDiscountDTO.java.md): Represents the data needed to add a new discount.
+- [`AddOrderDTO`](model/DTOs/AddOrderDTO.java.md): Contains information required to place a new order.
+- [`AddProductDTO`](model/DTOs/AddProductDTO.java.md): Encapsulates data necessary for adding a product.
+- [`AddUserDTO`](model/DTOs/AddUserDTO.java.md): Carries data for user creation.
+- [`CartItemDTO`](model/DTOs/CartItemDTO.java.md): Defines the data structure for an item in the shopping cart.
+- [`CartViewDTO`](model/DTOs/CartViewDTO.java.md): Represents the view model of the shopping cart for the user interface.
+- [`FinishOrderDTO`](model/DTOs/FinishOrderDTO.java.md): Holds the data required to finalize an order.
+- [`UserRegistrationDTO`](model/DTOs/UserRegistrationDTO.java.md): Contains information for registering a new user.
+- [`ViewProductDTO`](model/DTOs/ViewProductDTO.java.md): Represents the detailed view of a product.
+- [`ViewProductsDTO`](model/DTOs/ViewProductsDTO.java.md): Contains data for the view of multiple products.
 
 #### Sub-package: `entity`
 
