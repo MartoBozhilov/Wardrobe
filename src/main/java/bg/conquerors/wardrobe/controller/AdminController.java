@@ -209,7 +209,7 @@ public class AdminController {
         return "redirect:/admin/edit-order/"+orderId;
     }
 
-    @GetMapping("/add-order-product/{orderId},{productId},{quantity}")
+    @GetMapping("/add-order-product/{orderId}")
     public String addOrderProductGet(@PathVariable("orderId") Long orderId,@PathVariable("productId") Long productId,@PathVariable("quantity") Integer quantity ) {
 
         adminService.addOrderProduct(orderId,productId,quantity);
@@ -217,7 +217,7 @@ public class AdminController {
         return "redirect:/admin/edit-order/"+orderId;
     }
 
-    @PostMapping("/add-order-product/{orderDetailId},{orderId}")
+    @PostMapping("/add-order-product/{orderId},{productId},{quantity}")
     public String addOrderProductPost(@PathVariable("orderId") Long orderId,@PathVariable("productId") Long productId,@PathVariable("quantity") Integer quantity) {
 
         adminService.addOrderProduct(orderId,productId,quantity);

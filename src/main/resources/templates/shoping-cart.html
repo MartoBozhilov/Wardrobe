@@ -47,7 +47,7 @@
                                 <td class="column-5" th:text="${cartItem.quantity}"></td>
                                 <td class="column-6" th:text="${cartItem.price * cartItem.quantity}"></td>
                                 <td class="column-7">
-                                    <form th:action="@{/cart/remove-from-cart/{id}(id=${cartItem.id})}" method="post">
+                                    <form th:action="@{/cart/remove-from-cart/{id}(id=${cartItem.id})}" th:method="post">
                                         <button type="submit">Remove</button>
                                     </form>
                                 </td>
