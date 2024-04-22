@@ -1,15 +1,15 @@
 
 Once logged in as admin, you will have access to various administrative functions such as product management, discount management, order processing and viewing dashboard. In order to use these tools you have to navigate to the top menu bar on the homepage of the website. Then locate the button labeled "Admin" and click on it. Here is a visual representation where the button is located: 
 
-![Image of add-discount](../../Images/admin-page.png)
+![Image of add-discount](../Images/admin-page.png)
 
 It navigates you to this page`http://localhost:8080/admin/admin`:
 
-![Image of add-discount](../../Images/product-grid.png)
+![Image of add-discount](../Images/product-grid.png)
 
 The menu on the admin page provides a structured way to navigate through the administrative tasks related to managing an online store. Here is how it looks:
 
-![Image of add-discount](../../Images/menu-admin-page.png)
+![Image of add-discount](../Images/menu-admin-page.png)
 
 Here's a breakdown of what each option does:
 
