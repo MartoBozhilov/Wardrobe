@@ -105,7 +105,7 @@ Here's how to navigate and use the product page:
     
 4. **Quantity Selector**: You can usually choose how many of the item you'd like to order using a '+' to increase the quantity and a '-' to decrease it.
     
-5. **Add to Cart**: Once you've selected the size and quantity, you can add the item to your shopping cart by clicking the "ADD TO CART" button. Then you must go to your [cart](User/Cart/Cart.md) if you are ready with your order.
+5. **Add to Cart**: Once you've selected the size and quantity, you can add the item to your shopping cart by clicking the "ADD TO CART" button. Then you must go to your [cart](Cart/Cart.md) if you are ready with your order.
 
 
 
