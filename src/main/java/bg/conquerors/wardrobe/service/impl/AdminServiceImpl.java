@@ -250,7 +250,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public  List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
     //endregion
@@ -269,8 +269,8 @@ public class AdminServiceImpl implements AdminService {
 
     private void deleteNullOrderDetails() {
         List<OrderDetail> orderDetails = orderDetailRepository.findAll();
-        for(var orderDetail :orderDetails){
-            if(orderDetail.getOrder() == null){
+        for (var orderDetail : orderDetails) {
+            if (orderDetail.getOrder() == null) {
                 orderDetailRepository.delete(orderDetail);
             }
         }
@@ -286,11 +286,11 @@ public class AdminServiceImpl implements AdminService {
 
         List<OrderDetail> newOrderDetails = new ArrayList<>();
         BigDecimal totalPrice = new BigDecimal(0);
-        for (var orderDetail : addOrderDTO.getOrderInventories()){
+        for (var orderDetail : addOrderDTO.getOrderInventories()) {
             OrderDetail orderDetail1 = orderDetailRepository.findAllById(orderDetail.getId());
             orderDetail1.setQuantity(addOrderDTO.getOrderInventories().get(addOrderDTO.getOrderInventories().indexOf(orderDetail)).getQuantity());
             newOrderDetails.add(orderDetail1);
-            totalPrice = updateTotalPrice(totalPrice,orderDetail1);
+            totalPrice = updateTotalPrice(totalPrice, orderDetail1);
         }
 
         order.setOrderInventories(newOrderDetails);
@@ -314,7 +314,7 @@ public class AdminServiceImpl implements AdminService {
         OrderDetail orderDetail = orderDetailRepository.findAllById(id);
         Order order = orderDetail.getOrder();
 
-        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(),orderDetail));
+        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(), orderDetail));
 
         orderRepository.save(order);
         orderDetailRepository.delete(orderDetail);
@@ -334,14 +334,14 @@ public class AdminServiceImpl implements AdminService {
         orderDetail.setProduct(mergedProduct);
         orderDetail.setQuantity(quantity);
 
-        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(),orderDetail));
+        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(), orderDetail));
 
         orderRepository.save(order);
 
         orderDetailRepository.save(orderDetail);
     }
 
-    private BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail){
+    private BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail) {
         totalPrice = orderDetail.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity())).add(totalPrice);
         return totalPrice;
     }
@@ -447,13 +447,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public  void  setDiscountToProduct(SetDiscountToProductDTO setDiscountToProductDTO){
+    public void setDiscountToProduct(SetDiscountToProductDTO setDiscountToProductDTO) {
 
         Discount discount = discountRepository.findAllById(setDiscountToProductDTO.getDiscountId());
 
-        for (String productNumber : setDiscountToProductDTO.getProductsProductNumbers()){
+        for (String productNumber : setDiscountToProductDTO.getProductsProductNumbers()) {
             List<Product> products = productRepository.findAllByProductNumber(productNumber);
-            for(var product : products){
+            for (var product : products) {
                 product.setDiscount(discount);
                 productRepository.save(product);
             }
@@ -474,15 +474,18 @@ public class AdminServiceImpl implements AdminService {
 
     private User setUser(User user, AddUserDTO addUserDTO) {
 
-        if (addUserDTO.isAdmin()){
-            if (!user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);})){
+        if (addUserDTO.isAdmin()) {
+            if (!user.getRoles().stream().anyMatch((a) -> {
+                return a.getRole().equals(UserRoleEnum.ADMIN);
+            })) {
                 List<UserRole> userRoles = user.getRoles();
                 userRoles.add(new UserRole(UserRoleEnum.ADMIN));
                 user.setRoles(userRoles);
             }
-        }
-        else {
-            if (user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);})){
+        } else {
+            if (user.getRoles().stream().anyMatch((a) -> {
+                return a.getRole().equals(UserRoleEnum.ADMIN);
+            })) {
                 List<UserRole> userRoles = user.getRoles();
                 userRoles.remove(new UserRole(UserRoleEnum.ADMIN));
                 user.setRoles(userRoles);
@@ -521,11 +524,62 @@ public class AdminServiceImpl implements AdminService {
         return createUserDTO(user);
     }
 
+    @Override
+    public StatisticDTO getStatistics(Date startDate, Date endDate) {
+        List<Order> ordersInRange = orderRepository
+                .findAllByOrderDateBetweenAndStatusNot(
+                        startDate, endDate, OrderStatusEnum.CART
+                );
+
+        StatisticDTO statisticDTO = new StatisticDTO();
+        statisticDTO.setStartDate(startDate);
+        statisticDTO.setEndDate(endDate);
+
+        for (Order currentOrder : ordersInRange) {
+            statisticDTO.getOrders().add(mapOrderToAddOrderDTO(currentOrder));
+
+            statisticDTO.setTotalIncome(
+                    statisticDTO.getTotalIncome().add(currentOrder.getTotalPrice())
+            );
+
+            if (currentOrder.getStatus().equals(OrderStatusEnum.ORDERED)) {
+                statisticDTO.setOrderedIncome(
+                        statisticDTO.getOrderedIncome().add(currentOrder.getTotalPrice())
+                );
+            } else if (currentOrder.getStatus().equals(OrderStatusEnum.SHIPPED)) {
+                statisticDTO.setShippedIncome(
+                        statisticDTO.getShippedIncome().add(currentOrder.getTotalPrice())
+                );
+            } else if (currentOrder.getStatus().equals(OrderStatusEnum.DELIVERED)) {
+                statisticDTO.setDeliveredIncome(
+                        statisticDTO.getDeliveredIncome().add(currentOrder.getTotalPrice())
+                );
+            }
+        }
+
+        return statisticDTO;
+    }
+
+    private AddOrderDTO mapOrderToAddOrderDTO(Order order) {
+        AddOrderDTO addOrderDTO = new AddOrderDTO();
+
+        addOrderDTO.setOrderDate(order.getOrderDate());
+        addOrderDTO.setOrderInventories(order.getOrderInventories());
+        addOrderDTO.setStatus(order.getStatus());
+        addOrderDTO.setTotalPrice(order.getTotalPrice());
+        addOrderDTO.setAddress(order.getAddress());
+        addOrderDTO.setUserId(order.getUser().getId());
+
+        return addOrderDTO;
+    }
+
     private AddUserDTO createUserDTO(User user) {
 
         AddUserDTO addUserDTO = new AddUserDTO();
 
-        addUserDTO.setAdmin(user.getRoles().stream().anyMatch((a) -> {return a.getRole().equals(UserRoleEnum.ADMIN);}));
+        addUserDTO.setAdmin(user.getRoles().stream().anyMatch((a) -> {
+            return a.getRole().equals(UserRoleEnum.ADMIN);
+        }));
         addUserDTO.setEmail(user.getEmail());
         addUserDTO.setPassword(user.getPassword());
         addUserDTO.setPoints(user.getPoints());

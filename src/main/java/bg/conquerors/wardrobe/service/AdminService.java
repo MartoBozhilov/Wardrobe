@@ -5,6 +5,7 @@ import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AdminService {
@@ -54,4 +55,7 @@ public interface AdminService {
 
     AddUserDTO getUserById(Long id);
     //endregion
+
+    StatisticDTO getStatistics(Date startDate, Date endDate);
+
 }
