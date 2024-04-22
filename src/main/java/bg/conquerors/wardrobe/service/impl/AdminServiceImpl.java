@@ -17,6 +17,9 @@ import bg.conquerors.wardrobe.repository.TagRepository;
 import bg.conquerors.wardrobe.repository.UserRepository;
 import bg.conquerors.wardrobe.model.enums.UserRoleEnum;
 import bg.conquerors.wardrobe.service.AdminService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,8 @@ public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
@@ -285,7 +290,7 @@ public class AdminServiceImpl implements AdminService {
             OrderDetail orderDetail1 = orderDetailRepository.findAllById(orderDetail.getId());
             orderDetail1.setQuantity(addOrderDTO.getOrderInventories().get(addOrderDTO.getOrderInventories().indexOf(orderDetail)).getQuantity());
             newOrderDetails.add(orderDetail1);
-            totalPrice = orderDetail1.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail1.getQuantity())).add(totalPrice);
+            totalPrice = updateTotalPrice(totalPrice,orderDetail1);
         }
 
         order.setOrderInventories(newOrderDetails);
@@ -307,21 +312,38 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteOrderProduct(Long id) {
         OrderDetail orderDetail = orderDetailRepository.findAllById(id);
+        Order order = orderDetail.getOrder();
 
+        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(),orderDetail));
+
+        orderRepository.save(order);
         orderDetailRepository.delete(orderDetail);
     }
 
     @Override
+    @Transactional
     public void addOrderProduct(Long orderId, Long productId, Integer quantity) {
+
         OrderDetail orderDetail = new OrderDetail();
+
         Order order = orderRepository.findAllById(orderId);
         Product product = productRepository.findAllById(productId);
+        Product mergedProduct = entityManager.merge(product);
 
         orderDetail.setOrder(order);
-        orderDetail.setProduct(product);
+        orderDetail.setProduct(mergedProduct);
         orderDetail.setQuantity(quantity);
 
+        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(),orderDetail));
+
+        orderRepository.save(order);
+
         orderDetailRepository.save(orderDetail);
+    }
+
+    private BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail){
+        totalPrice = orderDetail.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity())).add(totalPrice);
+        return totalPrice;
     }
 
     @Override
