@@ -3,11 +3,11 @@ Firstly, as a user you can either register if you do not have a profile already 
 
 In order to register from the home page(`http://localhost:8080/index#`), click on the "Profile icon" located at the top right at the page and then click "Register" from the drop down menu. Here is how it looks like:
 
-![Image of add-discount](profile-icon.png)
+![Image of add-discount](../Images/profile-icon.png)
 
 It leads you to this address `http://localhost:8080/users/register` and this page:
 
-![Image of add-discount](register-page.png)
+![Image of add-discount](../Images/register-page.png)
 
 Here's how you can sign up:
 
@@ -32,11 +32,11 @@ Here's how you can sign up:
 
 If you already have an account, you can go to the login page. You can do that by going again to the "Profile icon" at the top right of the home page and click "Login" from the drop down menu or from the registration page at the bottom of the fields. Here's again how it looks like from the main page:
 
-![Image of add-discount](profile-icon.png)
+![Image of add-discount](../Images/profile-icon.png)
 
 It leads you to this address `http://localhost:8080/users/login` and this page:
 
-![Image of add-discount](login-page.png)
+![Image of add-discount](../Images/login-page.png)
 
 Here's how you can login:
 
@@ -51,11 +51,11 @@ Here's how you can login:
 
 If you decide to change the information you've already given when you've registered, you can do that by going to the "Account page". It is located where the "Profile icon" is, at the top right of the page.
 
-![Image of add-discount](account-page.png)
+![Image of add-discount](../Images/account-page.png)
 
 It leads you to this address `http://localhost:8080/users/account` and this page: 
 
-![Image of add-discount](account-page-url.png)
+![Image of add-discount](../Images/account-page-url.png)
 
 Here's how to change your information:
 
@@ -76,16 +76,16 @@ Here's how to change your information:
 
 In order to see all products, click on the "Shop page" button on the top navbar.
 
-![Image of add-discount](shop-page-nav.png)
+![Image of add-discount](../Images/shop-page-nav.png)
 
 It leads you to `http://localhost:8080/shop` and this page:
 
-![Image of add-discount](shop-page.png)
+![Image of add-discount](../Images/shop-page.png)
 
 From here you can see all of the products but if you want to sort them by either only female clothes or male clothes you can click on the "Women" button or on the "Men" button at the top left on this page. You can also sort them by products that have a discount by clicking "SALE".
 If you click the "Filter" button it shows up this:
 
-![Image of add-discount](filter.png)
+![Image of add-discount](../Images/filter.png)
 
 From here you can filter the products by price and style tags - Casual, Official, Oversize.
 
@@ -93,7 +93,7 @@ From here you can filter the products by price and style tags - Casual, Official
 
 When you've liked and selected a product you want to buy, click on it. It will lead you to the product page of the product (`http://localhost:8080/shop/product-detail/product_id`):
 
-![Image of add-discount](product-page.png)
+![Image of add-discount](../Images/product-page.png)
 
 Here's how to navigate and use the product page:
 
