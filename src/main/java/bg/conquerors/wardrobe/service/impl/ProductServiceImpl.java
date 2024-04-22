@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
         return viewProductDTO;
     }
 
-    private List<ViewProductsDTO> mapProductView(List<Product> products) {
+    protected static List<ViewProductsDTO> mapProductView(List<Product> products) {
         List<ViewProductsDTO> returnProducts = new ArrayList<>();
         List<String> productNumbers = new ArrayList<>();
 
@@ -64,6 +64,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setImgUrl(product.getFirstImgUrl());
             productDTO.setProductNumber(product.getProductNumber());
             productDTO.setTag(product.getTag());
+            productDTO.setDiscount(product.getDiscount() != null);
 
             if (!productNumbers.contains(product.getProductNumber())) {
                 productNumbers.add(product.getProductNumber());

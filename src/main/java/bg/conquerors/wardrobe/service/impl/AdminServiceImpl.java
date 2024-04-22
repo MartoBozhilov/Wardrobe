@@ -555,6 +555,7 @@ public class AdminServiceImpl implements AdminService {
 
     //endregion
 
+
     //region <Statistic>
     @Override
     public StatisticDTO getStatistics(Date startDate, Date endDate) {
@@ -605,4 +606,12 @@ public class AdminServiceImpl implements AdminService {
         return addOrderDTO;
     }
 //endregion
+
+    @Override
+    public List<ViewProductsDTO> findAllByDiscount() {
+        return ProductServiceImpl.mapProductView(productRepository.findByDiscountIsNotNull());
+    }
+
+
+
 }

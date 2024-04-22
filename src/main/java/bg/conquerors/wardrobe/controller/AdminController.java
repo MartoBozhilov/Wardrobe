@@ -242,6 +242,15 @@ public class AdminController {
     //endregion
 
     //region <Discount CRUD>
+
+    @GetMapping("/discounts")
+    public String discountsHome(Model model) {
+        List<ViewProductsDTO> onSaleProducts = adminService.findAllByDiscount();
+        model.addAttribute("products", onSaleProducts);
+        model.addAttribute("products", productService.getViewOfProducts());
+        return "admin/discounts";
+    }
+
     @GetMapping("/add-discount")
     public String addDiscount(Model model) {
 

@@ -1,5 +1,6 @@
 package bg.conquerors.wardrobe.model.dto;
 
+import bg.conquerors.wardrobe.model.entity.Discount;
 import bg.conquerors.wardrobe.model.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,7 @@ public class ViewProductsDTO {
     private BigDecimal price;
 
     private Tag tag;
+
+    private boolean discount;
 
 }

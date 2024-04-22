@@ -4,8 +4,9 @@ import bg.conquerors.wardrobe.model.dto.*;
 import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.util.Date;
+
+import javax.swing.text.View;
 import java.util.List;
 
 public interface AdminService {
@@ -54,8 +55,10 @@ public interface AdminService {
     void deleteUser(Long id);
 
     AddUserDTO getUserById(Long id);
-    //endregion
 
     StatisticDTO getStatistics(Date startDate, Date endDate);
+
+    List<ViewProductsDTO> findAllByDiscount();
+
 
 }
