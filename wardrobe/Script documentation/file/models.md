@@ -27,14 +27,14 @@
 
 **Contents**:
 
-- [`BaseEntity`](BaseEntity.java.md): Likely an abstract class providing common fields like ID.
-- [`Discount`](Discount.java.md): Entity for discount details.
-- [`Order`](Order.java.md): Entity representing a customer's order.
-- [`OrderDetail`](OrderDetail.java.md): Provides details of individual items within an order.
-- [`Product`](Product.java.md): Entity for product details.
-- [`Tag`](Tag.java.md): Represents a tag that can be associated with a product.
-- [`User`](User.java.md): Entity representing a user in the system.
-- [`UserRole`](UserRole.java.md): Defines the different roles a user can have.
+- [`BaseEntity`](model/Entities/BaseEntity.java.md): Likely an abstract class providing common fields like ID.
+- [`Discount`](model/Entities/Discount.java.md): Entity for discount details.
+- [`Order`](model/Entities/Order.java.md): Entity representing a customer's order.
+- [`OrderDetail`](model/Entities/OrderDetail.java.md): Provides details of individual items within an order.
+- [`Product`](model/Entities/Product.java.md): Entity for product details.
+- [`Tag`](model/Entities/Tag.java.md): Represents a tag that can be associated with a product.
+- [`User`](model/Entities/User.java.md): Entity representing a user in the system.
+- [`UserRole`](model/Entities/UserRole.java.md): Defines the different roles a user can have.
 
 #### Sub-package: `enums`
 
