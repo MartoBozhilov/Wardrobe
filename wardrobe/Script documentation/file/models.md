@@ -10,7 +10,7 @@
 
 **Contents**:
 
-- [`AddDiscountDTO`](AddDiscountDTO.java.md): Represents the data needed to add a new discount.
+- [`AddDiscountDTO`](model/DTOs/AddDiscountDTO.java.md): Represents the data needed to add a new discount.
 - [`AddOrderDTO`](AddOrderDTO.java.md): Contains information required to place a new order.
 - [`AddProductDTO`](AddProductDTO.java.md): Encapsulates data necessary for adding a product.
 - [`AddUserDTO`](AddUserDTO.java.md): Carries data for user creation.
