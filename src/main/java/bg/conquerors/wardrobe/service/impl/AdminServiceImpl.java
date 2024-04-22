@@ -280,7 +280,15 @@ public class AdminServiceImpl implements AdminService {
         order.setAddress(addOrderDTO.getAddress());
         order.setTotalPrice(addOrderDTO.getTotalPrice());
         order.setUser(userRepository.findById(addOrderDTO.getUserId()).get());
-        order.setOrderInventories(addOrderDTO.getOrderInventories());
+
+        List<OrderDetail> newOrderDetails = new ArrayList<>();
+        for (var orderDetail : addOrderDTO.getOrderInventories()){
+            OrderDetail orderDetail1 = orderDetailRepository.findAllById(orderDetail.getId());
+            orderDetail1.setQuantity(addOrderDTO.getOrderInventories().get(addOrderDTO.getOrderInventories().indexOf(orderDetail)).getQuantity());
+            newOrderDetails.add(orderDetail1);
+        }
+
+        order.setOrderInventories(newOrderDetails);
 
         return order;
     }

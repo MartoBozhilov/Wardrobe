@@ -228,7 +228,7 @@ public class AdminController {
     @GetMapping("/orders")
     public String ordersGet(Model model) {
         model.addAttribute("orders", orderService.getAllOrders());
-        return "redirect:/admin/orders?status=ordered";
+        return "admin/orders";
     }
 
     @PostMapping("/orders/{orderId}")

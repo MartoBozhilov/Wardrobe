@@ -104,6 +104,7 @@
                                              name="quantity">
 
                                     </td>
+                                    <input type="hidden" th:field="*{addOrderDTO.orderInventories[__${rowStat.index}__].id}">
                                     <td th:text="${entry.product.productNumber}"></td>
                                     <td th:text="${entry.product.name}"></td>
                                     <td th:text="${entry.product.price}"></td>
