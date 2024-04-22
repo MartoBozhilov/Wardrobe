@@ -15,5 +15,5 @@ public class SetDiscountToProductDTO {
 
     private Long discountId;
 
-    private List<Long> productsProductNumbers;
+    private List<String> productsProductNumbers;
 }

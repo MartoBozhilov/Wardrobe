@@ -308,7 +308,7 @@ public class AdminController {
     }
 
     @PostMapping("/add-product-id-to-discount/{id}")
-    public String addProductIdToDiscountPost(@PathVariable("id") Long productId,SetDiscountToProductDTO setDiscountToProductDTO,Model model) {
+    public String addProductIdToDiscountPost(@PathVariable("id") String productId,SetDiscountToProductDTO setDiscountToProductDTO,Model model) {
 
         List<Product> products = adminService.getAllProducts();
 

@@ -251,20 +251,6 @@ public class AdminServiceImpl implements AdminService {
     //endregion
 
     //region <Orders CRUD>
-   /* @Override
-    public void addOrder(AddOrderDTO addOrderDTO) {
-
-    }
-
-    private Order getNewOrder(AddOrderDTO addOrderDTO) {
-        Order order = new Order();
-
-        discount.setDiscountPercentage(addDiscountDTO.getDiscountPercentage());
-        discount.setStartDate(addDiscountDTO.getStartDate());
-        discount.setEndDate(addDiscountDTO.getEndDate());
-
-        return order;
-    }*/
 
     @Override
     public void editOrder(Long id, AddOrderDTO addOrderDTO) {
@@ -443,10 +429,12 @@ public class AdminServiceImpl implements AdminService {
 
         Discount discount = discountRepository.findAllById(setDiscountToProductDTO.getDiscountId());
 
-        for (Long id : setDiscountToProductDTO.getProductsProductNumbers()){
-            Product product = productRepository.findAllById(id);
-            product.setDiscount(discount);
-            productRepository.save(product);
+        for (String productNumber : setDiscountToProductDTO.getProductsProductNumbers()){
+            List<Product> products = productRepository.findAllByProductNumber(productNumber);
+            for(var product : products){
+                product.setDiscount(discount);
+                productRepository.save(product);
+            }
         }
 
     }
