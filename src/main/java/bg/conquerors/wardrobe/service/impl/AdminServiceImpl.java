@@ -271,6 +271,17 @@ public class AdminServiceImpl implements AdminService {
         Order order = setOrder(orderRepository.findAllById(id), addOrderDTO);
 
         orderRepository.save(order);
+
+        deleteNullOrderDetails();
+    }
+
+    private void deleteNullOrderDetails() {
+        List<OrderDetail> orderDetails = orderDetailRepository.findAll();
+        for(var orderDetail :orderDetails){
+            if(orderDetail.getOrder() == null){
+                orderDetailRepository.delete(orderDetail);
+            }
+        }
     }
 
     private Order setOrder(Order order, AddOrderDTO addOrderDTO) {
