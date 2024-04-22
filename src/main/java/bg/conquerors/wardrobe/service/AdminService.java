@@ -1,11 +1,11 @@
 package bg.conquerors.wardrobe.service;
 
-import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
-import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
-import bg.conquerors.wardrobe.model.dto.AddProductDTO;
-import bg.conquerors.wardrobe.model.dto.AddUserDTO;
+import bg.conquerors.wardrobe.model.dto.*;
 import bg.conquerors.wardrobe.model.entity.Order;
+import bg.conquerors.wardrobe.model.entity.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import java.util.List;
 
 public interface AdminService {
     //region <Product>
@@ -16,6 +16,8 @@ public interface AdminService {
     void deleteProduct(String productNumber);
 
     AddProductDTO getProductByProductNumber(String id);
+
+    List<Product> getAllProducts();
     //endregion
 
     //region <Discount>
@@ -26,6 +28,8 @@ public interface AdminService {
     void deleteDiscount(Long id);
 
     AddDiscountDTO getDiscountById(Long id);
+
+    void  setDiscountToProduct(SetDiscountToProductDTO setDiscountToProductDTO);
     //endregion
 
     //region <Order>

@@ -1,14 +1,11 @@
 package bg.conquerors.wardrobe.service.impl;
 
-import bg.conquerors.wardrobe.model.dto.AddDiscountDTO;
-import bg.conquerors.wardrobe.model.dto.AddOrderDTO;
-import bg.conquerors.wardrobe.model.dto.AddProductDTO;
+import bg.conquerors.wardrobe.model.dto.*;
 import bg.conquerors.wardrobe.model.entity.Discount;
 import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.entity.Tag;
-import bg.conquerors.wardrobe.model.dto.AddUserDTO;
 import bg.conquerors.wardrobe.model.entity.*;
 import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import bg.conquerors.wardrobe.model.enums.SizeEnum;
@@ -246,6 +243,10 @@ public class AdminServiceImpl implements AdminService {
         if (isChange) tagRepository.save(tag);
     }
 
+    @Override
+    public  List<Product> getAllProducts(){
+        return productRepository.findAll();
+    }
     //endregion
 
     //region <Orders CRUD>
@@ -411,6 +412,19 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteDiscount(Long id) {
         discountRepository.delete(discountRepository.findAllById(id));
+    }
+
+    @Override
+    public  void  setDiscountToProduct(SetDiscountToProductDTO setDiscountToProductDTO){
+
+        Discount discount = discountRepository.findAllById(setDiscountToProductDTO.getDiscountId());
+
+        for (Long id : setDiscountToProductDTO.getProductsProductNumbers()){
+            Product product = productRepository.findAllById(id);
+            product.setDiscount(discount);
+            productRepository.save(product);
+        }
+
     }
     //endregion
 
