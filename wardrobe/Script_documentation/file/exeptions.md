@@ -6,13 +6,13 @@
 
 **Contents**:
 
-1. **File**: [`DiscountExceptionHandler.java`](DiscountExeptionHandler.md)
+1. **File**: [`DiscountExceptionHandler.java`](exeptions/DiscountExeptionHandler.md)
     
     - **Description**: This file contains the `DiscountExceptionHandler` class, which is tasked with handling exceptions specifically related to discount operations within the application. It likely includes methods annotated with `@ExceptionHandler` to process instances of exceptions like `DiscountNotFoundException` or `DiscountValidationException`.
     - **Responsibilities**:
         - Capture and handle any exceptions thrown during discount-related processes.
         - Provide HTTP responses with appropriate status codes and error messages for discount-related issues.
-2. **File**: [`ProductExceptionHandler.java`](ProductExeptionHandler.md)
+2. **File**: [`ProductExceptionHandler.java`](exeptions/ProductExeptionHandler.md)
     
     - **Description**: This file comprises the `ProductExceptionHandler` class, focusing on handling exceptions that arise during product management operations. Similarly, it probably defines methods with `@ExceptionHandler` annotations aimed at dealing with `ProductNotFoundException`, `ProductValidationException`, etc.
     - **Responsibilities**:
