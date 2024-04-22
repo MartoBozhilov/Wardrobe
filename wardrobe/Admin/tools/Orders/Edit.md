@@ -2,7 +2,7 @@ The "Edit Order" page is an interface within the admin panel that allows you to 
 
 When you open it, this page shows up:
 
-![Image of add-discount](edit-order-page.png)
+![Image of add-discount](../../../Images/edit-order-page.png)
 
 Here's what each part of the page is for:
 
