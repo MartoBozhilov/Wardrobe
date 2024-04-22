@@ -568,6 +568,11 @@ public class AdminServiceImpl implements AdminService {
         statisticDTO.setStartDate(startDate);
         statisticDTO.setEndDate(endDate);
 
+        statisticDTO.setOrders(new ArrayList<>());
+        statisticDTO.setTotalIncome(BigDecimal.valueOf(0));
+        statisticDTO.setShippedIncome(BigDecimal.valueOf(0));
+        statisticDTO.setOrderedIncome(BigDecimal.valueOf(0));
+        statisticDTO.setDeliveredIncome(BigDecimal.valueOf(0));
         for (Order currentOrder : ordersInRange) {
             statisticDTO.getOrders().add(mapOrderToAddOrderDTO(currentOrder));
 

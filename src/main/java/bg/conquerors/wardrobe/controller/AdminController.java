@@ -1,29 +1,22 @@
 package bg.conquerors.wardrobe.controller;
 
 import bg.conquerors.wardrobe.model.dto.*;
-import bg.conquerors.wardrobe.model.entity.Order;
-import bg.conquerors.wardrobe.model.entity.OrderDetail;
 import bg.conquerors.wardrobe.model.entity.Product;
 import bg.conquerors.wardrobe.model.enums.*;
 import bg.conquerors.wardrobe.service.AdminService;
 import bg.conquerors.wardrobe.service.OrderService;
 import bg.conquerors.wardrobe.service.ProductService;
-import jakarta.validation.Valid;
-import lombok.Data;
-import org.hibernate.annotations.processing.Find;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.Banner;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -250,6 +243,20 @@ public class AdminController {
         model.addAttribute("products", productService.getViewOfProducts());
         return "admin/discounts";
     }
+
+    @GetMapping("/income")
+    public String websiteIncome(Model model) {
+//        model.addAttribute("incomeDTO", adminService.getStatistics());
+        return "admin/income";
+    }
+
+    @PostMapping("/income-dates")
+    public String incomeDates(DateInputDTO dateInputDTO, Model model) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        model.addAttribute("statistics", adminService.getStatistics((dateInputDTO.getStartDate()),(dateInputDTO.getEndDate())));
+        return "admin/income";
+    }
+
 
     @GetMapping("/add-discount")
     public String addDiscount(Model model) {

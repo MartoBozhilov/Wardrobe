@@ -14,6 +14,10 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Orders</h1>
+        <div class="mb-3">
+            <label for="userSearch" class="form-label">Search by Username:</label>
+            <input type="text" id="userSearch" class="form-control" onkeyup="searchByUsername()" placeholder="Enter username">
+        </div>
         <div class="btn-toolbar mb-2 mb-md-0">
             <button  onclick="filterByStatus('ordered')">Ordered</button>
             <button  onclick="filterByStatus('shipped')">Shipped</button>
@@ -99,28 +103,30 @@
                     filterByStatus(status);
                 }
             });
-            <!--script that clears the url-->
-            document.addEventListener("DOMContentLoaded", function() {
-                function getQueryParam(param) {
-                    var search = window.location.search.substring(1);
-                    var vars = search.split('&');
-                    for (var i = 0; i < vars.length; i++) {
-                        var pair = vars[i].split('=');
-                        if (pair[0] == param) {
-                            return pair[1];
-                        }
-                    }
-                    return false;
-                }
-                var status = getQueryParam('status');
-                if (status) {
-                    status = decodeURIComponent(status);
-                    filterByStatus(status);
 
-                    // Clear URL parameters
-                    window.history.pushState({}, document.title, window.location.pathname);
-                }
-            });
+           function searchByUsername() {
+    var input, filter, table, tr, tdUsername, tdStatus, i, txtValueUsername, txtValueStatus;
+    input = document.getElementById("userSearch");
+    filter = input.value.toUpperCase();
+    table = document.querySelector(".table");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        tdUsername = tr[i].getElementsByTagName("td")[1]; // Index 1 is the 'Username' column
+        tdStatus = tr[i].getElementsByTagName("td")[4]; // Index 4 is the 'Status' column
+        if (tdUsername && tdStatus) {
+            txtValueUsername = tdUsername.textContent || tdUsername.innerText;
+            txtValueStatus = tdStatus.textContent || tdStatus.innerText;
+            if (txtValueUsername.toUpperCase().indexOf(filter) > -1 && txtValueStatus.toUpperCase() !== 'CART') {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
 </script>
 </body>
 </html>
