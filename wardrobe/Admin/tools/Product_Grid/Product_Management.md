@@ -42,18 +42,18 @@ When you open it in a browser it will show this page :
 
 You can edit a product when clicking on the "Edit button" which is located in the same box as the item you want to change the information of. It look like this:
 
-![Image of add-discount](edit-product.png)
+![Image of add-discount](../../../Images/edit-product.png)
 
 With the edit page you can modify the already existing products on the website. This page is located on this address `http://localhost:8080/admin/edit-product/product_id` and is the same as the add product page but with already filled information in the product information boxes.
 It looks like this:
 
-![Image of add-discount](edit-product-page.png)
+![Image of add-discount](../../../Images/edit-product-page.png)
 
 ## Deleting a Product
 
 You can delete a product from the "Delete button" which is located in the same box as the product you want to delete. It looks like this:
 
-![Image of add-discount](delete-product.png)
+![Image of add-discount](../../../Images/delete-product.png)
 
 By just clicking on it, the product deletes itself from the database.
 
