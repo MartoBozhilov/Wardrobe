@@ -314,7 +314,7 @@ public class AdminServiceImpl implements AdminService {
         OrderDetail orderDetail = orderDetailRepository.findAllById(id);
         Order order = orderDetail.getOrder();
 
-        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(), orderDetail));
+        order.setTotalPrice(updateTotalPrice(order.getTotalPrice(), orderDetail, true));
 
         orderRepository.save(order);
         orderDetailRepository.delete(orderDetail);
@@ -341,9 +341,19 @@ public class AdminServiceImpl implements AdminService {
         orderDetailRepository.save(orderDetail);
     }
 
-    private BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail) {
-        totalPrice = orderDetail.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity())).add(totalPrice);
-        return totalPrice;
+    public BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail)
+    {
+       return updateTotalPrice(totalPrice, orderDetail, false);
+    }
+
+    private BigDecimal updateTotalPrice(BigDecimal totalPrice, OrderDetail orderDetail, boolean isMinus) {
+        if (!isMinus) {
+            totalPrice = orderDetail.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity())).add(totalPrice);
+            return totalPrice;
+        }else {
+            totalPrice = totalPrice.subtract(orderDetail.getProduct().getPrice().multiply(BigDecimal.valueOf(orderDetail.getQuantity())));
+            return totalPrice;
+        }
     }
 
     @Override
@@ -524,6 +534,28 @@ public class AdminServiceImpl implements AdminService {
         return createUserDTO(user);
     }
 
+    private AddUserDTO createUserDTO(User user) {
+
+        AddUserDTO addUserDTO = new AddUserDTO();
+
+        addUserDTO.setAdmin(user.getRoles().stream().anyMatch((a) -> {
+            return a.getRole().equals(UserRoleEnum.ADMIN);
+        }));
+        addUserDTO.setEmail(user.getEmail());
+        addUserDTO.setPassword(user.getPassword());
+        addUserDTO.setPoints(user.getPoints());
+        addUserDTO.setUsername(user.getUsername());
+        addUserDTO.setFirstName(user.getFirstName());
+        addUserDTO.setLastName(user.getLastName());
+        addUserDTO.setPhoneNumber(user.getPhoneNumber());
+
+
+        return addUserDTO;
+    }
+
+    //endregion
+
+    //region <Statistic>
     @Override
     public StatisticDTO getStatistics(Date startDate, Date endDate) {
         List<Order> ordersInRange = orderRepository
@@ -572,26 +604,5 @@ public class AdminServiceImpl implements AdminService {
 
         return addOrderDTO;
     }
-
-    private AddUserDTO createUserDTO(User user) {
-
-        AddUserDTO addUserDTO = new AddUserDTO();
-
-        addUserDTO.setAdmin(user.getRoles().stream().anyMatch((a) -> {
-            return a.getRole().equals(UserRoleEnum.ADMIN);
-        }));
-        addUserDTO.setEmail(user.getEmail());
-        addUserDTO.setPassword(user.getPassword());
-        addUserDTO.setPoints(user.getPoints());
-        addUserDTO.setUsername(user.getUsername());
-        addUserDTO.setFirstName(user.getFirstName());
-        addUserDTO.setLastName(user.getLastName());
-        addUserDTO.setPhoneNumber(user.getPhoneNumber());
-
-
-        return addUserDTO;
-    }
-
-    //endregion
-
+//endregion
 }
