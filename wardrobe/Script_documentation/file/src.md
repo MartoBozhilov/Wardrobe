@@ -5,5 +5,5 @@
 	- [`model`](models.md): Describes the domain models representing the data structures with which the application operates.
 	- [`repository`](repository.md): Packages that contain interfaces for Spring Data JPA repositories to interact with the database.
 	- [`service`](service.md): A layer for business logic where the core functionality of the application is processed.
-	- `WardrobeApplication`: The startup class for the Spring Boot application.
-- `src/main/resources`: Resources such as properties files, configuration XML files, and other resources needed for the application.
+	- `WardrobeApplication`: The startup class for the Spring Boot application, which is executed every time the website is ran.
+- `src/main/resources`: Resources such as properties files, Bootstrap, CSS, JavaScript, HTML files, as well as images and logos.
