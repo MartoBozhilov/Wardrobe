@@ -42,12 +42,6 @@ public class UserController {
         return "account";
     }
 
-
-//    @GetMapping("/users/account-update")
-//    public String account_update() {
-//        return "account-update";
-//    }
-
     @GetMapping("/users/account-update/{userId}")
     public String editUser(@PathVariable("userId") Long userId, Model model) {
 
