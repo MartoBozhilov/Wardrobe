@@ -1,6 +1,6 @@
 ![Logo](src/main/resources/static/images/icons/pin.png)
 # Wardrobe
-Wardrobe is an online clothing store, created as a school project.
+Wardrobe is an online clothing store, created as a university project.
 
 # Motivation
 - We have all shopped online. And let’s face it, it is not always the best experience. So, we decided to fix that.
