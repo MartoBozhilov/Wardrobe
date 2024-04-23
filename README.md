@@ -25,4 +25,4 @@ Wardrobe is an online clothing store, created as a school project.
 - Bootstrap – the front-end framework which was bundled with the template we used
 - HTML, CSS, JS – the template provided us with the foundational components. However, to tailor the solution to our specific needs, we customized and supplemented these ourselves
 # Documentation
-If you are uncertain how to use any features of the website, or want to learn how our website functions, you can view the [documentation](wardrobe/Documentation.md).
+If you are uncertain how to use any features of the website, or want to learn how our website functions, you can view the [documentation](docs/Documentation.md).
