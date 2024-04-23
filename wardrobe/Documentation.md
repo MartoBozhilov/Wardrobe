@@ -9,4 +9,5 @@ you can find more information here:
 - ### [Technical documentation](Script_documentation/Basic_Structure_of_the_Project.md)
 
 
+
 ## Happy shopping!
