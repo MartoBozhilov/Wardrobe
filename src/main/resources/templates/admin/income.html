@@ -70,7 +70,6 @@
         </div>
     </div>
 </div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const ctx = document.getElementById('incomeChart').getContext('2d');
@@ -102,13 +101,11 @@
                 }]
             },
             options: {
-                responsive: false, // Chart size is fixed (will not resize with window)
-                maintainAspectRatio: true, // Maintain the aspect ratio set by the canvas dimensions
+                responsive: false,
+                maintainAspectRatio: true,
             }
         });
     });
 </script>
-
-
 </body>
 </html>

@@ -28,7 +28,6 @@ public class AdminController {
     private final DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private final OrderService orderService;
 
-
     public AdminController(AdminService adminService, ProductService productService, OrderService orderService) {
         this.adminService = adminService;
         this.productService = productService;
@@ -238,9 +237,7 @@ public class AdminController {
 
     @GetMapping("/discounts")
     public String discountsHome(Model model) {
-        List<ViewProductsDTO> onSaleProducts = adminService.findAllByDiscount();
-        model.addAttribute("products", onSaleProducts);
-        model.addAttribute("products", productService.getViewOfProducts());
+        model.addAttribute("discounts", adminService.getAllDiscounts());
         return "admin/discounts";
     }
 
@@ -269,7 +266,7 @@ public class AdminController {
     @PostMapping("/add-discount")
     public String addDiscount(AddDiscountDTO addDiscountDTO) {
         adminService.addDiscount(addDiscountDTO);
-        return "admin/admin";
+        return "redirect:discounts";
     }
 
     @GetMapping("/edit-discount/{id}")
@@ -284,6 +281,7 @@ public class AdminController {
         model.addAttribute("startDate",format.format(addDiscountDTO.getStartDate()));
         model.addAttribute("endDate",format.format(addDiscountDTO.getEndDate()));
         model.addAttribute("discountId", id);
+        model.addAttribute("discountPercentage", addDiscountDTO.getDiscountPercentage());
 
         return "admin/discount/edit-discount";
     }
@@ -291,7 +289,7 @@ public class AdminController {
     @PostMapping("/edit-discount/{id}")
     public String editDiscount(@PathVariable("id") Long id, AddDiscountDTO addDiscountDTO) {
         adminService.editDiscount(id, addDiscountDTO);
-        return "admin/admin";
+        return "redirect:discounts";
     }
 
     @GetMapping("/delete-discount/{id}")
@@ -307,7 +305,7 @@ public class AdminController {
 
         adminService.deleteDiscount(id);
 
-        return "admin/admin";
+        return "redirect:discounts";
     }
 
     @GetMapping("/set-discount-to-product/{id}")

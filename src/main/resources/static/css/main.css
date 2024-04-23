@@ -3462,3 +3462,13 @@ input.num-product::-webkit-inner-spin-button {
         flex: 0 0 100%; /* Take full width */
         margin-top: 1rem; /* Add some margin at the top */
     }
+    /* CSS for making text in the table white */
+    .table.table-striped.table-hover.table-bordered {
+        color: #ffffff; /* Sets text color to white */
+    }
+
+    .table.table-striped.table-hover.table-bordered th,
+    .table.table-striped.table-hover.table-bordered td {
+        color: #ffffff; /* Ensures all table headers and cells have white text */
+    }
+

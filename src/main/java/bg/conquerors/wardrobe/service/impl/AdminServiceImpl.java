@@ -26,6 +26,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.lang.ref.Cleaner.create;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -470,6 +473,22 @@ public class AdminServiceImpl implements AdminService {
         }
 
     }
+
+    public List<AddDiscountDTO> findAllDiscounts() {
+        List<Discount> discounts = discountRepository.findAll();
+        return discounts.stream()
+                .map(this::mapToAddDiscountDTO)
+                .collect(Collectors.toList());
+    }
+
+    private AddDiscountDTO mapToAddDiscountDTO(Discount discount) {
+        AddDiscountDTO discountDTO = new AddDiscountDTO();
+        discountDTO.setDiscountPercentage(discount.getDiscountPercentage());
+        discountDTO.setStartDate(discount.getStartDate());
+        discountDTO.setEndDate(discount.getEndDate());
+        return discountDTO;
+    }
+
     //endregion
 
     //region <Users CRUD>
@@ -617,6 +636,18 @@ public class AdminServiceImpl implements AdminService {
         return ProductServiceImpl.mapProductView(productRepository.findByDiscountIsNotNull());
     }
 
+    @Override
+    public List<ViewAllDiscountsDTO> getAllDiscounts(){
+        List<Discount> discounts = discountRepository.findAll();
+        return createViewDiscountDTO(discounts);
+    }
 
+    private List<ViewAllDiscountsDTO> createViewDiscountDTO(List<Discount> discounts) {
+        List<ViewAllDiscountsDTO> viewAllDiscountsDTOS = new ArrayList<>();
+        for(Discount discount : discounts){
+            viewAllDiscountsDTOS.add(new ViewAllDiscountsDTO(discount.getId(),discount.getStartDate(),discount.getEndDate(),discount.getDiscountPercentage()));
+        }
+        return viewAllDiscountsDTOS;
+    }
 
 }

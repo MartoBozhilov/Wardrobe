@@ -41,12 +41,12 @@ public class ProductServiceImpl implements ProductService {
         viewProductDTO.setDescription(products.get(0).getDescription());
         viewProductDTO.setFirstImgUrl(products.get(0).getFirstImgUrl());
         viewProductDTO.setSecondImgUrl(products.get(0).getSecondImgUrl());
+        viewProductDTO.setPrice(calculateProduct(products));
 
         if (!products.get(0).getThirdImgUrl().equals("")) {
             viewProductDTO.setThirdImgUrl(products.get(0).getThirdImgUrl());
         }
 
-        viewProductDTO.setPrice(calculateProduct(products));
 
         return viewProductDTO;
     }
@@ -79,18 +79,16 @@ public class ProductServiceImpl implements ProductService {
         Discount productDiscount = discountRepository.findById(products.get(0).getId()).orElse(null);
 
         if (productDiscount != null) {
-            BigDecimal discountPercent = BigDecimal
-                    .valueOf(productDiscount.getDiscountPercentage()
-                    );
+            BigDecimal discountPercent = BigDecimal.valueOf(productDiscount.getDiscountPercentage());
+            BigDecimal discountPrice = products.get(0).getPrice().multiply(discountPercent).divide(BigDecimal.valueOf(100));
 
-            BigDecimal discountPrice = (discountPercent.multiply(products.get(0).getPrice())).divide(BigDecimal.valueOf(100));
-
-            if ((discountPrice.compareTo(products.get(0).getPrice())) > 0) {
+            if (discountPrice.compareTo(products.get(0).getMinPrice()) > 0) {
                 return discountPrice;
             }
         }
 
         return products.get(0).getPrice();
     }
+
 
 }
