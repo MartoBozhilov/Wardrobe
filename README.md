@@ -1,6 +1,5 @@
 # Wardrobe
 Wardrobe is an online clothing store, created as a school project.
-for more information place check the 
 
 # Motivation
 - We have all shopped online. And let’s face it, it is not always the best experience. So, we decided to fix that.
