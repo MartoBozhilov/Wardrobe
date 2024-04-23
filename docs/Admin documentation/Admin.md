@@ -19,7 +19,7 @@ Here's a breakdown of what each option does:
     
 3. **[Orders](tools/Orders/Orders.md)**: Here, you can manage customer orders. This functionality typically includes viewing pending, processed, and completed orders, updating order statuses, and handling returns or exchanges. It's a critical part of the order fulfillment process.
     
-4. **[Dashboard](tools/Dashboard/Dashboard.md)**: 
+4. **[Shop Income Summary](tools/Dashboard/Dashboard.md)**: 
     
 
 The "Back to the shop" button at the bottom allows you to return to the customer view of the store, which is useful for checking the updates or changes you've made in the admin view.
