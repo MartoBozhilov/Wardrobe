@@ -47,7 +47,6 @@ public class ProductServiceImpl implements ProductService {
             viewProductDTO.setThirdImgUrl(products.get(0).getThirdImgUrl());
         }
 
-
         return viewProductDTO;
     }
 
