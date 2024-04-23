@@ -8,4 +8,5 @@ Should you be interested in how our website works in regards to the technologies
 you can find more information here:
 - ### [Technical documentation](Script_documentation/Basic_Structure_of_the_Project.md)
 <br>
+
 ## Happy shopping!
