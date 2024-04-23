@@ -1,7 +1,10 @@
 package bg.conquerors.wardrobe.service.impl;
 
 import bg.conquerors.wardrobe.model.dto.UserRegistrationDTO;
+import bg.conquerors.wardrobe.model.dto.ViewUserOrdersDTO;
+import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.User;
+import bg.conquerors.wardrobe.model.enums.OrderStatusEnum;
 import bg.conquerors.wardrobe.model.enums.UserRoleEnum;
 import bg.conquerors.wardrobe.repository.RoleRepository;
 import bg.conquerors.wardrobe.repository.UserRepository;
@@ -13,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -98,6 +102,24 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public List<ViewUserOrdersDTO> getUserOrders(User currentUser) {
+
+        return createViewUserOrdersDTO(currentUser);
+    }
+
+    private List<ViewUserOrdersDTO> createViewUserOrdersDTO(User currentUser) {
+
+        List<ViewUserOrdersDTO> viewUserOrdersDTOS = new ArrayList<>();
+
+        for (Order order : currentUser.getOrders()) {
+
+            if (!order.getStatus().equals(OrderStatusEnum.CART))
+                viewUserOrdersDTOS.add(new ViewUserOrdersDTO(order.getId(), order.getOrderDate(), order.getStatus(), order.getTotalPrice(), order.getAddress()));
+        }
+
+        return viewUserOrdersDTOS;
+    }
 
 
 }

@@ -2,6 +2,8 @@ package bg.conquerors.wardrobe.controller;
 
 import bg.conquerors.wardrobe.model.dto.AddProductDTO;
 import bg.conquerors.wardrobe.model.dto.UserRegistrationDTO;
+import bg.conquerors.wardrobe.model.dto.ViewUserOrdersDTO;
+import bg.conquerors.wardrobe.model.entity.Order;
 import bg.conquerors.wardrobe.model.entity.User;
 import bg.conquerors.wardrobe.repository.UserRepository;
 import bg.conquerors.wardrobe.service.OrderService;
@@ -16,16 +18,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.naming.Binding;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
-    public UserController(UserService userService, UserRepository userRepository) {
+
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/users/login")
@@ -61,6 +63,21 @@ public class UserController {
     public String editUser(@PathVariable("userId") Long userId, UserRegistrationDTO userRegistrationDTO) {
 
         userService.editUserInformation(userId,userRegistrationDTO);
+        return "redirect:/users/account";
+    }
+
+    @GetMapping("/users/account-order")
+    public String ordersUser(Model model) {
+
+        List<ViewUserOrdersDTO> viewUserOrdersDTOS = userService.getUserOrders(userService.findCurrentUser());
+
+        model.addAttribute("orders",viewUserOrdersDTOS);
+
+        return "account-orders";
+    }
+
+    @PostMapping("/users/account-order")
+    public String ordersUser() {
         return "redirect:/users/account";
     }
 
