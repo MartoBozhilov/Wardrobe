@@ -1,4 +1,4 @@
-![Logo](src/main/resources/static/images/logo.png)
+![Logo](src/main/resources/static/images/icons/pin.png)
 # Wardrobe
 Wardrobe is an online clothing store, created as a school project.
 
