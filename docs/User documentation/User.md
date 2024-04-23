@@ -110,6 +110,13 @@ Here's how to navigate and use the product page:
 5. **Add to Cart**: Once you've selected the size and quantity, you can add the item to your shopping cart by clicking the "ADD TO CART" button. Then you must go to your [cart](Cart/Cart.md) if you are ready with your order.
 
 
+## How to See Orders
+
+If you want to see the already made orders you've made click on the "Profile icon" button and click "Order Information" then it leads you to this page (`http://localhost:8080/users/account-order`):
+
+![Image of add-discount](../Images/order-info-page.png)
+
+
 ## How to contact us
 
 If you want to contact us you can click on the "Contact" button located at the navbar above. 
@@ -134,6 +141,23 @@ It leads you to this address `http://localhost:8080/faq` and this page:
 ![Image of add-discount](../Images/faqs-page.png)
 
 Here you can click on whatever question you may have or is related to in order to find an answer.
+
+## Buy Policy Page
+
+If you want to see our policies regarding our products, check this page (`http://localhost:8080/buy-policy`): 
+
+![Image of add-discount](../Images/buy-policy-page.png)
+
+## Page Not Found
+
+If you accidentally write a wrong address you will be redirected to this page:
+
+![Image of add-discount](../Images/page-not-found.png)
+
+
+
+
+
 
 
 

@@ -13,19 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "User/User.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "cfb781bdb2c439d9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "User/User.md",
+                "file": "User documentation/User.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "User/User.md",
+                "file": "User documentation/User.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "User/User.md",
+                "file": "User documentation/User.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "User/User.md"
+                "file": "User documentation/User.md"
               }
             }
           }
@@ -160,9 +148,30 @@
   },
   "active": "afa5aac335a8ef4f",
   "lastOpenFiles": [
+    "Documentation.md",
+    "Admin documentation/Admin.md",
+    "User documentation/User.md",
+    "Admin/tools/Product_Grid/Product_Management.md",
     "User/Cart/Cart.md",
     "User/User.md",
-    "Documentation.md",
+    "Admin/tools/Orders/Orders.md",
+    "Images/page-not-found.png",
+    "Images/dashboard-page.png.crdownload",
+    "Images/dashboard-page.png",
+    "Images/order-info-page.png",
+    "Images/buy-policy-page.png",
+    "Admin/Admin.md",
+    "Script_documentation/file/src.md",
+    "Script_documentation/file/controller.md",
+    "Script_documentation/file/controller/UserController.java.md",
+    "Script_documentation/file/controller/ProductController.java.md",
+    "Script_documentation/file/controller/OrderController.java.md",
+    "Script_documentation/file/controller/HomeController.java.md",
+    "Script_documentation/file/controller/AdminController.java.md",
+    "Script_documentation/file/config.md",
+    "Script_documentation/Basic_Structure_of_the_Project.md",
+    "Admin/tools/Orders/Edit.md",
+    "Admin/tools/Discount/Discount.md",
     "Images/faqs-page.png",
     "Images/faq-nav.png",
     "Images/contact-page.png",
@@ -176,22 +185,6 @@
     "Script_documentation/file/model/Enums/GenderEnum.java.md",
     "Script_documentation/file/model/Enums/CategoryEnum.java.md",
     "Script_documentation/file/model/Entities/UserRole.java.md",
-    "Script_documentation/file/model/Entities/User.java.md",
-    "Script_documentation/file/model/Entities/Product.java.md",
-    "Script_documentation/file/model/Entities/Tag.java.md",
-    "Script_documentation/file/model/Entities/OrderDetail.java.md",
-    "Script_documentation/file/model/Entities/Order.java.md",
-    "Script_documentation/file/model/Entities/Discount.java.md",
-    "Script_documentation/file/model/Entities/BaseEntity.java.md",
-    "Script_documentation/file/model/DTOs/ViewProductsDTO.java.md",
-    "Script_documentation/file/model/DTOs/ViewProductDTO.java.md",
-    "Script_documentation/file/model/DTOs/UserRegistrationDTO.java.md",
-    "Script_documentation/file/model/DTOs/FinishOrderDTO.java.md",
-    "Script_documentation/file/model/DTOs/AddUserDTO.java.md",
-    "Script_documentation/file/model/DTOs/CartViewDTO.java.md",
-    "Script_documentation/file/model/DTOs/CartItemDTO.java.md",
-    "Script_documentation/file/model/DTOs/AddProductDTO.java.md",
-    "Script_documentation/file/model/DTOs/AddOrderDTO.java.md",
     "Script_documentation/file/model/Enums",
     "Script_documentation/file/model/Entities",
     "Script_documentation/file/model/DTOs",
@@ -200,11 +193,6 @@
     "Script_documentation/file/model",
     "Script_documentation/file/exeptions",
     "Script_documentation/file/controller",
-    "Script_documentation/file",
-    "Script_documentation",
-    "Images/shop-page.png",
-    "Images/shop-page-nav.png",
-    "Images/register-page.png",
-    "Images/profile-icon.png"
+    "Script_documentation/file"
   ]
 }
