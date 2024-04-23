@@ -135,6 +135,23 @@ It leads you to this address `http://localhost:8080/faq` and this page:
 
 Here you can click on whatever question you may have or is related to in order to find an answer.
 
+## Buy Policy Page
+
+If you want to see our policies regarding our products, check this page (`http://localhost:8080/buy-policy`): 
+
+![Image of add-discount](../Images/buy-policy-page.png)
+
+## Page Not Found
+
+If you accidentally write a wrong address you will be redirected to this page:
+
+![Image of add-discount](../Images/page-not-found.png)
+
+
+
+
+
+
 
 
 
